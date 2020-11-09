@@ -4,7 +4,7 @@ import Axios from "axios";
 import { useState, useMemo } from "react";
 
 function Step2({ state, setState, sendOtp }) {
-  const [timer, setTimer] = useState(59);
+  const [timer, setTimer] = useState(300);
 
   useMemo(() => {
     if (timer !== 0 && timer > 0) {
@@ -24,15 +24,16 @@ function Step2({ state, setState, sendOtp }) {
           token: localStorage.getItem("token"),
         },
       });
-      console.log(data);
+      console.log('data from verify', data);
       setState({
         ...state,
+        matchedOtp : true,
         loader: false,
         verified: true,
         formState: state.formState + 1,
       });
     } catch (err) {
-      setState({ ...state, loader: false });
+      setState({ ...state,matchedOtp : false, loader: false });
       console.log(err.message);
     }
   }
@@ -68,7 +69,14 @@ function Step2({ state, setState, sendOtp }) {
           margin: "auto",
         }}
       />
-      <p className='mt-3 mb-3 smallFont'>0:{timer}</p>
+      <p className='mt-3 mb-3 smallFont'>{'Verify within Five minutes'}</p>
+      {/* <p className='mt-3 mb-3 smallFont'>0:{timer}</p> */}
+      {
+        state.matchedOtp == false &&
+        <p style={{
+          color : 'red'
+        }}>Wrong otp.</p>
+      }
       <button
         disabled={state.disabled}
         className={`btn btn-sm text-light ${
@@ -90,7 +98,7 @@ function Step2({ state, setState, sendOtp }) {
           className='d-inline-block mt-3'
           onClick={()=>{
             sendOtp()
-            setTimer(59)
+            setTimer(300)
           }}
           style={{
             fontSize: "13px",

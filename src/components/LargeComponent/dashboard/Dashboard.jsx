@@ -13,6 +13,7 @@ function Blank({ history, ...props }) {
     phone: "",
     formState: 0,
     otp: "",
+    matchedOtp : '',
     disabled: true,
     verified: false,
     base: "https://whispering-lake-75400.herokuapp.com",
@@ -69,9 +70,9 @@ function Blank({ history, ...props }) {
       //     }
       // })
       if (data.err === undefined)
-        setState({ ...state, loader: false, formState: 1, timer: 59 });
+        setState({ ...state, loader: false, formState: 1, timer: 300 });
       else {
-        setState({ ...state, loader: false, timer: 59 });
+        setState({ ...state, loader: false, timer: 300 });
         console.log(data);
       }
     } catch (err) {
@@ -100,12 +101,23 @@ function Blank({ history, ...props }) {
           boxShadow: "0px 5px 15px black",
           position: "sticky",
           top: "0px",
-          right: "0px",
+          right: "0px"
         }}>
         <h3 className='d-inline fo1 font-weight-light'>Dashboard</h3>
-        <div className='mr-3 rounded-circle p-2 c4 float-right text-light'>
-          <Bell />
+          <div className='mr-3 rounded-circle p-2 c4 float-right text-light'>
+            <Bell />
         </div>
+        <button className=' mt-2 mr-2 float-right'
+          style={{
+            background : 'none',
+            color : 'white',
+            outline : 'none',
+            border : 'none'
+          }}
+          onClick={ () => {
+            localStorage.removeItem('token')
+          }}
+        > log out</button>
       </div>
 
       <div className='col-12 pb-5'>
