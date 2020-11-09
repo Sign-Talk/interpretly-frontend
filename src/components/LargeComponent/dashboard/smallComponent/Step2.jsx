@@ -1,0 +1,108 @@
+import React from "react";
+import OtpInput from "react-otp-input";
+import Axios from "axios";
+import { useState, useMemo } from "react";
+
+function Step2({ state, setState, sendOtp }) {
+  const [timer, setTimer] = useState(59);
+
+  useMemo(() => {
+    if (timer !== 0 && timer > 0) {
+      setTimeout(() => setTimer(timer - 1), 1000);
+    }
+  }, [timer]);
+
+  async function verifyPhone() {
+    try {
+      setState({ ...state, loader: true });
+      const { data } = await Axios({
+        method: "post",
+        url: `https://whispering-lake-75400.herokuapp.com/Home/verify?mobile_no=${state.phone.slice(
+          2
+        )}&otp=${state.otp}`,
+        headers: {
+          token: localStorage.getItem("token"),
+        },
+      });
+      console.log(data);
+      setState({
+        ...state,
+        loader: false,
+        verified: true,
+        formState: state.formState + 1,
+      });
+    } catch (err) {
+      setState({ ...state, loader: false });
+      console.log(err.message);
+    }
+  }
+
+  return (
+    <div>
+      <h6 className='text-light'>Enter Verification Code</h6>
+      <p className='smallFont'>code has been sent successfully</p>
+      <OtpInput
+        isDisabled={timer !== 0 && timer > 0 ? false : true}
+        value={state.otp}
+        onChange={(e) => {
+          if (e.length === 6) {
+            setState({ ...state, disabled: false, otp: e });
+          } else {
+            setState({ ...state, otp: e, disabled: true });
+          }
+        }}
+        numInputs={6}
+        separator={<span className='text-center p-2 ml-auto'></span>}
+        inputStyle={{
+          border: "3px solid #54ACF0",
+          borderRadius: "7px",
+          padding: "5px",
+          width: "40px",
+          height: "40px",
+          backgroundColor: "transparent",
+          color: "white",
+        }}
+        containerStyle={{
+          width: "85%",
+          justifyContent: "space-between",
+          margin: "auto",
+        }}
+      />
+      <p className='mt-3 mb-3 smallFont'>0:{timer}</p>
+      <button
+        disabled={state.disabled}
+        className={`btn btn-sm text-light ${
+          state.disabled === true ? "disabled" : null
+        }`}
+        style={{ backgroundColor: "#54ACF0" }}
+        onClick={() => {
+          verifyPhone();
+          console.log(state.otp);
+        }}>
+        Verify
+      </button>
+      <div
+        className='col-1 rounded-pill mt-3 mb-3 ml-auto mr-auto'
+        style={{ backgroundColor: "#54ACF0", padding: "3px" }}></div>
+      <div>
+        <p className='smallFont d-inline-block'>Code not recieved? &nbsp;</p>
+        <p
+          className='d-inline-block mt-3'
+          onClick={()=>{
+            sendOtp()
+            setTimer(59)
+          }}
+          style={{
+            fontSize: "13px",
+            color: "#54ACF0",
+            fontWeight: "bold",
+            cursor: "pointer",
+          }}>
+          Resend code &#62;
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default Step2;
