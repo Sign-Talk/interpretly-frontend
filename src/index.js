@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
@@ -13,7 +15,9 @@ const history = createBrowserHistory();
 
 ReactDOM.render(
   <Router history={history} basename={'/interpretly/'} >
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </Router>,
   document.getElementById('root')
 );
