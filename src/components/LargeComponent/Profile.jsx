@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
 import Modal from "react-modal";
-import { Bell, Clock, UserPlus, CloudLightning } from "react-feather";
+import { Bell, Clock, UserPlus, CloudLightning ,Power} from "react-feather";
 import { toast } from "react-toastify";
 import Avatar from "react-avatar";
 import Fab from "@material-ui/core/Fab";
@@ -282,6 +282,15 @@ export default function Profile(props) {
           <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
             <Bell />
           </div>
+          <div className='mr-3 rounded-circle p-2 c4 float-right text-light'>
+            <Power 
+            onClick={ () => {
+              localStorage.removeItem('token');
+              history.push('/interpretly')
+            }}
+            
+            />
+        </div>
         </div>
         {/* ================== <<<<<<<<< {{{{{ from here the user profile details are starting }}}}} >>>>>>>> ================== */}
         <div className="row p-0 m-0" style={{ fontSize: "14px" }}>

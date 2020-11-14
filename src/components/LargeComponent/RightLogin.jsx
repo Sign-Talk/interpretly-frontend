@@ -326,12 +326,13 @@ function RightLogin({ state, setState, ...props }) {
                   <GoogleLogin
                     clientId='154727329238-j9k2auvn5k8b8gsel5v2meegfajtltjo.apps.googleusercontent.com'
                     onSuccess={async (data, err) => {
+                      console.log(data)
                       try {
                         let dat = await Axios({
                           method: "post",
                           url: `${state.base}/Login/interpreter?sociallogin=1`,
                           data: {
-                            email: data.profileObj.googleId,
+                            email: data.profileObj.email,
                             firstName: data.profileObj.givenName,
                             lastName: data.profileObj.familyName,
                             image: data.profileObj.imageUrl,

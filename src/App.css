@@ -9,3 +9,7 @@ a:hover{
     cursor: pointer!important;
     text-decoration: none!important;
 }
+.MuiSvgIcon-root:hover {
+    color: white;
+    cursor: pointer;
+  }

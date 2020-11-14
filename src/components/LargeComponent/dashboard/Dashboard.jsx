@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import VerifyForm from "./VerifyForm";
 import "./style.css";
-import { Bell } from "react-feather";
-import Calendar from "react-calendar";
-import { withRouter } from "react-router-dom";
-import "react-calendar/dist/Calendar.css";
+import { Bell,Power } from "react-feather";
 
+import Calendar from "react-calendar";
+import { withRouter,useHistory } from "react-router-dom";
+import "react-calendar/dist/Calendar.css";
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 function Blank({ history, ...props }) {
   const [state, setState] = useState({
     o: false,
     phone: "",
     formState: 0,
     otp: "",
+    matchedOtp : '',
     disabled: true,
     verified: false,
     base: "https://whispering-lake-75400.herokuapp.com",
@@ -69,9 +71,9 @@ function Blank({ history, ...props }) {
       //     }
       // })
       if (data.err === undefined)
-        setState({ ...state, loader: false, formState: 1, timer: 59 });
+        setState({ ...state, loader: false, formState: 1, timer: 300 });
       else {
-        setState({ ...state, loader: false, timer: 59 });
+        setState({ ...state, loader: false, timer: 300 });
         console.log(data);
       }
     } catch (err) {
@@ -100,12 +102,22 @@ function Blank({ history, ...props }) {
           boxShadow: "0px 5px 15px black",
           position: "sticky",
           top: "0px",
-          right: "0px",
+          right: "0px"
         }}>
         <h3 className='d-inline fo1 font-weight-light'>Dashboard</h3>
-        <div className='mr-3 rounded-circle p-2 c4 float-right text-light'>
-          <Bell />
+          <div className='mr-3 rounded-circle p-2 c4 float-right text-light'>
+            <Bell />
         </div>
+        <div className='mr-3 rounded-circle p-2 c4 float-right text-light'>
+            <Power 
+            onClick={ () => {
+              localStorage.removeItem('token');
+              history.push('/interpretly')
+            }}
+            
+            />
+        </div>
+    
       </div>
 
       <div className='col-12 pb-5'>
@@ -114,8 +126,8 @@ function Blank({ history, ...props }) {
         </h4>
         <div className='container text-center'>
           <p className='f20'>No upcoming jobs at the moment</p>
-          <h3 className='text-light font-weight-light'>Find a job now</h3>
-          <button className='btn c4 text-light'>Go Now</button>
+          {/* <h3 className='text-light font-weight-light'>Find a job now</h3>
+          <button className='btn c4 text-light'>Go Now</button> */}
         </div>
         <hr className='c1 col-10 ml-auto mt-5 mb-5 mr-auto' />
 
@@ -143,7 +155,11 @@ function Blank({ history, ...props }) {
             <div
               className='col-12 mt-4'
               style={{ maxHeight: "400px", overflow: "scroll" }}>
-              {arr.map((item) => (
+                  <p className='d-inilne m-0 p-0'>
+                  No jobs Available
+                    <span className='co'>Now</span>
+                  </p>
+              {/* {arr.map((item) => (
                 <div className='p-3 c5 col-12 round mb-2'>
                   <p className='d-inilne m-0 p-0'>
                     Marathahalli Police Station -{" "}
@@ -160,7 +176,7 @@ function Blank({ history, ...props }) {
                     </div>
                   </div>
                 </div>
-              ))}
+              ))} */}
             </div>
           </div>
         </div>

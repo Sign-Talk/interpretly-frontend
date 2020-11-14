@@ -7,6 +7,7 @@ import "./App.css";
 import Navbar from "./components/LargeComponent/dashboard/Navbar";
 import Dashboard from "./components/LargeComponent/dashboard/Dashboard";
 import Profile from "./components/LargeComponent/Profile";
+import JobRequests from './components/LargeComponent/jobRequests/JobRequests'
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
 
@@ -38,7 +39,7 @@ const App = (props) => {
       ref={childRef}
       children={() => (
         <div
-          className={`col-12 p-0 m-auto ${
+          className={`col-12 p-0 ${
             props.location.pathname === "/interpretly" ||
             props.location.pathname === "/interpretly/"
               ? ""
@@ -57,6 +58,7 @@ const App = (props) => {
             />
             <Route exact path='/interpretly/dashboard' component={Dashboard} />
             <Route exact path='/interpretly/profile' component={Profile} />
+            <Route exact path='/interpretly/request' component={JobRequests} />
             <Route component={Error} />
           </Switch>
         </div>
