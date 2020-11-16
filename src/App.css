@@ -9,7 +9,7 @@ a:hover{
     cursor: pointer!important;
     text-decoration: none!important;
 }
-.MuiSvgIcon-root:hover {
+.rounded-circle:hover {
     color: white;
     cursor: pointer;
   }

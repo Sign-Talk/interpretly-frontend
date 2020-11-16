@@ -29,14 +29,12 @@ function Navbar() {
         to='/interpretly/dashboard'>
         <Grid className='d-inline mr-2' size='18' /> Dashboard
       </NavLink>
-      <Popup content='work in progress' trigger={
       <NavLink
         activeClassName='c4'
         className='col-12 p-2 d-block rounded f15'
         to='/interpretly/request'>
         <PlusSquare className='d-inline mr-2' size='18' /> Job Requests
       </NavLink>
-      }/>
       <Popup content='work in progress' trigger={
       <NavLink
         activeClassName='c4'
@@ -45,14 +43,12 @@ function Navbar() {
         <Calendar className='d-inline mr-2' size='18' /> Schedule
       </NavLink>
       }/>
-      <Popup content='work in progress' trigger={
       <NavLink
         activeClassName='c4'
         className='col-12 p-2 d-block rounded f15'
         to='/interpretly/completed'>
         <CheckSquare className='d-inline mr-2' size='18' /> Completed
       </NavLink>
-      }/>
 
       {/* ============= {{{{{{{{{{{{}}}}}}}}}}}} =============*/}
       <br />
