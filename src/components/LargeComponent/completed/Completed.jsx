@@ -9,8 +9,8 @@ const Completed = ({
 }) => {
     
     return(
-        <div className='col-10 ml-auto p-0' style={{ 
-            minWidth: "1000px" ,
+        <div className='col-10 ml-auto c0 p-0' style={{ 
+            minWidth: "850px" ,
             position : 'relative'
         }}
         >
