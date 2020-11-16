@@ -7,7 +7,7 @@ import './jobRequests.css'
 const JobRequests = ({ history }) => {
     return(
         <div className='col-10 ml-auto p-0' style={{ 
-                minWidth: "850px" ,
+                minWidth: "1000px" ,
                 position : 'relative'
             }}
         >
