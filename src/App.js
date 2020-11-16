@@ -43,7 +43,7 @@ const App = (props) => {
       ref={childRef}
       children={() => (
         <div
-          className={`col-12 p-0  ${
+          className={`col-12 p-0 ml-auto mr-auto  ${
             props.location.pathname === "/interpretly" ||
             props.location.pathname === "/interpretly/"
               ? ""
