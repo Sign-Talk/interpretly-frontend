@@ -7,7 +7,10 @@ import "./App.css";
 import Navbar from "./components/LargeComponent/dashboard/Navbar";
 import Dashboard from "./components/LargeComponent/dashboard/Dashboard";
 import Profile from "./components/LargeComponent/Profile";
-import JobRequests from './components/LargeComponent/jobRequests/JobRequests'
+import JobRequests from "./components/LargeComponent/jobRequests/JobRequests";
+import Schedule from "./components/LargeComponent/Schedule/Schedule";
+import Notification from "./components/LargeComponent/Notification/Notification";
+import Message from "./components/LargeComponent/Message/Message";
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
 
@@ -39,12 +42,13 @@ const App = (props) => {
       ref={childRef}
       children={() => (
         <div
-          className={`col-12 p-0 ${
+          className={`col-12 p-0  ${
             props.location.pathname === "/interpretly" ||
             props.location.pathname === "/interpretly/"
               ? ""
               : "row"
-          }`}>
+          }`}
+        >
           {props.location.pathname === "/interpretly" ||
           props.location.pathname === "/interpretly/" ? null : (
             <Navbar />
@@ -52,13 +56,20 @@ const App = (props) => {
           <Switch>
             <AppRoute
               exact
-              path='/interpretly'
+              path="/interpretly"
               component={Home}
               layout={LayoutDefault}
             />
-            <Route exact path='/interpretly/dashboard' component={Dashboard} />
-            <Route exact path='/interpretly/profile' component={Profile} />
-            <Route exact path='/interpretly/request' component={JobRequests} />
+            <Route exact path="/interpretly/dashboard" component={Dashboard} />
+            <Route exact path="/interpretly/profile" component={Profile} />
+            <Route exact path="/interpretly/request" component={JobRequests} />
+            <Route exact path="/interpretly/schedule" component={Schedule} />
+            <Route
+              exact
+              path="/interpretly/notification"
+              component={Notification}
+            />
+            <Route exact path="/interpretly/message" component={Message} />
             <Route component={Error} />
           </Switch>
         </div>

@@ -159,7 +159,7 @@ function Blank({ history, ...props }) {
                   No jobs Available
                     <span className='co'>Now</span>
                   </p>
-              {/* {arr.map((item) => (
+              {arr.map((item) => (
                 <div className='p-3 c5 col-12 round mb-2'>
                   <p className='d-inilne m-0 p-0'>
                     Marathahalli Police Station -{" "}
@@ -176,7 +176,7 @@ function Blank({ history, ...props }) {
                     </div>
                   </div>
                 </div>
-              ))} */}
+              ))}
             </div>
           </div>
         </div>
