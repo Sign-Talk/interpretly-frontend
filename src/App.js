@@ -9,6 +9,7 @@ import Dashboard from "./components/LargeComponent/dashboard/Dashboard";
 import Profile from "./components/LargeComponent/Profile";
 import JobRequests from "./components/LargeComponent/jobRequests/JobRequests";
 import Schedule from "./components/LargeComponent/Schedule/Schedule";
+import Completed from "./components/LargeComponent/completed/Completed";
 import Notification from "./components/LargeComponent/Notification/Notification";
 import Message from "./components/LargeComponent/Message/Message";
 // Layouts
@@ -64,6 +65,7 @@ const App = (props) => {
             <Route exact path="/interpretly/profile" component={Profile} />
             <Route exact path="/interpretly/request" component={JobRequests} />
             <Route exact path="/interpretly/schedule" component={Schedule} />
+            <Route exact path='/interpretly/completed' component={Completed} />
             <Route
               exact
               path="/interpretly/notification"
