@@ -5,6 +5,7 @@ import { useState, useMemo } from "react";
 
 function Step2({ state, setState, sendOtp }) {
   const [timer, setTimer] = useState(300);
+  const [verifyClicked, setVerfiyClicked] = useState(false)
 
   useMemo(() => {
     if (timer !== 0 && timer > 0) {
@@ -14,6 +15,7 @@ function Step2({ state, setState, sendOtp }) {
 
   async function verifyPhone() {
     try {
+      setVerfiyClicked(true);
       setState({ ...state, loader: true });
       const { data } = await Axios({
         method: "post",
@@ -72,7 +74,7 @@ function Step2({ state, setState, sendOtp }) {
       <p className='mt-3 mb-3 smallFont'>{'Verify within Five minutes'}</p>
       {/* <p className='mt-3 mb-3 smallFont'>0:{timer}</p> */}
       {
-        state.matchedOtp == false &&
+        state.matchedOtp !== '' && state.matchedOtp == false  && verifyClicked &&
         <p style={{
           color : 'red'
         }}>Wrong otp.</p>
