@@ -35,7 +35,7 @@ function Step3({closeModal,loader,setLoader}) {
         ],
     })
     let steps = [
-        {title: 'Adress'}, 
+        {title: 'City'}, 
         {title: 'Languages'}, 
         {title: 'Background'}
     ]
@@ -109,20 +109,21 @@ function Step3({closeModal,loader,setLoader}) {
             }
 
             {
-              state.step!==4?
+              state.step!==4 ?
               <button className='btn btn-sm' 
               style={{backgroundColor:"#54ACF0"}}
               onClick={()=>{
-                if(state.step===3){
+                if(state.step===3 && state.region!=''&&state.selectedLanguages.length>0&&state.selectedWork!=''){
                   updateProfile()
                 }else{setState({...state,step:state.step+1})}}}>
                   Next
             </button>:null
             }
-            {/* <button className='btn btn-sm bg-primary' 
-            onClick={()=>state.step!==0?setState({...state,step:state.step-1}):null}>
+            <button className='btn btn-sm' 
+              style={{backgroundColor:"#54ACF0",marginLeft:"1rem"}}
+            onClick={()=>state.step!==0 &&  state.step !=4?setState({...state,step:state.step-1}):null}>
                 Back
-            </button> */}
+            </button>
             {/* <button onClick={closeModal}>Close modal</button> */}
         </div>
     )

@@ -172,14 +172,14 @@ export default function Profile(props) {
 
   const handleSave = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     var res = name.split(" ");
     // console.log("splitted name ", res[0], res[1]);
 
     console.log("lang =====>>>>>>>>> ", language);
     console.log("Background =====>>>>>>>>> ", Background);
     try {
-      await Axios({
+     let data= await Axios({
         method: "patch",
         url: `${base}/Home/profile`,
         data: {
@@ -193,6 +193,9 @@ export default function Profile(props) {
           token: localStorage.getItem("token"),
         },
       });
+      if(data){
+        setLoading(false);
+      }
 
       notify("Profile Updated sucessfullly");
       setShow("");
@@ -200,7 +203,8 @@ export default function Profile(props) {
 
       // console.log(data);
     } catch (err) {
-      // console.log(err);
+       console.log(err);
+       setLoading(false);
     }
   };
 
@@ -260,6 +264,7 @@ export default function Profile(props) {
 
   return (
     <>
+ 
       <div
         className="col-10 ml-auto c0 p-0"
         style={{

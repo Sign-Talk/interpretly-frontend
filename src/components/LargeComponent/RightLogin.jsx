@@ -343,7 +343,7 @@ function RightLogin({ state, setState, ...props }) {
                           props.history.push("/interpretly/dashboard");
                         }
                       } catch (err) {
-                        console.log(err.message);
+                        console.log(err.response);
                       }
                     }}
                     onFailure={(data, err) => console.log(err, data)}
@@ -405,6 +405,7 @@ function RightLogin({ state, setState, ...props }) {
                     buttonTheme='dark'
                     clientId='2c22b02c-0cee-411f-8d9e-6b6e632d2148'
                     authCallback={async (err, data) => {
+                      console.log(data)
                       let Name = data.authResponseWithAccessToken.account.name;
                       let index = Name.indexOf(" ");
                       let firstName = Name.slice(0, index - 1);
@@ -415,8 +416,7 @@ function RightLogin({ state, setState, ...props }) {
                           url: `${state.base}/Login/interpreter?sociallogin=1`,
                           data: {
                             email:
-                              data.authResponseWithAccessToken.account
-                                .accountIdentifier,
+                            data.authResponseWithAccessToken.account.accountIdentifier,
                             firstName: firstName,
                             lastName: LastName,
                             image: "",
