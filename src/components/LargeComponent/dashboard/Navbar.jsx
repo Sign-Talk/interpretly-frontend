@@ -35,15 +35,14 @@ function Navbar() {
         to='/interpretly/request'>
         <PlusSquare className='d-inline mr-2' size='18' /> Job Requests
       </NavLink>
-      <Popup content='work in progress' trigger={
+      
       <NavLink
         activeClassName='c4'
         className='col-12 p-2 d-block rounded f15'
         to='/interpretly/schedule'>
         <Calendar className='d-inline mr-2' size='18' /> Schedule
       </NavLink>
-      }/>
-      <NavLink
+            <NavLink
         activeClassName='c4'
         className='col-12 p-2 d-block rounded f15'
         to='/interpretly/completed'>
@@ -55,22 +54,21 @@ function Navbar() {
       <br />
       <br />
 
-      <Popup content='work in progress' trigger={
+      
         <NavLink
           activeClassName='c4'
           className='col-12 p-2 d-block rounded f15'
           to='/interpretly/message'>
           <Send className='d-inline mr-2' size='18' /> Messages
         </NavLink>
-      }/>
-      <Popup content='work in progress' trigger={
+            
         <NavLink
           activeClassName='c4'
           className='col-12 p-2 d-block rounded f15'
           to='/interpretly/notification'>
           <Bell className='d-inline mr-2' size='18' /> Notification
       </NavLink>
-      } />
+      
       <NavLink
         activeClassName='c4'
         className='col-12 p-2 d-block rounded f15'

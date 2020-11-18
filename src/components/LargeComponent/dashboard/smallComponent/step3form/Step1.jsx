@@ -42,7 +42,7 @@ const Step1 = ({ state, setState }) => {
   return (
     <div>
       <h5 className='text-light mt-3 mb-3' style={{ fontWeight: "lighter" }}>
-        Enter Your Address
+        Enter Your City
       </h5>
       <p className='smallFont mb-2'>Pick a city</p>
       <Select

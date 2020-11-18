@@ -173,19 +173,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ['Address', 'Languages', 'Background'];
+  return ['City', 'Languages', 'Background'];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return 'Address';
+      return 'City';
     case 1:
       return 'Languages';
     case 2:
       return 'Background';
     default:
-      return 'Address';
+      return 'City';
   }
 }
 

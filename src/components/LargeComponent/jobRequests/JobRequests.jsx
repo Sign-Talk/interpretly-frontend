@@ -2,6 +2,9 @@ import React from 'react'
 import { Bell, Power } from "react-feather";
 import policeIcon from '../../../assets/images/streamline-icon-police-hat-1@140x140 (1).png'
 import crossIcon from '../../../assets/images/Icon ionic-ios-close.png'
+import bankingIcon from '../../../assets/images/banking.svg'
+import softwareIcon from '../../../assets/images/software.svg'
+import technicalIcon from '../../../assets/images/technical.svg'
 import './jobRequests.css'
 
 const JobRequests = ({ history }) => {
@@ -37,15 +40,17 @@ const JobRequests = ({ history }) => {
                     <div className='row pl-5 pr-5 pt-4 job-section'>
                         <div className="col-12">
                             <div className="row pb-4">
-                        <div className="col-4">
+                        <div className="col-8">
                             <h4 className="p-0 mb-2">Posted jobs</h4>
-                            <span className='filter-section-btns'>
-                                <p>
-                                    Quick Filter : 
-                                    <button className='btn ml-2'>Onsite</button>
-                                    <button className='btn ml-2'>Remote</button>
-                                </p>
-                            </span>
+                            <div className='filter-section-btns d-flex'>
+                                        <p>
+                                            Quick Filter : 
+                                        </p>
+                                        <span>
+                                            <button className='btn ml-2'>Onsite</button>
+                                            <button className='btn ml-2'>Remote</button>
+                                        </span>
+                            </div>
                         </div>
                     </div>
                                 <div className="row">
@@ -110,7 +115,7 @@ const JobRequests = ({ history }) => {
                                                                     </p>
                                                                 </div>
                                                                 <div className="card-img mt-3 mb-3">
-                                                                    <img src={policeIcon} alt=""/>
+                                                                    <img src={technicalIcon} alt=""/>
                                                                 </div>
                                                                 <div className="card-footer p-0 m-0 ">
                                                                     <p>
@@ -150,7 +155,7 @@ const JobRequests = ({ history }) => {
                                                                     </p>
                                                                 </div>
                                                                 <div className="card-img mt-3 mb-3">
-                                                                    <img src={policeIcon} alt=""/>
+                                                                    <img src={bankingIcon} alt=""/>
                                                                 </div>
                                                                 <div className="card-footer p-0 m-0 ">
                                                                     <p>
@@ -190,7 +195,7 @@ const JobRequests = ({ history }) => {
                                                                     </p>
                                                                 </div>
                                                                 <div className="card-img mt-3 mb-3">
-                                                                    <img src={policeIcon} alt=""/>
+                                                                    <img src={softwareIcon} alt=""/>
                                                                 </div>
                                                                 <div className="card-footer p-0 m-0 ">
                                                                     <p>
