@@ -85,10 +85,10 @@ export default function Profile(props) {
   const [showEmail, setshowEmail] = useState(false);
   const [showUploadcertificate, setshowUploadcertificate] = useState(false);
 
-  const [div1per, setdiv1per] = useState("");
-  const [div2per, setdiv2per] = useState("");
-  const [div3per, setdiv3per] = useState("");
-  const [div4per, setdiv4per] = useState("");
+  const [div1per, setdiv1per] = useState(0);
+  const [div2per, setdiv2per] = useState(0);
+  const [div3per, setdiv3per] = useState(0);
+  const [div4per, setdiv4per] = useState(0);
   const [Reviews, setReviews] = useState("");
   const [ProfilePic, setProfilePic] = useState("");
 
@@ -135,11 +135,11 @@ export default function Profile(props) {
         setregion(data.user.region);
         setName(data.user.firstName + " " + data.user.lastName);
 
-        setdiv1per("4.8");
-        setdiv2per("4.2");
-        setdiv3per("3.2");
-        setdiv4per("89");
-        setReviews("72");
+        // setdiv1per("4.8");
+        // setdiv2per("4.2");
+        // setdiv3per("3.2");
+        // setdiv4per("89");
+        // setReviews("72");
       }
 
       func1();
@@ -804,7 +804,7 @@ export default function Profile(props) {
         {/* ====================== Rating sestion ==============  */}
         <Divider
           variant="middle"
-          style={{ height: "1px", background: "white" }}
+          style={{ height: "1px", background: "grey", margin: '2em' }}
         />
 
         <div className="col-12 ">
@@ -911,12 +911,14 @@ export default function Profile(props) {
                 <h1 style={{ color: "#24e5af" }}>{div4per} %</h1>
               </div>
               <div className="col">Recommended By</div>
-              <div className="col"> ( {Reviews} reviews)</div>
+              {/* <div className="col"> ( {Reviews} reviews)</div> */}
             </div>
           </div>
         </div>
         {/* ====================== feedback sestion ==============  */}
-        <div className="col-12 p-3 mb-5 ">
+        
+
+        {/* <div className="col-12 p-3 mb-5 ">
           <h4 style={{ marginLeft: "3rem" }}>Feedback</h4>
           <div className="col-12">
             <div
@@ -979,10 +981,10 @@ export default function Profile(props) {
                   </b>
                 </div>
                 <div className="col">- Asif Mohammed (Receptionist)</div>
-                {/* <div className='col'> ( {Reviews} reviews)</div> */}
+                <div className='col'> ( {Reviews} reviews)</div>
               </div>
             </div>
-            {/*  */}
+            
             <div
               className="row"
               style={{
@@ -1046,7 +1048,7 @@ export default function Profile(props) {
                 <div className="col">- Asif Mohammed (Receptionist)</div>
               </div>
             </div>
-            {/*  */}
+            
             <div
               className="row"
               style={{
@@ -1111,7 +1113,7 @@ export default function Profile(props) {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

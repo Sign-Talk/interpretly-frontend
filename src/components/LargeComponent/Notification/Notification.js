@@ -31,9 +31,15 @@ function Notification({ history, ...props }) {
             />
           </div>
         </div>
-        <div className="col m-5">
-          <img className={classes.notification} src={icon} alt="notifiaction" />
-          <p className={classes.notification}>You Do not have Notification !</p>
+        <div className="col text-center"
+          style={{
+            dipslay : 'absolute',
+            top: '10%',
+            left: '25%'
+          }}
+        >
+          <img className={classes.notification} style={{ margin : '2em 0', }} src={icon} alt="notifiaction" />
+          <p className={classes.notification} style={{ margin : 0}}>You Do not have Notification !</p>
         </div>
       </div>
     </>

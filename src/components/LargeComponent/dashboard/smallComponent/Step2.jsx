@@ -2,6 +2,8 @@ import React from "react";
 import OtpInput from "react-otp-input";
 import Axios from "axios";
 import { useState, useMemo } from "react";
+import Timer from 'react-compound-timer'
+
 
 function Step2({ state, setState, sendOtp }) {
   const [timer, setTimer] = useState(300);
@@ -71,13 +73,36 @@ function Step2({ state, setState, sendOtp }) {
           margin: "auto",
         }}
       />
-      <p className='mt-3 mb-3 smallFont'>{'Verify within Five minutes'}</p>
-      {/* <p className='mt-3 mb-3 smallFont'>0:{timer}</p> */}
       {
-        state.matchedOtp !== '' && state.matchedOtp == false  && verifyClicked &&
-        <p style={{
-          color : 'red'
-        }}>Wrong otp.</p>
+        state.matchedOtp !== '' && state.matchedOtp == false  && verifyClicked ?
+          <p style={{
+            color : 'red',
+            paddingTop : '10px'
+          }}>Wrong otp.</p>
+        :
+          <p className='mt-3 mb-3 smallFont'>
+            {
+              <Timer
+                  initialTime={300000}
+                  direction="backward"
+              >
+                  {({ reset }) => {
+                    if(timer == 300) reset();
+                    // if(resendOtp === true) {
+                    //   console.log('resetting');
+                    //   reset();
+                    // }
+                    return (
+                      <>
+                        <Timer.Minutes />:  
+                        <Timer.Seconds />
+                      </>
+                    )
+                  }
+                  }
+              </Timer>
+            }
+          </p>
       }
       <button
         disabled={state.disabled}

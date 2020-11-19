@@ -36,8 +36,18 @@ const JobRequests = ({ history }) => {
                     />
                 </div>
             </div>
-
-                    <div className='row pl-5 pr-5 pt-4 job-section'>
+                        <div
+                            style={{
+                                position : 'absolute',
+                                left: '25%',
+                                top: '200%',
+                                textAlign : 'center'
+                            }}
+                        >
+                            <img style={{ width : '25em', margin: '2em auto'}} src="https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/empty_xct9.svg" alt=""/>
+                            <p>You have no job requests yet, but we will keep you informed !</p>
+                        </div>
+                    {/* <div className='row pl-5 pr-5 pt-4 job-section'>
                         <div className="col-12">
                             <div className="row pb-4">
                         <div className="col-8">
@@ -222,8 +232,8 @@ const JobRequests = ({ history }) => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-        // </div> 
+                    </div> */}
+        </div> 
     )
 }
 

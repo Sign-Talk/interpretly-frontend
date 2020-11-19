@@ -297,7 +297,16 @@ function LeftLogin({ state, setState }) {
                         className={state.lfp !== true ? 'mt-5' : 'mt-3'}
                         width={250}
                         height={250} />
-                    <h5 className='m-0 p-0' style={{ color: "white", fontSize: "15px" }}>Are you new here?</h5>
+                    {
+                        state.lSelected == 'register' ?
+                        <h5 className='m-0 p-0' style={{ color: "white", fontSize: "15px" }}>
+                            Already Registered with us?
+                        </h5>
+                        : 
+                        <h5 className='m-0 p-0' style={{ color: "white", fontSize: "15px" }}>
+                        Are you new here?
+                        </h5>
+                    }
                     {
                         state.lSelected !== 'register' ?
                             <h5 className='m-0 p-0' onClick={() => setState({ ...state, lSelected: 'register' })}

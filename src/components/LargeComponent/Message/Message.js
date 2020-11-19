@@ -32,9 +32,15 @@ function Message({ history, ...props }) {
             />
           </div>
         </div>
-        <div className="col m-5">
-          <img className={classes.message} src={icon} alt="Messaage" />
-          <p className={classes.message}>You Do not have Message!</p>
+        <div className="col text-center"
+          style={{
+            dipslay : 'absolute',
+            top: '10%',
+            left: '25%'
+          }}
+        >
+          <img className={classes.message} style={{ margin : '2em 0', }} src={icon} alt="Messaage" />
+          <p className={classes.message} style={{ margin : 0}}>You Do not have any messages yet!</p>
         </div>
       </div>
     </>

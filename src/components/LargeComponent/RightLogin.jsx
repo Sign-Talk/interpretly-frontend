@@ -97,7 +97,7 @@ function RightLogin({ state, setState, ...props }) {
     } catch (err) {
       setLoading(false);
       console.log(err.response);
-      setmessage(err.response.data.message);
+      err.response.data.message == 'Email Id exists' ? setmessage('Email id already registered') : setmessage(err.response.data.message)
       seterrorMSG(true)
       if(err.response){
         // notifyWarning('email exist')
@@ -179,9 +179,16 @@ function RightLogin({ state, setState, ...props }) {
             width={250}
             height={250}
           />
-          <h5 className='m-0 p-0' style={{ color: "white", fontSize: "15px" }}>
-            Are you new here?
-          </h5>
+          {
+            state.lSelected == 'register' ?
+              <h5 className='m-0 p-0' style={{ color: "white", fontSize: "15px" }}>
+                Already Registered with us?
+              </h5>
+            : 
+            <h5 className='m-0 p-0' style={{ color: "white", fontSize: "15px" }}>
+              Are you new here?
+            </h5>
+          }
           {state.lSelected !== "register" ? (
             <h5
               className='m-0 p-0'
@@ -273,7 +280,7 @@ function RightLogin({ state, setState, ...props }) {
           <p
             style={validation}
             className={mailok === false ? "d-block" : "d-none"}>
-            this field is required
+            Please enter a valid email id
           </p>
           {state.lfp !== true ? (
             <>
