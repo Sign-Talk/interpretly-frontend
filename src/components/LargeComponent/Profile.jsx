@@ -672,7 +672,7 @@ export default function Profile(props) {
                         </p>
                         <p className="m-0 mb-3 " id="marginleft3">
                           <span style={styleObject}>
-                            {email === "" ? "no-email" : email}
+                            {email === "" ? "no-email" :email.search('@') == "-1" ?"Social Login":email }
                           </span>
                           {email === "" ? (
                             <CheckCircleOutlineOutlinedIcon
