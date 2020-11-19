@@ -37,7 +37,19 @@ const Completed = ({
                 </div>
             </div>
 
-            <div className="row">
+                        <div
+                            style={{
+                                position : 'absolute',
+                                left: '25%',
+                                top: '200%',
+                                textAlign : 'center'
+                            }}
+                        >
+                            <img style={{ width : '25em', margin: '2em auto'}} src="https://42f2671d685f51e10fc6-b9fcecea3e50b3b59bdc28dead054ebc.ssl.cf5.rackcdn.com/illustrations/Selection_re_poer.svg" alt=""/>
+                            <p>No messages to show yet. We will keep you posted!</p>
+                        </div>
+
+            {/* <div className="row">
                 <div className="col-12 d-flex mt-4 ml-3 sort-dropdown">
                     <p className='mt-2'>Sort :</p>
                     <select className='ml-2'>
@@ -326,7 +338,7 @@ const Completed = ({
                         </div>
                     </div>                   
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

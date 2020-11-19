@@ -9,6 +9,7 @@ import MicrosoftLogin from "react-microsoft-login";
 import { withRouter } from "react-router-dom";
 import Input from "./Input";
 import Loader from "react-loader-spinner";
+import OtpInput from "react-otp-input";
 // import {notifySucess,notifyWarning} from "../AlertComponent/ToastifyAlert"
 
 const iconStyle = {
@@ -121,6 +122,37 @@ function RightLogin({ state, setState, ...props }) {
 
   return (
     <div className='p-0 col-12' style={{ backgroundColor: "transparent" }}>
+      {/* <div>
+        <h6 className='text-light'>Enter Verification Code</h6>
+        <p className='smallFont'>check your email for Verification code</p>
+          <OtpInput
+            // isDisabled={timer !== 0 && timer > 0 ? false : true}
+            // value={state.otp}
+            // onChange={(e) => {
+            //   if (e.length === 6) {
+            //     setState({ ...state, disabled: false, otp: e });
+            //   } else {
+            //     setState({ ...state, otp: e, disabled: true });
+            //   }
+            // }}
+            numInputs={6}
+            separator={<span className='text-center p-2 ml-auto'></span>}
+            inputStyle={{
+              border: "3px solid #54ACF0",
+              borderRadius: "7px",
+              padding: "5px",
+              width: "40px",
+              height: "40px",
+              backgroundColor: "transparent",
+              color: "white",
+            }}
+            containerStyle={{
+              width: "85%",
+              justifyContent: "space-between",
+              margin: "auto",
+            }}
+          /> */}
+      {/* </div> */}
       <div
         style={{
           position: "absolute",

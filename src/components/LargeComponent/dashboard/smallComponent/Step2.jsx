@@ -87,7 +87,7 @@ function Step2({ state, setState, sendOtp }) {
                   direction="backward"
               >
                   {({ reset }) => {
-                    if(timer == 300) reset();
+                    if(timer === 300) reset();
                     // if(resendOtp === true) {
                     //   console.log('resetting');
                     //   reset();
