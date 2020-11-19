@@ -141,7 +141,7 @@ function Blank({ history, ...props }) {
                 <h4 className='co'>Expand &gt;</h4>
               </div>
             </div>
-            <Calendar className='col-11 mr-auto mt-4 ml-auto p-3 c5 round' />
+            <Calendar className='col-11 mr-auto mt-4 ml-auto p-3 w-100 c5 round' />
           </div>
           <div className='col-6'>
             <div className='col-12 m-auto d-flex justify-content-between p-0'>
@@ -152,14 +152,16 @@ function Blank({ history, ...props }) {
                 <h4 className='co'>See all &gt;</h4>
               </div>
             </div>
-            <div
+            <div className=' col-12 mt-4 container text-center'>
+          <p className='f20'>No upcoming jobs at the moment</p>
+          {/* <h3 className='text-light font-weight-light'>Find a job now</h3>
+          <button className='btn c4 text-light'>Go Now</button> */}
+        </div>
+            {/* <div
               className='col-12 mt-4'
-              style={{ maxHeight: "400px", overflow: "scroll" }}>
-                  <p className='d-inilne m-0 p-0'>
-                  No jobs Available
-                    <span className='co'>Now</span>
-                  </p>
-              {arr.map((item) => (
+              style={{ maxHeight: "400px", overflow: "scroll" }}> */}
+                 
+              {/* {arr.map((item) => (
                 <div className='p-3 c5 col-12 round mb-2'>
                   <p className='d-inilne m-0 p-0'>
                     Marathahalli Police Station -{" "}
@@ -176,8 +178,8 @@ function Blank({ history, ...props }) {
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
+              ))} */}
+            {/* </div> */}
           </div>
         </div>
       </div>
