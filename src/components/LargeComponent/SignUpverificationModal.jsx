@@ -1,20 +1,61 @@
 import React, { useState } from 'react'
+import { useEffect } from 'react';
 import OtpInput from "react-otp-input";
 import { Modal } from "react-responsive-modal";
-
+import Axios from "axios"
 import './verifyModal.css'
-
-const SignUpverificationModal = () => {
+import Loader from "./dashboard/smallComponent/Spinner";
+const SignUpverificationModal = ({verify}) => {
     const[pass, setOtp] = useState({
         disabled : true,
         otp :''
     })
-
-    const handleResnendClick = () => {
+    const [loading, setLoading] = useState(false);
+    const [o,setO]=useState(false)
+   useEffect(()=>{
+    if(verify!=null){
+        setO(true)
+    }
+   },[verify])
+    const handleResnendClick = async() => {
         // axios xcall
+        try{
+            setLoading(true)
+            let data= await Axios({
+                method: "get",
+                url: `https://whispering-lake-75400.herokuapp.com/Register/resendieotp?email=${verify}`,
+                
+              });
+              if(data){
+                setLoading(false);
+                  console.log(data)
+                  setO(false);
+              }
+           }  catch(err){
+               console.log(err);
+               setLoading(false);
+           }
+       
+
     }
 
-    const handleClick = () => {
+    const handleClick = async () => {
+       try{
+        setLoading(true)
+        let data= await Axios({
+            method: "get",
+            url: `https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=${verify}&vcode=${pass.otp}`,
+            
+          });
+          if(data){
+            setLoading(false);
+              console.log(data)
+              setO(false);
+          }
+       }  catch(err){
+           console.log(err);
+           setLoading(false);
+       }
 
     }
 
@@ -23,8 +64,8 @@ const SignUpverificationModal = () => {
 
     return (
         <Modal
-            open={true}
-            // onClose={() => setState({...state,o:state.o})}
+            open={o}
+             onClose={() => setO(false)}
             classNames={{
                 overlay: 'customOverlay',
                 modal: 'customModal3',
@@ -33,6 +74,7 @@ const SignUpverificationModal = () => {
 
             }}
             >
+       <Loader loading={loading} />
             <div className='signUp-modal'>
                 <h4 className='text-light'>Enter Verification Code</h4>
                 <p className='smallFont'>check your email for Verification code</p>
@@ -79,7 +121,8 @@ const SignUpverificationModal = () => {
                                 color: '#54acf0'
                             }}
                             onClick={handleResnendClick}
-                        >resend code> </button>
+                        >resend code{">"
+                        } </button>
                     </span>
                 </p>
             </div>

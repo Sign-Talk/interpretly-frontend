@@ -25,7 +25,7 @@ const validation = {
   padding: "0px",
 };
 const primary = "#54ACF0";
-function RightLogin({ state, setState, ...props }) {
+function RightLogin({ state, setState,setVerify, ...props }) {
   const [nameok, setnameok] = useState(true);
   const [mailok, setmailok] = useState(true);
   const [passok, setpassok] = useState(true);
@@ -63,7 +63,8 @@ function RightLogin({ state, setState, ...props }) {
         email: state.fmail,
         password: state.fpass,
       });
-      console.log(data);
+      
+      
       localStorage.setItem("token", data.token);
       setLoading(true);
       if (data !== undefined) {
@@ -71,6 +72,7 @@ function RightLogin({ state, setState, ...props }) {
       }
     } catch (err) {
       setLoading(false);
+      setVerify(err.response.data.email)
       setmessage(err.response.data.message);
       seterrorMSG(true)
       // console.log(err.message);
@@ -89,11 +91,12 @@ function RightLogin({ state, setState, ...props }) {
             : "",
         password: state.fpass,
       });
+      setVerify(data)
       setLoading(true);
       data && ( 
         setSignUpVerifyModal(true)
       )
-      console.log(data);
+    
       setmessage(`register sucessfully!\n${data.message}`);
       seterrorMSG(true)
       // notifySucess('register sucessfully!')
@@ -103,7 +106,7 @@ function RightLogin({ state, setState, ...props }) {
     } catch (err) {
       setLoading(false);
       console.log(err.response);
-      err.response.data.message == 'Email Id exists' ? setmessage('Email id already registered') : setmessage(err.response.data.message)
+      err.response&&  err.response.data.message == 'Email Id exists' ? setmessage('Email id already registered') : setmessage(err.response.data.message)
       seterrorMSG(true)
       if(err.response){
         // notifyWarning('email exist')
@@ -117,7 +120,7 @@ function RightLogin({ state, setState, ...props }) {
       const { data } = await Axios.post(
         `${state.base}/Register/resetpass/i?type=email&email=${state.fmail}`
       );
-      console.log(data);
+      
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -344,7 +347,7 @@ function RightLogin({ state, setState, ...props }) {
                   <GoogleLogin
                     clientId='154727329238-j9k2auvn5k8b8gsel5v2meegfajtltjo.apps.googleusercontent.com'
                     onSuccess={async (data, err) => {
-                      console.log(data)
+                      
                       try {
                         let dat = await Axios({
                           method: "post",
@@ -388,7 +391,7 @@ function RightLogin({ state, setState, ...props }) {
                     appId='2983361728458755'
                     onLoginSuccess={async (response) => {
                       try {
-                        console.log(response);
+                        
                         let newdata = await Axios({
                           method: "post",
                           url: `${state.base}/Login/interpreter?sociallogin=1`,
@@ -423,7 +426,7 @@ function RightLogin({ state, setState, ...props }) {
                     buttonTheme='dark'
                     clientId='2c22b02c-0cee-411f-8d9e-6b6e632d2148'
                     authCallback={async (err, data) => {
-                      console.log(data)
+                      
                       let Name = data.authResponseWithAccessToken.account.name;
                       let index = Name.indexOf(" ");
                       let firstName = Name.slice(0, index - 1);
