@@ -456,7 +456,7 @@ export default function Profile(props) {
                     >
                       <p className="m-0 mb-2 ">
                         <span style={styleObject}>
-                          {email === "" ? "no-email" : email}
+                          {email === "" ? "no-email" :email.search('@') == "-1" ?"Social Login":email }
                         </span>
                         <span style={{ marginLeft: ".8rem" }}>
                           {email === "" ? (
@@ -645,13 +645,13 @@ export default function Profile(props) {
                   <div className="col-6">
                     <div className="row">
                       <div className="col-4">
-                        <p className="m-0 mb-4 " id="marginleft4">
+                        <p className=" mb-4 " id="marginleft4">
                           Mobile :
                         </p>
-                        <p className="m-0 mb-4 " id="marginleft4">
+                        <p className=" mb-4 " id="marginleft4">
                           Email :
                         </p>
-                        <p className="m-0 mb-4 " id="marginleft4">
+                        <p className=" mb-4 " id="marginleft4">
                           Language :
                         </p>
                       </div>
