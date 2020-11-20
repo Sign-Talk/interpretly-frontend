@@ -9,7 +9,7 @@ import SectionHeader from "./partials/SectionHeader";
 import { PopupComponent } from "../elements/PopupComponent";
 import { centralStyle } from "../elements/centralStyle";
 import SignUpLogin from "../LargeComponent/SignUpLogin";
-
+import VerifyModal from '../LargeComponent/SignUpverificationModal'
 const propTypes = {
   ...SectionProps.types,
 };
@@ -50,6 +50,15 @@ const Hero = ({
   const [videoModalActive, setVideomodalactive] = useState(false);
   const [modalState, setmodalState] = useState(false);
   const [clicked, setClicked] = useState("");
+  const [verify,setVerify]=useState(null);
+  
+  if( verify!= null && verify.details!=undefined){
+    setVerify(verify.details[0].email);
+    setmodalState(false);
+  }
+  useEffect(()=>{
+    setmodalState(false)
+  },[verify])
   const openModal = (e) => {
     e.preventDefault();
     setVideomodalactive(true);
@@ -155,9 +164,11 @@ const Hero = ({
             </div>
           </div>
           <hr />
+          <VerifyModal  verify={verify} />
           <PopupComponent
             Content={
               <SignUpLogin
+              setVerify={setVerify}
                 clicked={clicked}
                 modalState={modalState}
                 setmodalState={setmodalState}
@@ -166,6 +177,7 @@ const Hero = ({
             modalState={modalState}
             setmodalState={setmodalState}
           />
+
           <SectionHeader data={sectionHeader} className='center-content' />
           <div color='primary' style={hl}></div>
           <div
