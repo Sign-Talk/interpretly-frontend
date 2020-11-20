@@ -31,7 +31,9 @@ function Step3({closeModal,loader,setLoader}) {
             { value: 'Healthcare', label: 'Healthcare' },
             { value: 'Bank', label: 'Bank' },
             { value: 'Software', label: 'Software' },
-            { value: 'Technology', label: 'Technology' }
+            { value: 'Technology', label: 'Technology' },
+            { value: 'Finance', label: 'Finance' },
+            { value: 'Accounting', label: 'Accounting' }
         ],
     })
     let steps = [
@@ -110,7 +112,26 @@ function Step3({closeModal,loader,setLoader}) {
 
             {
               state.step!==4 ?
+            //   <button className='btn btn-sm' 
+            //   style={{backgroundColor:"#54ACF0"}}
+            //   onClick={()=>{
+            //     if(state.step===3 && state.region!=''&&state.selectedLanguages.length>0&&state.selectedWork!=''){
+            //       updateProfile()
+            //     }else{setState({...state,step:state.step+1})}}}>
+            //       Next
+            // </button>:null
               <button className='btn btn-sm' 
+                style={{backgroundColor:"#54ACF0",marginLeft:"1rem"}}
+                onClick={()=>state.step!==0 &&  state.step !=4?setState({...state,step:state.step-1}):null}>
+                Back
+              </button> : null
+            }
+            {/* <button className='btn btn-sm' 
+              style={{backgroundColor:"#54ACF0",marginLeft:"1rem"}}
+            onClick={()=>state.step!==0 &&  state.step !=4?setState({...state,step:state.step-1}):null}>
+                Back
+            </button> */}
+            <button className='btn btn-sm' 
               style={{backgroundColor:"#54ACF0"}}
               onClick={()=>{
                 if(state.step===3 && state.region!=''&&state.selectedLanguages.length>0&&state.selectedWork!=''){
@@ -118,12 +139,6 @@ function Step3({closeModal,loader,setLoader}) {
                 }else{setState({...state,step:state.step+1})}}}>
                   Next
             </button>:null
-            }
-            <button className='btn btn-sm' 
-              style={{backgroundColor:"#54ACF0",marginLeft:"1rem"}}
-            onClick={()=>state.step!==0 &&  state.step !=4?setState({...state,step:state.step-1}):null}>
-                Back
-            </button>
             {/* <button onClick={closeModal}>Close modal</button> */}
         </div>
     )

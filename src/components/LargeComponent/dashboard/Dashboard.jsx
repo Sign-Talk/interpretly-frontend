@@ -153,15 +153,15 @@ function Blank({ history, ...props }) {
               </div>
             </div>
             <div className=' col-12 mt-4 container text-center'>
-          <p className='f20'>No upcoming jobs at the moment</p>
+          {/* <p className='f20'>No upcoming jobs at the moment</p> */}
           {/* <h3 className='text-light font-weight-light'>Find a job now</h3>
           <button className='btn c4 text-light'>Go Now</button> */}
         </div>
-            {/* <div
+            <div
               className='col-12 mt-4'
-              style={{ maxHeight: "400px", overflow: "scroll" }}> */}
+              style={{ maxHeight: "400px", overflow: "scroll" }}>
                  
-              {/* {arr.map((item) => (
+              {arr.map((item) => (
                 <div className='p-3 c5 col-12 round mb-2'>
                   <p className='d-inilne m-0 p-0'>
                     Marathahalli Police Station -{" "}
@@ -178,8 +178,8 @@ function Blank({ history, ...props }) {
                     </div>
                   </div>
                 </div>
-              ))} */}
-            {/* </div> */}
+              ))}
+            </div>
           </div>
         </div>
       </div>

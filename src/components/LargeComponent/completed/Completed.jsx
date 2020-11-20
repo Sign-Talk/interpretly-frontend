@@ -49,7 +49,7 @@ const Completed = ({
                             <p>No messages to show yet. We will keep you posted!</p>
                         </div>
 
-            {/* <div className="row">
+            <div className="row">
                 <div className="col-12 d-flex mt-4 ml-3 sort-dropdown">
                     <p className='mt-2'>Sort :</p>
                     <select className='ml-2'>
@@ -338,7 +338,7 @@ const Completed = ({
                         </div>
                     </div>                   
                 </div>
-            </div> */}
+            </div>
         </div>
     )
 }

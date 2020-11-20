@@ -135,11 +135,11 @@ export default function Profile(props) {
         setregion(data.user.region);
         setName(data.user.firstName + " " + data.user.lastName);
 
-        // setdiv1per("4.8");
-        // setdiv2per("4.2");
-        // setdiv3per("3.2");
-        // setdiv4per("89");
-        // setReviews("72");
+        setdiv1per("4.8");
+        setdiv2per("4.2");
+        setdiv3per("3.2");
+        setdiv4per("89");
+        setReviews("72");
       }
 
       func1();
@@ -918,7 +918,7 @@ export default function Profile(props) {
         {/* ====================== feedback sestion ==============  */}
         
 
-        {/* <div className="col-12 p-3 mb-5 ">
+        <div className="col-12 p-3 mb-5 ">
           <h4 style={{ marginLeft: "3rem" }}>Feedback</h4>
           <div className="col-12">
             <div
@@ -1113,7 +1113,7 @@ export default function Profile(props) {
               </div>
             </div>
           </div>
-        </div> */}
+        </div>
       </div>
     </>
   );
