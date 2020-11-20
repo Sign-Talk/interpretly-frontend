@@ -10,6 +10,7 @@ import { withRouter } from "react-router-dom";
 import Input from "./Input";
 import Loader from "react-loader-spinner";
 import OtpInput from "react-otp-input";
+import VerifyModal from './SignUpverificationModal'
 // import {notifySucess,notifyWarning} from "../AlertComponent/ToastifyAlert"
 
 const iconStyle = {
@@ -31,6 +32,7 @@ function RightLogin({ state, setState, ...props }) {
   const [loading, setLoading] = useState(false);
   const [errorMSG,seterrorMSG]= useState(false);
   const [message,setmessage]=useState('');
+  const[signUpVerifyModal, setSignUpVerifyModal]= useState(true)
 
   if (nameok === true && mailok === true && passok === true) {
     state.fregsisterok = true;
@@ -88,6 +90,9 @@ function RightLogin({ state, setState, ...props }) {
         password: state.fpass,
       });
       setLoading(true);
+      data && ( 
+        setSignUpVerifyModal(true)
+      )
       console.log(data);
       setmessage(`register sucessfully!\n${data.message}`);
       seterrorMSG(true)
@@ -122,37 +127,6 @@ function RightLogin({ state, setState, ...props }) {
 
   return (
     <div className='p-0 col-12' style={{ backgroundColor: "transparent" }}>
-      {/* <div>
-        <h6 className='text-light'>Enter Verification Code</h6>
-        <p className='smallFont'>check your email for Verification code</p>
-          <OtpInput
-            // isDisabled={timer !== 0 && timer > 0 ? false : true}
-            // value={state.otp}
-            // onChange={(e) => {
-            //   if (e.length === 6) {
-            //     setState({ ...state, disabled: false, otp: e });
-            //   } else {
-            //     setState({ ...state, otp: e, disabled: true });
-            //   }
-            // }}
-            numInputs={6}
-            separator={<span className='text-center p-2 ml-auto'></span>}
-            inputStyle={{
-              border: "3px solid #54ACF0",
-              borderRadius: "7px",
-              padding: "5px",
-              width: "40px",
-              height: "40px",
-              backgroundColor: "transparent",
-              color: "white",
-            }}
-            containerStyle={{
-              width: "85%",
-              justifyContent: "space-between",
-              margin: "auto",
-            }}
-          /> */}
-      {/* </div> */}
       <div
         style={{
           position: "absolute",
@@ -200,6 +174,11 @@ function RightLogin({ state, setState, ...props }) {
           <h6 className='mt-2 text-light text-center'>I'm an Interpreter</h6>
         </div>
       </div>
+      {
+        signUpVerifyModal && (
+          <VerifyModal
+          />
+      )}
       <div
         className='row m-auto col-12 p-2 rounded'
         style={{ backgroundColor: "#272727" }}>
