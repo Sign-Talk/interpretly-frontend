@@ -5,6 +5,7 @@ import Step2 from './step3form/Step2'
 import LastStep from './step3form/Step3'
 import StepLast from './step3form/StepLast'
 import Axios from 'axios'
+import { Languages } from './languageDummy'
 
 function Step3({closeModal,loader,setLoader}) {
     const [state,setState] = useState({
@@ -21,12 +22,7 @@ function Step3({closeModal,loader,setLoader}) {
             { value: 'Hydrabad', label: 'Hydrabad' },
             { value: 'Others', label: 'Others' },
           ],
-        languages:[
-            { value: 'English', label: 'English' },
-            { value: 'Hindi', label: 'Hindi' },
-            { value: 'Marathi', label: 'Marathi' },
-            { value: 'Malyalam', label: 'Malyalam' }
-          ],
+        languages: Languages,
         works:[
             { value: 'Healthcare', label: 'Healthcare' },
             { value: 'Bank', label: 'Bank' },
@@ -111,20 +107,17 @@ function Step3({closeModal,loader,setLoader}) {
             }
 
             {
-              state.step!== 4 ?
+              state.step!== 3 ?
               <button className='btn btn-sm mr-1' 
                 style={{backgroundColor:"#54ACF0",marginLeft:"1rem"}}
-                onClick={()=>{
-                  if(state.step!==0 && state.step!== 4)
-                  setState({...state, step : state.step-1})
-                }}>
+                onClick={()=>state.step!==0 &&  state.step !=4?setState({...state,step:state.step-1}):null}>
                 Back
               </button> : null
             }
             <button className='btn btn-sm ml-1' 
               style={{backgroundColor:"#54ACF0"}}
               onClick={()=>{
-                if(state.step === 4 && state.region!='' && state.selectedLanguages.length>0 && state.selectedWork!=''){
+                if(state.step === 3 && state.region!='' && state.selectedLanguages.length>0 && state.selectedWork!=''){
                   updateProfile()
                 }else{
                   setState({...state, step : state.step+1})

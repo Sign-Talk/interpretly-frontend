@@ -17,13 +17,14 @@ import CloseIcon from "@material-ui/icons/Close";
 import Divider from "@material-ui/core/Divider";
 import { InputBase } from "@material-ui/core";
 import { PopupComponent } from "../../components/elements/PopupComponent";
+import { Languages } from './dashboard/smallComponent/languageDummy'
 
 import './profile.css'
 import "react-toastify/dist/ReactToastify.css";
 
 import { Button, Segment, Form } from "semantic-ui-react";
 
-const styleObject = { fontSize: "14px", color: "white", marginRight: '2em' };
+const styleObject = { fontSize: "14px", color: "white", marginRight: '1em' };
 
 // these 3 variable is for drop down
 const Reginset = [
@@ -48,16 +49,7 @@ const Backgroundset = [
   { key: 11, text: "Construction", value: "Construction" },
   { key: 12, text: "Other", value: "Other" },
 ];
-const Languageset = [
-  { key: 1, text: "English", value: "English" },
-  { key: 2, text: "Hindi", value: "Hindi" },
-  { key: 3, text: "Marathi", value: "Marathi" },
-  { key: 4, text: "Bengali", value: "Bengali" },
-  { key: 5, text: "Tamil", value: "Tamil" },
-  { key: 6, text: "Malayalam", value: "Malayalam" },
-  { key: 7, text: "Punjabi", value: "Punjabi" },
-  { key: 8, text: "Kannada", value: "Kannada" },
-];
+const Languageset = Languages
 
 export default function Profile(props) {
   const history = useHistory();
