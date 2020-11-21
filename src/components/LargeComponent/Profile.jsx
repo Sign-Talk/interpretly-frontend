@@ -717,7 +717,7 @@ export default function Profile(props) {
                         </div>
                         <div className="m-0 mb-3" id="marginleft3">
                           <span style={styleObject}>
-                            {Backgroundforgettingval.length === 0
+                            {Backgroundforgettingval &&Backgroundforgettingval.length === 0
                               ? "update your Background"
                               : Backgroundforgettingval}
                           </span>
