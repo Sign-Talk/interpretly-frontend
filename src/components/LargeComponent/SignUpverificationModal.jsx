@@ -5,14 +5,15 @@ import { Modal } from "react-responsive-modal";
 import Axios from "axios"
 import './verifyModal.css'
 import Loader from "./dashboard/smallComponent/Spinner";
+import {notifySucess,notifyWarning} from "../AlertComponent/ToastifyAlert";
 const SignUpverificationModal = ({verify}) => {
     const[pass, setOtp] = useState({
         disabled : true,
         otp :''
     })
     const [loading, setLoading] = useState(false);
-    const [o,setO]=useState(false)
-    const[error, setError] = useState(false)
+    const [o,setO]=useState(false);
+    const[error, setError] = useState(false);
 
    useEffect(()=>{
     if(verify!=null){
@@ -56,6 +57,7 @@ const SignUpverificationModal = ({verify}) => {
             setLoading(false);
             setO(false);
           } else{
+            notifySucess('Email verified successfully ! Login to proceed !')
             setLoading(false);
             setO(false);
           }

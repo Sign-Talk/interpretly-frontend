@@ -14,7 +14,7 @@ import Notification from "./components/LargeComponent/Notification/Notification"
 import Message from "./components/LargeComponent/Message/Message";
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
-
+import {ToastifyAlert} from "../src/components/AlertComponent/ToastifyAlert"
 // Views
 import Home from "./views/Home";
 import Error from "./views/Error";
@@ -54,6 +54,7 @@ const App = (props) => {
           props.location.pathname === "/interpretly/" ? null : (
             <Navbar />
           )}
+          <ToastifyAlert  style={{zIndex:"1"}}/>
           <Switch>
             <AppRoute
               exact

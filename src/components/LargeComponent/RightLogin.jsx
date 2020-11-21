@@ -11,7 +11,7 @@ import Input from "./Input";
 import Loader from "react-loader-spinner";
 import OtpInput from "react-otp-input";
 import VerifyModal from './SignUpverificationModal'
-// import {notifySucess,notifyWarning} from "../AlertComponent/ToastifyAlert"
+ import {notifySucess,notifyWarning} from "../AlertComponent/ToastifyAlert"
 
 const iconStyle = {
   width: "30px",
@@ -74,6 +74,7 @@ function RightLogin({ state, setState,setVerify, ...props }) {
       setLoading(false);
       setVerify(err.response.data.email)
       setmessage(err.response.data.message);
+      
       seterrorMSG(true)
       // console.log(err.message);
     }
