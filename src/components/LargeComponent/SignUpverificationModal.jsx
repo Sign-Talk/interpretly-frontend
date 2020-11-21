@@ -29,7 +29,7 @@ const SignUpverificationModal = ({verify}) => {
               if(data){
                 setLoading(false);
                   console.log(data)
-                  setO(false);
+                  
               }
            }  catch(err){
                console.log(err);
