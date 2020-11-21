@@ -29,6 +29,7 @@ function Step3({ closeModal, loader, setLoader }) {
       { value: 'Software', label: 'Software' },
       { value: 'Technology', label: 'Technology' },
       { value: 'Finance & Accounting', label: 'Finance & Accounting' },
+      { value: 'others', label: 'others' },
     ],
   })
   let steps = [

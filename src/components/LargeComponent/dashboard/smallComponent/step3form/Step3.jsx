@@ -9,7 +9,8 @@ import {
   faUniversity,
   faLaptopCode,
   faCogs,
-  faHandHoldingUsd
+  faHandHoldingUsd,
+  
 } from "@fortawesome/free-solid-svg-icons";
 
 function Step3({ state, setState }) {
