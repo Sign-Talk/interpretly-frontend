@@ -111,35 +111,27 @@ function Step3({closeModal,loader,setLoader}) {
             }
 
             {
-              state.step!==4 ?
-            //   <button className='btn btn-sm' 
-            //   style={{backgroundColor:"#54ACF0"}}
-            //   onClick={()=>{
-            //     if(state.step===3 && state.region!=''&&state.selectedLanguages.length>0&&state.selectedWork!=''){
-            //       updateProfile()
-            //     }else{setState({...state,step:state.step+1})}}}>
-            //       Next
-            // </button>:null
-              <button className='btn btn-sm' 
+              state.step!== 4 ?
+              <button className='btn btn-sm mr-1' 
                 style={{backgroundColor:"#54ACF0",marginLeft:"1rem"}}
-                onClick={()=>state.step!==0 &&  state.step !=4?setState({...state,step:state.step-1}):null}>
+                onClick={()=>{
+                  if(state.step!==0 && state.step!== 4)
+                  setState({...state, step : state.step-1})
+                }}>
                 Back
               </button> : null
             }
-            {/* <button className='btn btn-sm' 
-              style={{backgroundColor:"#54ACF0",marginLeft:"1rem"}}
-            onClick={()=>state.step!==0 &&  state.step !=4?setState({...state,step:state.step-1}):null}>
-                Back
-            </button> */}
-            <button className='btn btn-sm' 
+            <button className='btn btn-sm ml-1' 
               style={{backgroundColor:"#54ACF0"}}
               onClick={()=>{
-                if(state.step===3 && state.region!=''&&state.selectedLanguages.length>0&&state.selectedWork!=''){
+                if(state.step === 4 && state.region!='' && state.selectedLanguages.length>0 && state.selectedWork!=''){
                   updateProfile()
-                }else{setState({...state,step:state.step+1})}}}>
-                  Next
-            </button>:null
-            {/* <button onClick={closeModal}>Close modal</button> */}
+                }else{
+                  setState({...state, step : state.step+1})
+                }
+              }}>
+                Next
+            </button>
         </div>
     )
 }

@@ -8,6 +8,7 @@ import Timer from 'react-compound-timer'
 function Step2({ state, setState, sendOtp }) {
   const [timer, setTimer] = useState(300);
   const [verifyClicked, setVerfiyClicked] = useState(false)
+  const[resend, setResend] = useState(false)
 
   useMemo(() => {
     if (timer !== 0 && timer > 0) {
@@ -59,7 +60,7 @@ function Step2({ state, setState, sendOtp }) {
         numInputs={6}
         separator={<span className='text-center p-2 ml-auto'></span>}
         inputStyle={{
-          border: "3px solid #54ACF0",
+          border: state.matchedOtp !== '' && state.matchedOtp == false  && verifyClicked && !resend ? "3px solid red" : "3px solid #54ACF0",
           borderRadius: "7px",
           padding: "5px",
           width: "40px",
@@ -73,13 +74,14 @@ function Step2({ state, setState, sendOtp }) {
           margin: "auto",
         }}
       />
-      {
-        state.matchedOtp !== '' && state.matchedOtp == false  && verifyClicked ?
-          <p style={{
-            color : 'red',
-            paddingTop : '10px'
-          }}>Wrong otp.</p>
-        :
+      {/* {
+        state.matchedOtp !== '' && state.matchedOtp == false  && verifyClicked &&(
+            <p style={{
+              color : 'red',
+              paddingTop : '15px'
+            }}>Wrong otp.</p>
+          )
+      } */}
           <p className='mt-3 mb-3 smallFont'>
             {
               <Timer
@@ -88,10 +90,6 @@ function Step2({ state, setState, sendOtp }) {
               >
                   {({ reset }) => {
                     if(timer === 300) reset();
-                    // if(resendOtp === true) {
-                    //   console.log('resetting');
-                    //   reset();
-                    // }
                     return (
                       <>
                         <Timer.Minutes />:  
@@ -103,7 +101,6 @@ function Step2({ state, setState, sendOtp }) {
               </Timer>
             }
           </p>
-      }
       <button
         disabled={state.disabled}
         className={`btn btn-sm text-light ${
@@ -124,6 +121,7 @@ function Step2({ state, setState, sendOtp }) {
         <p
           className='d-inline-block mt-3'
           onClick={()=>{
+            setResend(true)
             sendOtp()
             setTimer(300)
           }}

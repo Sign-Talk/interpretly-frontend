@@ -39,7 +39,7 @@ function Notification({ history, ...props }) {
           }}
         >
           <img className={classes.notification} style={{ margin : '2em 0', }} src={icon} alt="notifiaction" />
-          <p className={classes.notification} style={{ margin : 0}}>You Do not have Notification !</p>
+          <p className={classes.notification} style={{ margin : 0}}>You Do not have any Notifications yet!</p>
         </div>
       </div>
     </>
