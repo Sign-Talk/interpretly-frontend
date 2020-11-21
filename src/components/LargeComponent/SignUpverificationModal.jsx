@@ -12,6 +12,8 @@ const SignUpverificationModal = ({verify}) => {
     })
     const [loading, setLoading] = useState(false);
     const [o,setO]=useState(false)
+    const[error, setError] = useState(false)
+
    useEffect(()=>{
     if(verify!=null){
         setO(true)
@@ -21,22 +23,23 @@ const SignUpverificationModal = ({verify}) => {
         // axios xcall
         try{
             setLoading(true)
-            let data= await Axios({
+            let {data}= await Axios({
                 method: "get",
                 url: `https://whispering-lake-75400.herokuapp.com/Register/resendieotp?email=${verify}`,
-                
               });
-              if(data){
+              if(data.error){
+                setError(true)
                 setLoading(false);
-                  console.log(data)
-                  setO(false);
+                // setO(false);
+              } else{
+                setLoading(false);
+                // setO(false);
               }
-           }  catch(err){
+           } catch(err){
+                setError(true)
                console.log(err);
                setLoading(false);
            }
-       
-
     }
 
     const handleClick = async () => {
@@ -47,20 +50,22 @@ const SignUpverificationModal = ({verify}) => {
             url: `https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=${verify}&vcode=${pass.otp}`,
             
           });
-          if(data){
+          console.log(data)
+          if(data.error){
+            setError(true)
             setLoading(false);
-              console.log(data)
-              setO(false);
+            setO(false);
+          } else{
+            setLoading(false);
+            setO(false);
           }
        }  catch(err){
+            setError(true)
            console.log(err);
            setLoading(false);
        }
 
     }
-
-    // baseroute/Register/resendieotp?email=mrmanasranjan547@gmail.com
-    // https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=apallauri@gmail.com&vcode=416617
 
     return (
         <Modal
@@ -91,7 +96,7 @@ const SignUpverificationModal = ({verify}) => {
                         numInputs={6}
                         separator={<span className='text-center p-2 ml-auto'></span>}
                         inputStyle={{
-                            border: "3px solid #54ACF0",
+                            border: error ? '3px solid red' : "3px solid #54ACF0",
                             borderRadius: "7px",
                             padding: "5px",
                             width: "40px",
@@ -105,6 +110,11 @@ const SignUpverificationModal = ({verify}) => {
                             margin: "auto",
                         }}
                     />
+                    {/* {
+                        error && (
+                            <p classNam='p-0 m-0' style={{ color : 'red',}}>Wrong OTP</p>
+                        )
+                    } */}
                 {
                     pass.disabled === true ?
                         <button disabled className='continue-btn btn btn-primary'>Continue</button>

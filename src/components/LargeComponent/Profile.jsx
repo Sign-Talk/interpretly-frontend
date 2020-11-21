@@ -18,11 +18,12 @@ import Divider from "@material-ui/core/Divider";
 import { InputBase } from "@material-ui/core";
 import { PopupComponent } from "../../components/elements/PopupComponent";
 
+import './profile.css'
 import "react-toastify/dist/ReactToastify.css";
 
 import { Button, Segment, Form } from "semantic-ui-react";
 
-const styleObject = { fontSize: "14px", color: "white" };
+const styleObject = { fontSize: "14px", color: "white", marginRight: '2em' };
 
 // these 3 variable is for drop down
 const Reginset = [
@@ -298,7 +299,7 @@ export default function Profile(props) {
         </div>
         </div>
         {/* ================== <<<<<<<<< {{{{{ from here the user profile details are starting }}}}} >>>>>>>> ================== */}
-        <div className="row p-0 m-0" style={{ fontSize: "14px" }}>
+        <div className="row profile-centered" style={{ fontSize: "14px" }}>
           <div
             style={{
               borderRadius: "50%",
@@ -398,18 +399,18 @@ export default function Profile(props) {
                       className="col-12"
                       style={{ paddingTop: ".8rem", marginLeft: "-1rem" }}
                     >
-                      <p className="m-0 mb-2 ">
-                        <span style={styleObject}>
+                      <p className="m-0 mb-2">
+                        <span style={styleObject} className='mr-2'>
                           {mobile === "" ? "UnRegistered" : mobile}
                         </span>
-                        <span style={{ marginLeft: ".8rem" }}>
+                        <span style={{ marginLeft: ".8em" }}>
                           {mobile === "" ? (
                             <CheckCircleOutlineOutlinedIcon
                               style={{ color: "red" }}
                             />
                           ) : (
                             <CheckCircleOutlineOutlinedIcon
-                              style={{ color: "#24e5af" }}
+                              style={{ color: "#24e5af"}}
                             />
                           )}
                         </span>
@@ -907,11 +908,11 @@ export default function Profile(props) {
                 marginLeft: "1rem",
               }}
             >
+              <div className="col">Recommended By</div>
               <div className="col">
                 <h1 style={{ color: "#24e5af" }}>{div4per} %</h1>
               </div>
-              <div className="col">Recommended By</div>
-              {/* <div className="col"> ( {Reviews} reviews)</div> */}
+              <div className="col"> ( {Reviews} reviews)</div>
             </div>
           </div>
         </div>
