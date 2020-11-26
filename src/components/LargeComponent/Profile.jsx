@@ -21,7 +21,7 @@ import { Languages } from './dashboard/smallComponent/languageDummy'
 
 import './profile.css'
 import "react-toastify/dist/ReactToastify.css";
-
+import {notifySucess} from "../../components/AlertComponent/ToastifyAlert"
 import { Button, Segment, Form } from "semantic-ui-react";
 
 const styleObject = { fontSize: "14px", color: "white", marginRight: '1em' };
@@ -156,7 +156,7 @@ export default function Profile(props) {
       },
     });
     setProfilePic(data);
-    notify("upload done");
+    notifySucess('profile updated')
     setprofileimageModel(false);
     history.push("/interpretly/profile");
 
@@ -190,7 +190,7 @@ export default function Profile(props) {
         setLoading(false);
       }
 
-      notify("Profile Updated sucessfullly");
+      notifySucess('profile updated!')
       setShow("");
       history.push("/interpretly/profile");
 

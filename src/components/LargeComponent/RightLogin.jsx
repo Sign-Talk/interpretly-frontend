@@ -107,7 +107,9 @@ function RightLogin({ state, setState,setVerify, ...props }) {
     } catch (err) {
       setLoading(false);
       console.log(err.response);
-      err.response&&  err.response.data.message == 'Email Id exists' ? setmessage('Email id already registered') : setmessage(err.response.data.message)
+  if(err.response){
+    err.response.data.message == 'Email Id exists' ? setmessage('Email id already registered') : setmessage(err.response.data.message)
+  }
       seterrorMSG(true)
       if(err.response){
         // notifyWarning('email exist')
