@@ -19,9 +19,7 @@ function Notification({ history, ...props }) {
           }}
         >
           <h3 className="d-inline fo1 font-weight-light">Notifications</h3>
-          <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
-            <Bell />
-          </div>
+
           <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
             <Power
               onClick={() => {
@@ -30,16 +28,27 @@ function Notification({ history, ...props }) {
               }}
             />
           </div>
+          <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
+            <Bell />
+          </div>
         </div>
-        <div className="col text-center"
+        <div
+          className="col text-center"
           style={{
-            dipslay : 'absolute',
-            top: '10%',
-            left: '25%'
+            dipslay: "absolute",
+            top: "10%",
+            left: "25%",
           }}
         >
-          <img className={classes.notification} style={{ margin : '2em 0', }} src={icon} alt="notifiaction" />
-          <p className={classes.notification} style={{ margin : 0}}>You Do not have any Notifications yet!</p>
+          <img
+            className={classes.notification}
+            style={{ margin: "2em 0" }}
+            src={icon}
+            alt="notifiaction"
+          />
+          <p className={classes.notification} style={{ margin: 0 }}>
+            You Do not have any Notifications yet!
+          </p>
         </div>
       </div>
     </>

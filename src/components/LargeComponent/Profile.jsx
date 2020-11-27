@@ -3,7 +3,7 @@ import { useHistory, Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
 import Modal from "react-modal";
-import { Bell, Clock, UserPlus, CloudLightning ,Power} from "react-feather";
+import { Bell, Clock, UserPlus, CloudLightning, Power } from "react-feather";
 import { toast } from "react-toastify";
 import Avatar from "react-avatar";
 import Fab from "@material-ui/core/Fab";
@@ -17,14 +17,14 @@ import CloseIcon from "@material-ui/icons/Close";
 import Divider from "@material-ui/core/Divider";
 import { InputBase } from "@material-ui/core";
 import { PopupComponent } from "../../components/elements/PopupComponent";
-import { Languages } from './dashboard/smallComponent/languageDummy'
+import { Languages } from "./dashboard/smallComponent/languageDummy";
 
-import './profile.css'
+import "./profile.css";
 import "react-toastify/dist/ReactToastify.css";
-import {notifySucess} from "../../components/AlertComponent/ToastifyAlert"
+import { notifySucess } from "../../components/AlertComponent/ToastifyAlert";
 import { Button, Segment, Form } from "semantic-ui-react";
 
-const styleObject = { fontSize: "14px", color: "white", marginRight: '1em' };
+const styleObject = { fontSize: "14px", color: "white", marginRight: "1em" };
 
 // these 3 variable is for drop down
 const Reginset = [
@@ -49,7 +49,7 @@ const Backgroundset = [
   { key: 11, text: "Construction", value: "Construction" },
   { key: 12, text: "Other", value: "Other" },
 ];
-const Languageset = Languages
+const Languageset = Languages;
 
 export default function Profile(props) {
   const history = useHistory();
@@ -156,7 +156,7 @@ export default function Profile(props) {
       },
     });
     setProfilePic(data);
-    notifySucess('profile updated')
+    notifySucess("profile updated");
     setprofileimageModel(false);
     history.push("/interpretly/profile");
 
@@ -172,7 +172,7 @@ export default function Profile(props) {
     console.log("lang =====>>>>>>>>> ", language);
     console.log("Background =====>>>>>>>>> ", Background);
     try {
-     let data= await Axios({
+      let data = await Axios({
         method: "patch",
         url: `${base}/Home/profile`,
         data: {
@@ -186,18 +186,18 @@ export default function Profile(props) {
           token: localStorage.getItem("token"),
         },
       });
-      if(data){
+      if (data) {
         setLoading(false);
       }
 
-      notifySucess('profile updated!')
+      notifySucess("profile updated!");
       setShow("");
       history.push("/interpretly/profile");
 
       // console.log(data);
     } catch (err) {
-       console.log(err);
-       setLoading(false);
+      console.log(err);
+      setLoading(false);
     }
   };
 
@@ -257,7 +257,6 @@ export default function Profile(props) {
 
   return (
     <>
- 
       <div
         className="col-10 ml-auto c0 p-0"
         style={{
@@ -277,18 +276,19 @@ export default function Profile(props) {
           }}
         >
           <h3 className="d-inline fo1 font-weight-light">Profile</h3>
+
+          <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
+            <Power
+              onClick={() => {
+                localStorage.removeItem("token");
+                history.push("/interpretly");
+              }}
+            />
+          </div>
+
           <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
             <Bell />
           </div>
-          <div className='mr-3 rounded-circle p-2 c4 float-right text-light'>
-            <Power 
-            onClick={ () => {
-              localStorage.removeItem('token');
-              history.push('/interpretly')
-            }}
-            
-            />
-        </div>
         </div>
         {/* ================== <<<<<<<<< {{{{{ from here the user profile details are starting }}}}} >>>>>>>> ================== */}
         <div className="row profile-centered" style={{ fontSize: "14px" }}>
@@ -392,7 +392,7 @@ export default function Profile(props) {
                       style={{ paddingTop: ".8rem", marginLeft: "-1rem" }}
                     >
                       <p className="m-0 mb-2">
-                        <span style={styleObject} className='mr-2'>
+                        <span style={styleObject} className="mr-2">
                           {mobile === "" ? "UnRegistered" : mobile}
                         </span>
                         <span style={{ marginLeft: ".8em" }}>
@@ -402,7 +402,7 @@ export default function Profile(props) {
                             />
                           ) : (
                             <CheckCircleOutlineOutlinedIcon
-                              style={{ color: "#24e5af"}}
+                              style={{ color: "#24e5af" }}
                             />
                           )}
                         </span>
@@ -449,7 +449,11 @@ export default function Profile(props) {
                     >
                       <p className="m-0 mb-2 ">
                         <span style={styleObject}>
-                          {email === "" ? "no-email" :email.search('@') == "-1" ?"Social Login":email }
+                          {email === ""
+                            ? "no-email"
+                            : email.search("@") == "-1"
+                            ? "Social Login"
+                            : email}
                         </span>
                         <span style={{ marginLeft: ".8rem" }}>
                           {email === "" ? (
@@ -629,96 +633,118 @@ export default function Profile(props) {
                 >
                   <b>{name}</b>
                 </p>
+                {/* ======================= {{{{{{{{{{{{{{ user details }}}}}}}}}}}}}} ======================= */}
 
-                {/* ======================= {{{{{{{{{{{{{{ class = row }}}}}}}}}}}}}} ======================= */}
+                <Grid container>
+                  {/* 1 */}
 
-                <div className="row" style={{ marginLeft: ".5rem" }}>
-                  {/* ======================= {{{{{{{{{{{{{{ 1st col of row }}}}}}}}}}}}}} ======================= */}
+                  <Grid container spacing={2} sm={7}>
+                    <Grid sm={3} item>
+                      Mobile :
+                    </Grid>
+                    <Grid item>
+                      <span style={styleObject}>
+                        {mobile === "" ? "Registered" : mobile}
+                      </span>
+                      {mobile === "" ? (
+                        <CheckCircleOutlineOutlinedIcon
+                          style={{ color: "red" }}
+                        />
+                      ) : (
+                        <CheckCircleOutlineOutlinedIcon
+                          style={{ color: "#24e5af" }}
+                        />
+                      )}
+                    </Grid>
+                  </Grid>
 
-                  <div className="col-6">
-                    <div className="row">
-                      <div className="col-4">
-                        <p className=" mb-4 " id="marginleft4">
-                          Mobile :
-                        </p>
-                        <p className=" mb-4 " id="marginleft4">
-                          Email :
-                        </p>
-                        <p className=" mb-4 " id="marginleft4">
-                          Language :
-                        </p>
-                      </div>
-                      <div className="col-8">
-                        <p className="m-0 mb-2 " id="marginleft3">
-                          <span style={styleObject}>
-                            {mobile === "" ? "Registered" : mobile}
-                          </span>
-                          {mobile === "" ? (
-                            <CheckCircleOutlineOutlinedIcon
-                              style={{ color: "red" }}
-                            />
-                          ) : (
-                            <CheckCircleOutlineOutlinedIcon
-                              style={{ color: "#24e5af" }}
-                            />
-                          )}
-                        </p>
-                        <p className="m-0 mb-3 " id="marginleft3">
-                          <span style={styleObject}>
-                            {email === "" ? "no-email" :email.search('@') == "-1" ?"Social Login":email }
-                          </span>
-                          {email === "" ? (
-                            <CheckCircleOutlineOutlinedIcon
-                              style={{ color: "red" }}
-                            />
-                          ) : (
-                            <CheckCircleOutlineOutlinedIcon
-                              style={{ color: "#24e5af" }}
-                            />
-                          )}
-                        </p>
+                  {/* 2 */}
 
-                        <div className="m-0 mb-3" id="marginleft3">
-                          <span style={styleObject}>
-                            {languageforgettingval.length === 0
-                              ? "update your Language"
-                              : languageforgettingval}
-                          </span>
-                          {/* )} */}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* ======================= {{{{{{{{{{{{{{ 2st col of row }}}}}}}}}}}}}} ======================= */}
-                  <div className="col-6">
-                    <div className="row">
-                      <div className="col-4">
-                        <p className="m-0 mb-4 " id="marginleft4">
-                          Location :
-                        </p>
-                        <p className="m-0 mb-4 " id="marginleft4">
-                          Background :
-                        </p>
-                      </div>
-                      <div className="col-sm-8">
-                        <div className="m-0 mb-3 " id="marginleft3">
-                          <span style={styleObject}>
-                            {region === "" ? "update your region" : region}
-                          </span>
-                          {/* )} */}
-                        </div>
-                        <div className="m-0 mb-3" id="marginleft3">
-                          <span style={styleObject}>
-                            {Backgroundforgettingval &&Backgroundforgettingval.length === 0
-                              ? "update your Background"
-                              : Backgroundforgettingval}
-                          </span>
-                          {/* )} */}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  <Grid container spacing={2} sm={5}>
+                    <Grid sm={5} item>
+                      Location :
+                    </Grid>
+                    <Grid item>
+                      <span style={styleObject}>
+                        {region === "" ? "update your region" : region}
+                      </span>
+                    </Grid>
+                  </Grid>
+
+                  {/* 3 */}
+
+                  <Grid
+                    container
+                    spacing={2}
+                    sm={7}
+                    style={{ marginTop: "10px" }}
+                  >
+                    <Grid sm={3} item>
+                      Email :
+                    </Grid>
+                    <Grid item>
+                      <p>
+                        <span style={styleObject}>
+                          {email === ""
+                            ? "no-email"
+                            : email.search("@") == "-1"
+                            ? "Social Login"
+                            : email}
+                        </span>
+                        {email === "" ? (
+                          <CheckCircleOutlineOutlinedIcon
+                            style={{ color: "red" }}
+                          />
+                        ) : (
+                          <CheckCircleOutlineOutlinedIcon
+                            style={{ color: "#24e5af" }}
+                          />
+                        )}
+                      </p>
+                    </Grid>
+                  </Grid>
+
+                  {/* 4 */}
+
+                  <Grid
+                    container
+                    spacing={2}
+                    sm={5}
+                    style={{ marginTop: "10px" }}
+                  >
+                    <Grid sm={5} item>
+                      Background :
+                    </Grid>
+                    <Grid item>
+                      <span style={styleObject}>
+                        {Backgroundforgettingval &&
+                        Backgroundforgettingval.length === 0
+                          ? "update your Background"
+                          : Backgroundforgettingval}
+                      </span>
+                    </Grid>
+                  </Grid>
+
+                  {/* 5 */}
+
+                  <Grid
+                    container
+                    spacing={2}
+                    sm={7}
+                    style={{ marginTop: "10px" }}
+                  >
+                    <Grid sm={3} item>
+                      Language :
+                    </Grid>
+                    <Grid item>
+                      <span style={styleObject}>
+                        {languageforgettingval.length === 0
+                          ? "update your Language"
+                          : languageforgettingval}
+                      </span>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </>
             )}
           </div>
@@ -737,8 +763,9 @@ export default function Profile(props) {
                 style={{
                   color: "#6aacdf",
                   left: "75%",
-                  marginTop: "-14rem",
                   position: "absolute",
+                  top: "20vh",
+                  left: "60vw",
                 }}
                 onClick={handleDisplay}
               >
@@ -790,19 +817,21 @@ export default function Profile(props) {
           setmodalState={setprofileimageModel}
           Content={ContentPic()}
         />
-       
 
         {/* ================== <<<<<<<<< {{{{{ End of Editible code responsible because of this code   }}}}} >>>>>>>> ================== */}
 
         {/* ====================== Rating sestion ==============  */}
         <Divider
           variant="middle"
-          style={{ height: "1px", background: "grey", margin: '2em' }}
+          style={{ height: "1px", background: "grey", margin: "2em" }}
         />
 
         <div className="col-12 ">
           <h4 style={{ marginLeft: "3rem" }}>Rating</h4>
-          <div className="row" style={{ marginLeft: "5.5rem", textAlign: 'center' }}>
+          <div
+            className="row"
+            style={{ marginLeft: "5.5rem", textAlign: "center" }}
+          >
             <div
               className="col-2"
               style={{
@@ -814,14 +843,17 @@ export default function Profile(props) {
                 borderRadius: "10px",
               }}
             >
-              <div className="col" style={{
-                position: "relative",
-                height : '3em'
-              }}>
+              <div
+                className="col"
+                style={{
+                  position: "relative",
+                  height: "3em",
+                }}
+              >
                 <Clock
                   size="50"
                   color={"white"}
-                  style={{ position : 'absolute', left : '35%', top : 0}}
+                  style={{ position: "absolute", left: "35%", top: 0 }}
                 />
               </div>
               <div className="col">On-Time</div>
@@ -840,14 +872,17 @@ export default function Profile(props) {
                 marginLeft: "1rem",
               }}
             >
-              <div className="col"style={{
-                position: "relative",
-                height : '3em'
-              }}>
+              <div
+                className="col"
+                style={{
+                  position: "relative",
+                  height: "3em",
+                }}
+              >
                 <UserPlus
                   size="50"
                   color={"white"}
-                  style={{ position : 'absolute', left : '35%', top : 0}}
+                  style={{ position: "absolute", left: "35%", top: 0 }}
                 />
               </div>
               <div className="col">Attitude</div>
@@ -866,14 +901,17 @@ export default function Profile(props) {
                 marginLeft: "1rem",
               }}
             >
-              <div className="col"style={{
-                position: "relative",
-                height : '3em'
-              }}>
+              <div
+                className="col"
+                style={{
+                  position: "relative",
+                  height: "3em",
+                }}
+              >
                 <CloudLightning
                   size="50"
                   color={"white"}
-                  style={{ position : 'absolute', left : '35%', top : 0}}
+                  style={{ position: "absolute", left: "35%", top: 0 }}
                 />
               </div>
               <div className="col">Quality</div>
@@ -909,7 +947,6 @@ export default function Profile(props) {
           </div>
         </div>
         {/* ====================== feedback sestion ==============  */}
-        
 
         <div className="col-12 p-3 mb-5 ">
           <h4 style={{ marginLeft: "3rem" }}>Feedback</h4>
@@ -974,10 +1011,10 @@ export default function Profile(props) {
                   </b>
                 </div>
                 <div className="col">- Asif Mohammed (Receptionist)</div>
-                <div className='col'> ( {Reviews} reviews)</div>
+                <div className="col"> ( {Reviews} reviews)</div>
               </div>
             </div>
-            
+
             <div
               className="row"
               style={{
@@ -1041,7 +1078,7 @@ export default function Profile(props) {
                 <div className="col">- Asif Mohammed (Receptionist)</div>
               </div>
             </div>
-            
+
             <div
               className="row"
               style={{
