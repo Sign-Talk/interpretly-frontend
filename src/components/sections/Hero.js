@@ -10,6 +10,12 @@ import { PopupComponent } from "../elements/PopupComponent";
 import { centralStyle } from "../elements/centralStyle";
 import SignUpLogin from "../LargeComponent/SignUpLogin";
 import VerifyModal from '../LargeComponent/SignUpverificationModal'
+import ClientJobPost from "../Client/JobPost/ClientJobPost";
+import ReactModal from 'react-responsive-modal'
+import 'react-responsive-modal/styles.css';
+import './Hero.css'
+import FormTracker from "../Client/JobPost/FormTracker";
+
 const propTypes = {
   ...SectionProps.types,
 };
@@ -49,6 +55,7 @@ const Hero = ({
 }) => {
   const [videoModalActive, setVideomodalactive] = useState(false);
   const [modalState, setmodalState] = useState(false);
+  // const [clicked, setClicked] = useState("left");
   const [clicked, setClicked] = useState("");
   const [verify,setVerify]=useState(null);
   
@@ -165,18 +172,38 @@ const Hero = ({
           </div>
           <hr />
           <VerifyModal  verify={verify} />
-          <PopupComponent
-            Content={
-              <SignUpLogin
-              setVerify={setVerify}
-                clicked={clicked}
-                modalState={modalState}
-                setmodalState={setmodalState}
-              />
-            }
-            modalState={modalState}
-            setmodalState={setmodalState}
-          />
+          {
+            clicked === 'left' ?
+              <ReactModal
+                  open={clicked == 'left'}
+                  onClose={()=> {
+                    setClicked("")
+                    setmodalState(false)
+                  }}
+                  classNames={{
+                    modal : 'client-job-modal'
+                  }}
+                  center
+                >
+                <ClientJobPost
+                  closeModal={setClicked}
+                />
+              </ReactModal>
+            : ( clicked === 'right' &&
+                <PopupComponent
+                  Content={
+                    <SignUpLogin
+                      setVerify={setVerify}
+                      clicked={clicked}
+                      modalState={modalState}
+                      setmodalState={setmodalState}
+                    />
+                  }
+                  modalState={modalState}
+                  setmodalState={setmodalState}
+                />
+            ) 
+          }
 
           <SectionHeader data={sectionHeader} className='center-content' />
           <div color='primary' style={hl}></div>
