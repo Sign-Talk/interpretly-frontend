@@ -102,10 +102,10 @@ export default function Profile(props) {
 
     if (!token) {
       history.push("/interpretly");
-      notify("you must be logged in");
+      notifySucess("you must be logged in");
     }
     if (decoded.exp < currentTime) {
-      notify("login required");
+      notifySucess("login required");
       history.push("/interpretly");
     } else {
       async function func1() {
@@ -145,22 +145,34 @@ export default function Profile(props) {
     setFile(event.target.files[0]);
   };
 
+  // handling image upload of user profile
   const handleFileUpload = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("image", file);
-    let data = await Axios.post(`${base}/Home/dp`, formData, {
-      headers: {
-        "content-type": "multipart/form-data",
-        token: localStorage.getItem("token"),
-      },
-    });
-    setProfilePic(data);
-    notifySucess("profile updated");
-    setprofileimageModel(false);
-    history.push("/interpretly/profile");
 
-    // console.log(data);
+    const formData = new FormData();
+    // console.log("file ==========>>>>>>>> ", file);
+    if (file !== null) {
+      setLoading(true);
+      setprofileimageModel(false);
+      formData.append("image", file);
+      let data = await Axios.post(`${base}/Home/dp`, formData, {
+        headers: {
+          "content-type": "multipart/form-data",
+          token: localStorage.getItem("token"),
+        },
+      });
+
+      setProfilePic(data);
+      setimage(data.data.user.image);
+      notifySucess("profile updated");
+      setprofileimageModel(false);
+      history.push("/interpretly/profile");
+
+      // console.log(data);
+    } else {
+      setprofileimageModel(false);
+      notifySucess("Select Your Pic first ");
+    }
   };
 
   const handleSave = async (e) => {
@@ -169,35 +181,41 @@ export default function Profile(props) {
     var res = name.split(" ");
     // console.log("splitted name ", res[0], res[1]);
 
-    console.log("lang =====>>>>>>>>> ", language);
-    console.log("Background =====>>>>>>>>> ", Background);
     try {
-      let data = await Axios({
-        method: "patch",
-        url: `${base}/Home/profile`,
-        data: {
-          language: language,
-          Background: Background,
-          region: region,
-          firstName: res[0],
-          lastName: res[1],
-        },
-        headers: {
-          token: localStorage.getItem("token"),
-        },
-      });
-      if (data) {
+      if (language.length < 1 || Background.length < 1) {
+        // console.log("language ", language);
+        // console.log("Background ", Background);
+        // console.log("region ", region);
+        notifySucess("language, background are required");
         setLoading(false);
+      } else {
+        let data = await Axios({
+          method: "patch",
+          url: `${base}/Home/profile`,
+          data: {
+            language: language,
+            Background: Background,
+            region: region,
+            firstName: res[0],
+            lastName: res[1],
+          },
+          headers: {
+            token: localStorage.getItem("token"),
+          },
+        });
+        if (data) {
+          setLoading(false);
+        }
+
+        notifySucess(" profile updated!");
+        setShow("");
+        history.push("/interpretly/profile");
       }
-
-      notifySucess("profile updated!");
-      setShow("");
-      history.push("/interpretly/profile");
-
       // console.log(data);
     } catch (err) {
-      console.log(err);
+      // console.log(err);
       setLoading(false);
+      notifySucess(err.message);
     }
   };
 
@@ -230,6 +248,7 @@ export default function Profile(props) {
 
   const UploadImage = (e) => {
     e.preventDefault();
+
     setprofileimageModel(true);
   };
 
