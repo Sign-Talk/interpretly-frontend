@@ -61,10 +61,15 @@ const Hero = ({
   
   if( verify!= null && verify.details!=undefined){
     setVerify(verify.details[0].email);
+  
     setmodalState(false);
+  
   }
   useEffect(()=>{
-    setmodalState(false)
+    if( verify!= null && verify.details===undefined){
+      setmodalState(false)
+    }
+    
   },[verify])
   const openModal = (e) => {
     e.preventDefault();

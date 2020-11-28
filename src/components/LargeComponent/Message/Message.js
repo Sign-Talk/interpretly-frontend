@@ -20,9 +20,7 @@ function Message({ history, ...props }) {
           }}
         >
           <h3 className="d-inline fo1 font-weight-light">Messages</h3>
-          <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
-            <Bell />
-          </div>
+
           <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
             <Power
               onClick={() => {
@@ -31,16 +29,27 @@ function Message({ history, ...props }) {
               }}
             />
           </div>
+          <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
+            <Bell />
+          </div>
         </div>
-        <div className="col text-center"
+        <div
+          className="col text-center"
           style={{
-            dipslay : 'absolute',
-            top: '10%',
-            left: '25%'
+            dipslay: "absolute",
+            top: "10%",
+            left: "25%",
           }}
         >
-          <img className={classes.message} style={{ margin : '2em 0', }} src={icon} alt="Messaage" />
-          <p className={classes.message} style={{ margin : 0}}>You Do not have any messages yet!</p>
+          <img
+            className={classes.message}
+            style={{ margin: "2em 0" }}
+            src={icon}
+            alt="Messaage"
+          />
+          <p className={classes.message} style={{ margin: 0 }}>
+            You Do not have any messages yet!
+          </p>
         </div>
       </div>
     </>

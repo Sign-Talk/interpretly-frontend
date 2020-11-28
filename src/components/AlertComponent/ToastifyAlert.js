@@ -19,6 +19,7 @@ export const notifySucess = (m) =>
     autoClose: 4000,
     draggable: true,
   });
+ 
 
 export const notifyWarning = (m) =>
   toast.error(m, {

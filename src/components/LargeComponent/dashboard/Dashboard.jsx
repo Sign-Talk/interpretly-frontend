@@ -2,19 +2,19 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import VerifyForm from "./VerifyForm";
 import "./style.css";
-import { Bell,Power } from "react-feather";
+import { Bell, Power } from "react-feather";
 
 import Calendar from "react-calendar";
-import { withRouter,useHistory } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import "react-calendar/dist/Calendar.css";
-import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 function Blank({ history, ...props }) {
   const [state, setState] = useState({
     o: false,
     phone: "",
     formState: 0,
     otp: "",
-    matchedOtp : '',
+    matchedOtp: "",
     disabled: true,
     verified: false,
     base: "https://whispering-lake-75400.herokuapp.com",
@@ -86,7 +86,7 @@ function Blank({ history, ...props }) {
   const arr = [1, 1, 1, 1, 1, 1, 1, 1];
 
   return (
-    <div className='col-10 ml-auto c0 p-0' style={{ minWidth: "850px" }}>
+    <div className="col-10 ml-auto c0 p-0" style={{ minWidth: "850px" }}>
       <VerifyForm
         state={state}
         setState={setState}
@@ -96,83 +96,82 @@ function Blank({ history, ...props }) {
       />
 
       <div
-        className='col-12 pl-3 pt-3 p-0 pb-5'
+        className="col-12 pl-3 pt-3 p-0 pb-5"
         style={{
           height: "80px",
           boxShadow: "0px 5px 15px black",
           position: "sticky",
           top: "0px",
-          right: "0px"
-        }}>
-        <h3 className='d-inline fo1 font-weight-light'>Dashboard</h3>
-          <div className='mr-3 rounded-circle p-2 c4 float-right text-light'>
-            <Bell />
-        </div>
-        <div className='mr-3 rounded-circle p-2 c4 float-right text-light'>
-            <Power 
-            onClick={ () => {
-              localStorage.removeItem('token');
-              history.push('/interpretly')
+          right: "0px",
+        }}
+      >
+        <h3 className="d-inline fo1 font-weight-light">Dashboard</h3>
+        <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
+          <Power
+            onClick={() => {
+              localStorage.removeItem("token");
+              history.push("/interpretly");
             }}
-            
-            />
+          />
         </div>
-    
+        <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
+          <Bell />
+        </div>
       </div>
 
-      <div className='col-12 pb-5'>
-        <h4 className='text-light font-weight-light mt-3 ml-4'>
+      <div className="col-12 pb-5">
+        <h4 className="text-light font-weight-light mt-3 ml-4">
           Upcoming Jobs
         </h4>
-        <div className='container text-center'>
-          <p className='f20'>No upcoming jobs at the moment</p>
+        <div className="container text-center">
+          <p className="f20">No upcoming jobs at the moment</p>
           {/* <h3 className='text-light font-weight-light'>Find a job now</h3>
           <button className='btn c4 text-light'>Go Now</button> */}
         </div>
-        <hr className='c1 col-10 ml-auto mt-5 mb-5 mr-auto' />
+        <hr className="c1 col-10 ml-auto mt-5 mb-5 mr-auto" />
 
-        <div className='col-12 row m-auto'>
-          <div className='col-6'>
-            <div className='col-12 m-auto d-flex justify-content-between p-0'>
-              <div className='col text-left'>
+        <div className="col-12 row m-auto">
+          <div className="col-6">
+            <div className="col-12 m-auto d-flex justify-content-between p-0">
+              <div className="col text-left">
                 <h4>Schedule</h4>
               </div>
-              <div className='col text-right'>
-                <h4 className='co'>Expand &gt;</h4>
+              <div className="col text-right">
+                <h4 className="co">Expand &gt;</h4>
               </div>
             </div>
-            <Calendar className='col-11 mr-auto mt-4 ml-auto p-3 w-100 c5 round' />
+            <Calendar className="col-11 mr-auto mt-4 ml-auto p-3 w-100 c5 round" />
           </div>
-          <div className='col-6'>
-            <div className='col-12 m-auto d-flex justify-content-between p-0'>
-              <div className='col text-left'>
+          <div className="col-6">
+            <div className="col-12 m-auto d-flex justify-content-between p-0">
+              <div className="col text-left">
                 <h4>Job requests</h4>
               </div>
-              <div className='col text-right'>
-                <h4 className='co'>See all &gt;</h4>
+              <div className="col text-right">
+                <h4 className="co">See all &gt;</h4>
               </div>
             </div>
-            <div className=' col-12 mt-4 container text-center'>
-          {/* <p className='f20'>No upcoming jobs at the moment</p> */}
-          {/* <h3 className='text-light font-weight-light'>Find a job now</h3>
+            <div className=" col-12 mt-4 container text-center">
+              {/* <p className='f20'>No upcoming jobs at the moment</p> */}
+              {/* <h3 className='text-light font-weight-light'>Find a job now</h3>
           <button className='btn c4 text-light'>Go Now</button> */}
-        </div>
+            </div>
             <div
-              className='col-12 mt-4'
-              style={{ maxHeight: "400px", overflow: "scroll" }}>
-                 
+              className="col-12 mt-4"
+              style={{ maxHeight: "400px", overflow: "scroll" }}
+            >
               {arr.map((item) => (
-                <div className='p-3 c5 col-12 round mb-2'>
-                  <p className='d-inilne m-0 p-0'>
+                <div className="p-3 c5 col-12 round mb-2">
+                  <p className="d-inilne m-0 p-0">
                     Marathahalli Police Station -{" "}
-                    <span className='co'>Onsite</span>{" "}
+                    <span className="co">Onsite</span>{" "}
                   </p>
-                  <div className='justify-content-between row m-auto col-12 p-0'>
-                    <div className='col text-left p-0 '>
-                      <p className='d-inline'>Hindi Interpreter</p>
+                  <div className="justify-content-between row m-auto col-12 p-0">
+                    <div className="col text-left p-0 ">
+                      <p className="d-inline">Hindi Interpreter</p>
                     </div>
-                    <div className='col text-right p-0'>
-                      <p className='f15 d-inline co1 ml-auto'>
+                    <div className="col text-right p-0">
+                      <p className="f15 d-inline co1 ml-auto">
                         16th Oct at 03:30PM
                       </p>
                     </div>
