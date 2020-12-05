@@ -14,7 +14,6 @@ import ClientJobPost from "../Client/JobPost/ClientJobPost";
 import ReactModal from 'react-responsive-modal'
 import 'react-responsive-modal/styles.css';
 import './Hero.css'
-import FormTracker from "../Client/JobPost/FormTracker";
 
 const propTypes = {
   ...SectionProps.types,
@@ -55,8 +54,8 @@ const Hero = ({
 }) => {
   const [videoModalActive, setVideomodalactive] = useState(false);
   const [modalState, setmodalState] = useState(false);
-  // const [clicked, setClicked] = useState("left");
   const [clicked, setClicked] = useState("");
+  // const [clicked, setClicked] = useState("");
   const [verify,setVerify]=useState(null);
   
   if( verify!= null && verify.details!=undefined){
@@ -192,6 +191,10 @@ const Hero = ({
                 >
                 <ClientJobPost
                   closeModal={setClicked}
+                  setVerify={setVerify}
+                  clicked={clicked}
+                  modalState={modalState}
+                  setmodalState={setmodalState}
                 />
               </ReactModal>
             : ( clicked === 'right' &&

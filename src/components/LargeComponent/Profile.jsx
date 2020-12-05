@@ -17,7 +17,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import Divider from "@material-ui/core/Divider";
 import { InputBase } from "@material-ui/core";
 import { PopupComponent } from "../../components/elements/PopupComponent";
-import { Languages } from "./dashboard/smallComponent/languageDummy";
+import { Languages } from "../DummyData/languageDummy";
 
 import "./profile.css";
 import "react-toastify/dist/ReactToastify.css";

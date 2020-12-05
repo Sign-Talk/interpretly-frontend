@@ -8,8 +8,8 @@ const FormTracker = ({steps, setSteps}) => {
         <div className='form-tracker'>
             <div className='sections'>
                 <button style={{ background : 'none', outline : 'none', border : 'none'}}>
-                    <div style={{background : '#ab57ff'}} className='circle'>1</div>
-                    <p style={{color : '#ab57ff'}} className='step-name'>Details</p>
+                    <div style={{background : '#7E21DB'}} className='circle'>1</div>
+                    <p style={{color : '#7E21DB'}} className='step-name'>Details</p>
                 </button>
             </div>
             <Divider
@@ -18,19 +18,19 @@ const FormTracker = ({steps, setSteps}) => {
                 flexItem
                 className='divider'
                 style= {{
-                    background : steps !== 1 && '#ab57ff'
+                    background : steps !== 1 && '#7E21DB'
                 }}
             />
             <div className='sections'>
                 <button style={{ background : 'none', outline : 'none', border : 'none'}}>
                     <div
                         style = {{
-                            background : steps !== 1 && '#ab57ff'
+                            background : steps !== 1 && '#7E21DB'
                         }}
                         className='circle' >2</div>
                     <p
                         style={{
-                            color : steps !== 1 && '#ab57ff'
+                            color : steps !== 1 && '#7E21DB'
                         }}
                         className='step-name'
                     >Schedule</p>
@@ -42,19 +42,19 @@ const FormTracker = ({steps, setSteps}) => {
                 flexItem
                 className='divider'
                 style= {{
-                    background : steps == 3 && '#ab57ff'
+                    background : steps == 3 && '#7E21DB'
                 }}
             />
             <div className='sections'>
                 <button style={{ background : 'none', outline : 'none', border : 'none'}}>
                     <div
                         style= {{
-                            background : steps == 3 && '#ab57ff'
+                            background : steps == 3 && '#7E21DB'
                         }}
                         className='circle'>3</div>
                     <p
                         style= {{
-                            color : steps == 3 && '#ab57ff'
+                            color : steps == 3 && '#7E21DB'
                         }}
                         className='step-name'
                     >Confirm</p>

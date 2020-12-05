@@ -8,15 +8,19 @@ import ShortConfirmation from './Step3/ShortConfirmation'
 import ContractConfirmMsg from './Step4/ContractConfirmMsg'
 import ShortConfirmMsg from './Step4/ShortConfirmMsg'
 import './clientJobPost.css'
+import { Languages } from '../../DummyData/languageDummy'
 
-const ClientJobPost = ({ closeModal }) => {
+const ClientJobPost = ({ closeModal, ...props }) => {
     const initialState = {
         background : '',
         langugae : '',
         region : '',
         type : '',
+        meeting: '',
+        languages : Languages,
         contractDue : {
-            duration : '00:00',
+            durationhr : '',
+            durationm : '',
             startDate : '01-01-2021',
             endDate : '02-01-2021',
             interpreters : 1,
@@ -24,9 +28,12 @@ const ClientJobPost = ({ closeModal }) => {
             description : ''
         },
         shortDue : {
-            duration : '00:00',
+            address1 : '',
+            address2 : '',
+            durationhr : '',
+            durationm : '',
             startDate : '01-01-2021',
-            endDate : '02-01-2021',
+            bookingTime : '00:00',
             interpreters : 1,
             amount : 800,
             description : ''
@@ -103,6 +110,7 @@ const ClientJobPost = ({ closeModal }) => {
                                                     closeModal={closeModal}
                                                     initialState={initialState}
                                                     setSteps={setSteps}
+                                                    props={props}
                                                 />
                                             )
                                         )

@@ -68,7 +68,7 @@ function SignUpLogin({ setmodalState, modalState, clicked ,setVerify }) {
         }}
       />
       {state.selected === "left" ? (
-        <LeftLogin state={state} setState={setState} />
+        <LeftLogin setVerify={setVerify} state={state} setState={setState} />
       ) : (
         <RightLogin setVerify={setVerify} state={state} setState={setState} />
       )}
