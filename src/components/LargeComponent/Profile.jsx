@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
-import Modal from "react-modal";
-import { Bell, Clock, UserPlus, CloudLightning, Power } from "react-feather";
+
+import { Bell, Clock, UserPlus, CloudLightning } from "react-feather";
 import { toast } from "react-toastify";
 import Avatar from "react-avatar";
 import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
 import CheckCircleOutlineOutlinedIcon from "@material-ui/icons/CheckCircleOutlineOutlined";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { Dropdown } from "semantic-ui-react";
 import Grid from "@material-ui/core/Grid";
 import Spinner from "./dashboard/smallComponent/Spinner";
-import CloseIcon from "@material-ui/icons/Close";
+
 import Divider from "@material-ui/core/Divider";
 import { InputBase } from "@material-ui/core";
 import { PopupComponent } from "../../components/elements/PopupComponent";
@@ -21,8 +22,8 @@ import { Languages } from "../DummyData/languageDummy";
 
 import "./profile.css";
 import "react-toastify/dist/ReactToastify.css";
-import { notifySucess } from "../../components/AlertComponent/ToastifyAlert";
-import { Button, Segment, Form } from "semantic-ui-react";
+import { notifySucess ,notifyWarning} from "../../components/AlertComponent/ToastifyAlert";
+import { Button, Form } from "semantic-ui-react";
 
 const styleObject = { fontSize: "14px", color: "white", marginRight: "1em" };
 
@@ -51,7 +52,7 @@ const Backgroundset = [
 ];
 const Languageset = Languages;
 
-export default function Profile(props) {
+export default function Profile() {
   const history = useHistory();
 
   const base = "https://whispering-lake-75400.herokuapp.com";
@@ -77,7 +78,7 @@ export default function Profile(props) {
   const [showNumber, setshowNumber] = useState(false);
   const [showEmail, setshowEmail] = useState(false);
   const [showUploadcertificate, setshowUploadcertificate] = useState(false);
-
+  const [Update, setUpdate] = useState(null);
   const [div1per, setdiv1per] = useState(0);
   const [div2per, setdiv2per] = useState(0);
   const [div3per, setdiv3per] = useState(0);
@@ -102,10 +103,10 @@ export default function Profile(props) {
 
     if (!token) {
       history.push("/interpretly");
-      notifySucess("you must be logged in");
+      notifyWarning("you must be logged in");
     }
     if (decoded.exp < currentTime) {
-      notifySucess("login required");
+      notifyWarning("login required");
       history.push("/interpretly");
     } else {
       async function func1() {
@@ -120,8 +121,10 @@ export default function Profile(props) {
 
         setLoading(false);
         // console.log("user_data ", data);
-        setlanguageforgettingval(data.user.language);
-        setBackgroundforgettingval(data.user.Background);
+        setlanguage(data.user.language);
+        setlanguageforgettingval(data.user.language)
+        setBackgroundforgettingval(data.user.Background)
+        setBackground(data.user.Background);
         setemail(data.user.email);
         setimage(data.user.image);
         setmobile(data.user.mobile_no);
@@ -137,7 +140,7 @@ export default function Profile(props) {
 
       func1();
     }
-  }, [history, ProfilePic]);
+  }, [history, ProfilePic, Update]);
 
   // console.log(file);
 
@@ -171,7 +174,7 @@ export default function Profile(props) {
       // console.log(data);
     } else {
       setprofileimageModel(false);
-      notifySucess("Select Your Pic first ");
+      notifyWarning("Select Your Pic first ");
     }
   };
 
@@ -193,8 +196,8 @@ export default function Profile(props) {
           method: "patch",
           url: `${base}/Home/profile`,
           data: {
-            language: language,
-            Background: Background,
+            language: languageforgettingval,
+            Background: Backgroundforgettingval,
             region: region,
             firstName: res[0],
             lastName: res[1],
@@ -204,6 +207,7 @@ export default function Profile(props) {
           },
         });
         if (data) {
+          setUpdate(data);
           setLoading(false);
         }
 
@@ -215,7 +219,7 @@ export default function Profile(props) {
     } catch (err) {
       // console.log(err);
       setLoading(false);
-      notifySucess(err.message);
+      notifyWarning(err.message);
     }
   };
 
@@ -227,11 +231,16 @@ export default function Profile(props) {
     langStr.push(data.value);
     // console.log("langStr @@ ", langStr);
 
-    langStr.map((data) => {
-      setlanguage(data + ",");
-      setlanguageforgettingval(data + ",");
-      return null;
-    });
+    if (langStr.length === 1) {
+      // setlanguage(langStr[0])
+      setlanguageforgettingval(langStr[0]);
+    } else {
+      langStr.map((data) => {
+        // setlanguage(data + ",");
+        setlanguageforgettingval(data + ",");
+        return null;
+      });
+    }
   };
 
   const handleChange3 = async (e, data) => {
@@ -239,11 +248,15 @@ export default function Profile(props) {
 
     backgroundStr.push(data.value);
 
-    backgroundStr.map((data) => {
-      setBackground(data + ",");
-      setBackgroundforgettingval(data + ",");
-      return null;
-    });
+    if (backgroundStr.length === 1) {
+      setBackgroundforgettingval(backgroundStr[0]);
+    } else {
+      backgroundStr.map((data) => {
+        // setBackground(data + ",");
+        setBackgroundforgettingval(data + ",");
+        return null;
+      });
+    }
   };
 
   const UploadImage = (e) => {
@@ -295,15 +308,6 @@ export default function Profile(props) {
           }}
         >
           <h3 className="d-inline fo1 font-weight-light">Profile</h3>
-
-          <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
-            <Power
-              onClick={() => {
-                localStorage.removeItem("token");
-                history.push("/interpretly");
-              }}
-            />
-          </div>
 
           <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
             <Bell />
@@ -536,6 +540,7 @@ export default function Profile(props) {
                         selectOnBlur={false}
                         selection
                         search
+                        value={languageforgettingval}
                         size="20"
                         options={Languageset}
                         onChange={handleChange1}
@@ -599,6 +604,7 @@ export default function Profile(props) {
                         selectOnBlur={false}
                         selection
                         search
+                        value={Backgroundforgettingval}
                         options={Backgroundset}
                         onChange={handleChange3}
                       />
@@ -736,10 +742,9 @@ export default function Profile(props) {
                     </Grid>
                     <Grid item>
                       <span style={styleObject}>
-                        {Backgroundforgettingval &&
-                        Backgroundforgettingval.length === 0
+                        {Background && Background.length === 0
                           ? "update your Background"
-                          : Backgroundforgettingval}
+                          : Background}
                       </span>
                     </Grid>
                   </Grid>
@@ -757,11 +762,57 @@ export default function Profile(props) {
                     </Grid>
                     <Grid item>
                       <span style={styleObject}>
-                        {languageforgettingval.length === 0
+                        {language.length === 0
                           ? "update your Language"
-                          : languageforgettingval}
+                          : language}
                       </span>
                     </Grid>
+                  </Grid>
+
+                  {/* 6 */}
+
+                  <Grid
+                    container
+                    spacing={2}
+                    sm={7}
+                    style={{
+                      marginTop: "10px",
+                      fontSize: "11px",
+                      color: "#6aacdf",
+                    }}
+                  >
+                    <Grid sm={3} item>
+                      Account Settings
+                    </Grid>
+                    <Grid item>PrivAcy Policy</Grid>
+                  </Grid>
+
+                  {/* 7 */}
+
+                  <Grid
+                    container
+                    spacing={2}
+                    sm={7}
+                    style={{
+                      marginTop: "10px",
+
+                      color: "#6aacdf",
+                    }}
+                  >
+                    <Grid
+                      sm={3}
+                      item
+                      style={{
+                        cursor: "pointer",
+                      }}
+                      onClick={() => {
+                        localStorage.removeItem("token");
+                        history.push("/interpretly");
+                      }}
+                    >
+                      LogOut <ChevronRightIcon />
+                    </Grid>
+                    <Grid item></Grid>
                   </Grid>
                 </Grid>
               </>

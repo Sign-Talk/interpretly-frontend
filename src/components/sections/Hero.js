@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { SectionProps } from "../../utils/SectionProps";
 // import ButtonGroup from "../elements/ButtonGroup";
 import Button from "../elements/Button";
-import Image from "../elements/Image";    
+import Image from "../elements/Image";
 import Modal from "../elements/Modal";
 import SectionHeader from "./partials/SectionHeader";
 import { PopupComponent } from "../elements/PopupComponent";
@@ -55,6 +55,7 @@ const Hero = ({
   const [videoModalActive, setVideomodalactive] = useState(false);
   const [modalState, setmodalState] = useState(false);
   const [clicked, setClicked] = useState("");
+<<<<<<< Updated upstream
   // const [clicked, setClicked] = useState("");
   const [verify,setVerify]=useState(null);
   
@@ -70,6 +71,8 @@ const Hero = ({
     }
     
   },[verify])
+=======
+>>>>>>> Stashed changes
   const openModal = (e) => {
     e.preventDefault();
     setVideomodalactive(true);
@@ -175,6 +178,7 @@ const Hero = ({
             </div>
           </div>
           <hr />
+<<<<<<< Updated upstream
           <VerifyModal  verify={verify} />
           {
             clicked === 'left' ?
@@ -213,6 +217,19 @@ const Hero = ({
             ) 
           }
 
+=======
+          <PopupComponent
+            Content={
+              <SignUpLogin
+                clicked={clicked}
+                modalState={modalState}
+                setmodalState={setmodalState}
+              />
+            }
+            modalState={modalState}
+            setmodalState={setmodalState}
+          />
+>>>>>>> Stashed changes
           <SectionHeader data={sectionHeader} className='center-content' />
           <div color='primary' style={hl}></div>
           <div
