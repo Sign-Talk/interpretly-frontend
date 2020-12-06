@@ -10,6 +10,7 @@ import Input from "./Input";
 import Spinner from "./dashboard/smallComponent/Spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import VerifyModal from "./SignUpverificationModal";
 
 const iconStyle = {
   width: "30px",
@@ -22,11 +23,14 @@ const validation = {
   margin: "0px",
   padding: "0px",
 };
-function LeftLogin({ state, setState }) {
+function LeftLogin({ state, setState, setVerify, ...props }) {
   const [nameok, setnameok] = useState(true);
   const [mailok, setmailok] = useState(true);
   const [passok, setpassok] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [signUpVerifyModal, setSignUpVerifyModal] = useState(false);
+  const [message, setmessage] = useState("");
+  const [errorMSG, seterrorMSG] = useState(false);
 
   if (nameok === true && mailok === true && passok === true) {
     state.iregsisterok = true;
@@ -57,10 +61,16 @@ function LeftLogin({ state, setState }) {
         email: state.imail,
         password: state.ipass,
       });
-      setLoading(false);
-      console.log(data);
+      localStorage.setItem("userToken", data.token);
+      if(data){
+        setLoading(false);
+      } 
     } catch (err) {
       setLoading(false);
+      setVerify(err.response.data.email);
+      setmessage(err.response.data.message);
+
+      seterrorMSG(true);
       console.log(err.message);
     }
   }
@@ -91,11 +101,27 @@ function LeftLogin({ state, setState }) {
             : null,
         password: state.ipass,
       });
+      setVerify(data);
+      setLoading(true);
+      if(data){
+        setSignUpVerifyModal(true)
+      }
+      setmessage(`register sucessfully!\n${data.message}`);
+      seterrorMSG(true);
+      if (data.details.length > 0) {
+        setLoading(false);
+      }
       setLoading(false);
       console.log(data);
     } catch (err) {
       setLoading(false);
-      console.log(err.message);
+      console.log(err.response);
+      if (err.response) {
+        err.response.data.message == "Email Id exists"
+          ? setmessage("Email id already registered")
+          : setmessage(err.response.data.message);
+      }
+      seterrorMSG(true);
     }
   }
 
@@ -135,6 +161,7 @@ function LeftLogin({ state, setState }) {
           </h3>
         </div>
       </div>
+      {signUpVerifyModal && <VerifyModal />}
       <div
         className="row m-auto col-12 p-2 rounded"
         style={{ backgroundColor: "#272727" }}
@@ -267,6 +294,12 @@ function LeftLogin({ state, setState }) {
                 className={passok === false ? "d-block" : "d-none"}
               >
                 this field is required and should be greater than 3
+              </p>
+              <p
+                style={validation}
+                className={errorMSG === true ? "d-block" : "d-none"}
+              >
+                {message}
               </p>
               <h5
                 style={{

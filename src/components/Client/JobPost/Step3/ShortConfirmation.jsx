@@ -116,7 +116,7 @@ const ShortConfirmation = ({
                         marginLeft : '1rem'
                     }}
                     onClick={()=>{
-                        const clientToken = localStorage.getItem('client-token')
+                        const clientToken = localStorage.getItem('userToken')
                         return (
                             clientToken 
                             ? setSteps(4)
@@ -141,7 +141,7 @@ const ShortConfirmation = ({
             >
                 <p style={{ textAlign : 'center'}}>You need to log yourself in first</p>
                 <SignUpLogin
-                    // setVerify={setVerify}
+                    setVerify={props.setVerify}
                     clicked={'left'}
                     modalState={logModal}
                     setmodalState={setLogModal}

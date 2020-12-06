@@ -92,6 +92,7 @@ const ClientJobPost = ({ closeModal, ...props }) => {
                                             closeModal={closeModal}
                                             initialState={initialState}
                                             setSteps={setSteps}
+                                            props={props}
                                         />
                                     : (
                                         steps == 4 && formData.type == 'short' ?
@@ -110,7 +111,6 @@ const ClientJobPost = ({ closeModal, ...props }) => {
                                                     closeModal={closeModal}
                                                     initialState={initialState}
                                                     setSteps={setSteps}
-                                                    props={props}
                                                 />
                                             )
                                         )

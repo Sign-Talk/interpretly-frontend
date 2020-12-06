@@ -32,7 +32,7 @@ function RightLogin({ state, setState, setVerify, ...props }) {
   const [loading, setLoading] = useState(false);
   const [errorMSG, seterrorMSG] = useState(false);
   const [message, setmessage] = useState("");
-  const [signUpVerifyModal, setSignUpVerifyModal] = useState(true);
+  const [signUpVerifyModal, setSignUpVerifyModal] = useState(false);
 
   if (nameok === true && mailok === true && passok === true) {
     state.fregsisterok = true;
