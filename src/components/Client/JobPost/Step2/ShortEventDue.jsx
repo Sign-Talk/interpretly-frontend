@@ -48,7 +48,7 @@ const ContractEventDue = ({
                                             borderRadius : '10px', 
                                             padding: '5px' 
                                         }}
-                                        value={formData.shortDue.address1}
+                                        value={formData.shortDue.address2}
                                         onChange={
                                             e => setFormData({
                                                 ...formData, 

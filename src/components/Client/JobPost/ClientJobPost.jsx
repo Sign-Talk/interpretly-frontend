@@ -17,7 +17,7 @@ const ClientJobPost = ({ closeModal, ...props }) => {
         region : '',
         type : '',
         meeting: '',
-        languages : Languages,
+        languages : '',
         contractDue : {
             durationhr : '',
             durationm : '',
@@ -35,7 +35,7 @@ const ClientJobPost = ({ closeModal, ...props }) => {
             startDate : '01-01-2021',
             bookingTime : '00:00',
             interpreters : 1,
-            amount : 800,
+            amount : 1500,
             description : ''
         }
     }

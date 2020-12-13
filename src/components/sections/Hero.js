@@ -14,6 +14,7 @@ import ClientJobPost from "../Client/JobPost/ClientJobPost";
 import ReactModal from 'react-responsive-modal'
 import 'react-responsive-modal/styles.css';
 import './Hero.css'
+import { Link } from 'react-router-dom'
 
 const propTypes = {
   ...SectionProps.types,

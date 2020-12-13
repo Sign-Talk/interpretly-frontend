@@ -66,13 +66,13 @@ const JobSpecs = ({
                     <p className='labels' style={{width : '40%'}}>Language</p>
                     <p>:</p>
                     <Select
-                        isMulti
+                        // isMulti
                         labelId='demo-customized-select-label'
                         id='demo-customized-select'
                         className='bg-light rounded'
                         style={{ width : '40%', padding: '1rem', height : 0}}
                         value={formData.language}
-                        onChange={(e) => setFormData({...formData, language : e.target.value})}
+                        onChange={(e) => setFormData({...formData, langugae : e.target.value})}
                     >
                         {
                             languages.map((item, index) => (

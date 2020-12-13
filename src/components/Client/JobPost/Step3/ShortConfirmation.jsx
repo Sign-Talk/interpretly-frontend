@@ -88,7 +88,7 @@ const ShortConfirmation = ({
                         style={{ 
                             width: '60%', 
                             fontSize: '.8rem',
-                            height : '10em',
+                            height : '7em',
                             padding : '10px',
                             borderRadius : '10px' 
                         }} 
@@ -141,6 +141,7 @@ const ShortConfirmation = ({
             >
                 <p style={{ textAlign : 'center'}}>You need to log yourself in first</p>
                 <SignUpLogin
+                    isInterpreter={false}
                     setVerify={props.setVerify}
                     clicked={'left'}
                     modalState={logModal}

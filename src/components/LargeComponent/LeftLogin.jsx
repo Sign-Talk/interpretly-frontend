@@ -161,7 +161,7 @@ function LeftLogin({ state, setState, setVerify, ...props }) {
           </h3>
         </div>
       </div>
-      {signUpVerifyModal && <VerifyModal />}
+      {signUpVerifyModal && <VerifyModal isInterpreter={props.isInterpreter}/>}
       <div
         className="row m-auto col-12 p-2 rounded"
         style={{ backgroundColor: "#272727" }}
@@ -295,12 +295,12 @@ function LeftLogin({ state, setState, setVerify, ...props }) {
               >
                 this field is required and should be greater than 3
               </p>
-              <p
+              {/* <p
                 style={validation}
                 className={errorMSG === true ? "d-block" : "d-none"}
               >
                 {message}
-              </p>
+              </p> */}
               <h5
                 style={{
                   color: "#AB57FF",

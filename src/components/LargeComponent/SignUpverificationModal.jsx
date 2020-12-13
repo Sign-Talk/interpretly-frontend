@@ -6,7 +6,7 @@ import Axios from "axios"
 import './verifyModal.css'
 import Loader from "./dashboard/smallComponent/Spinner";
 import {notifySucess,notifyWarning} from "../AlertComponent/ToastifyAlert";
-const SignUpverificationModal = ({verify}) => {
+const SignUpverificationModal = ({verify, isInterpreter}) => {
     const[pass, setOtp] = useState({
         disabled : true,
         otp :''
@@ -48,8 +48,11 @@ const SignUpverificationModal = ({verify}) => {
         setLoading(true)
         let data= await Axios({
             method: "get",
-            url: `https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=${verify}&vcode=${pass.otp}`,
-            
+            url: 
+                isInterpreter ?
+                `https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=${verify}&vcode=${pass.otp}`
+                : 
+                `https://whispering-lake-75400.herokuapp.com/Register/user/verify?email=${verify}&vcode=${pass.otp}`
           });
           console.log(data)
           if(data.error){

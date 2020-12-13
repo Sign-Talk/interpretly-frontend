@@ -18,6 +18,7 @@ import {ToastifyAlert} from "../src/components/AlertComponent/ToastifyAlert"
 // Views
 import Home from "./views/Home";
 import Error from "./views/Error";
+import ClientJobPost from "./components/Client/JobPost/ClientJobPost";
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -67,6 +68,7 @@ const App = (props) => {
             <Route exact path="/interpretly/request" component={JobRequests} />
             <Route exact path="/interpretly/schedule" component={Schedule} />
             <Route exact path='/interpretly/completed' component={Completed} />
+            <Route exact path='/client/onboard' component={ClientJobPost} />
             <Route
               exact
               path="/interpretly/notification"
