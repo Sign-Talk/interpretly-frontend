@@ -249,3 +249,112 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.dropdownMenu {
+  position: absolute;
+  height: 160px;
+  width: 180px;
+  top: 70px;
+  right: 7%;
+  font-size: 18px;
+  background: #171717;
+  box-shadow: 0px 5px 15px black;
+  text-align: right;
+  list-style: none;
+  padding: 10px;
+  border-radius: 10px 10px 10px 10px;
+  line-height: 26px;
+  padding: 10px;
+  z-index: 100;
+}
+
+.dropdownMenuli {
+  margin: 0px 10px;
+  cursor: pointer;
+}
+
+.NavDropDown {
+  position: absolute;
+  top: 25%;
+  right: 15%;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  /* background: red; */
+  cursor: pointer;
+}
+
+.NavDropDownchild {
+  position: absolute;
+  left: 22px;
+  width: 100px;
+  height: 44px;
+  background: #272727;
+  z-index: -1;
+}
+.NavDropDownchild2 {
+  position: absolute;
+  right: -22px;
+  width: 44px;
+  height: 44px;
+  background: #272727;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.DetailsRoundedIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -42%);
+  color: white;
+  padding: 6px;
+}
+
+@media only screen and (max-width: 1350px) {
+  .dropdownMenu {
+    right: 10%;
+    /* box-shadow: 0px 5px 15px rgb(255, 5, 5); */
+  }
+  .NavDropDown {
+    right: 19%;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  .dropdownMenu {
+    right: 10%;
+    /* box-shadow: 0px 5px 15px rgb(41, 247, 0); */
+  }
+  .NavDropDown {
+    right: 19.5%;
+  }
+}
+@media only screen and (max-width: 800px) {
+  .dropdownMenu {
+    right: 24%;
+    /* box-shadow: 0px 5px 15px rgb(255, 2, 255); */
+  }
+  .NavDropDown {
+    right: 34%;
+  }
+
+  .rounded-circle {
+    position: absolute;
+    right: 13%;
+    transform: translate(0%, -98%);
+  }
+}
+@media only screen and (max-width: 640px) {
+  .dropdownMenu {
+    right: 50%;
+    /* box-shadow: 0px 5px 15px rgb(0, 247, 255); */
+  }
+  .NavDropDown {
+    right: 61%;
+  }
+  .rounded-circle {
+    position: absolute;
+    right: 40%;
+    transform: translate(0%, -78%);
+  }
+}

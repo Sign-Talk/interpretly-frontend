@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { SectionProps } from "../../utils/SectionProps";
 // import ButtonGroup from "../elements/ButtonGroup";
 import Button from "../elements/Button";
-import Image from "../elements/Image";    
+import Image from "../elements/Image";
 import Modal from "../elements/Modal";
 import SectionHeader from "./partials/SectionHeader";
 import { PopupComponent } from "../elements/PopupComponent";

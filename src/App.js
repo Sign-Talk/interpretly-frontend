@@ -12,9 +12,11 @@ import Schedule from "./components/LargeComponent/Schedule/Schedule";
 import Completed from "./components/LargeComponent/completed/Completed";
 import Notification from "./components/LargeComponent/Notification/Notification";
 import Message from "./components/LargeComponent/Message/Message";
+// testing for ck
+import FullViewjobRequest from "./components/LargeComponent/jobRequests/FullViewjobRequest";
 // Layouts
 import LayoutDefault from "./layouts/LayoutDefault";
-import {ToastifyAlert} from "../src/components/AlertComponent/ToastifyAlert"
+import { ToastifyAlert } from "../src/components/AlertComponent/ToastifyAlert";
 // Views
 import Home from "./views/Home";
 import Error from "./views/Error";
@@ -55,7 +57,7 @@ const App = (props) => {
           props.location.pathname === "/interpretly/" ? null : (
             <Navbar />
           )}
-          <ToastifyAlert  style={{zIndex:"1"}}/>
+          <ToastifyAlert style={{ zIndex: "1" }} />
           <Switch>
             <AppRoute
               exact
@@ -67,8 +69,12 @@ const App = (props) => {
             <Route exact path="/interpretly/profile" component={Profile} />
             <Route exact path="/interpretly/request" component={JobRequests} />
             <Route exact path="/interpretly/schedule" component={Schedule} />
-            <Route exact path='/interpretly/completed' component={Completed} />
-            <Route exact path='/client/onboard' component={ClientJobPost} />
+            <Route exact path="/interpretly/completed" component={Completed} />
+            <Route
+              exact
+              path="/interpretly/full"
+              component={FullViewjobRequest}
+            />
             <Route
               exact
               path="/interpretly/notification"

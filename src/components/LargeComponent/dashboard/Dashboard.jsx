@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import VerifyForm from "./VerifyForm";
 import "./style.css";
-import { Bell, Power } from "react-feather";
+import { Bell } from "react-feather";
+import DetailsRoundedIcon from "@material-ui/icons/DetailsRounded";
 
 import Calendar from "react-calendar";
-import { withRouter, useHistory } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import "react-calendar/dist/Calendar.css";
-import PowerSettingsNewIcon from "@material-ui/icons/PowerSettingsNew";
 function Blank({ history, ...props }) {
   const [state, setState] = useState({
     o: false,
@@ -27,9 +27,24 @@ function Blank({ history, ...props }) {
     active: "",
   });
 
+  const [DisplayDropdown, setDisplayDropdown] = useState(false);
+
+  const HandleDisplyDropdown = () => {
+    if (DisplayDropdown) {
+      setDisplayDropdown(false);
+    } else {
+      setDisplayDropdown(true);
+    }
+  };
+
   useEffect(() => {
     if (localStorage.getItem("token") === null) history.push("/interpretly");
     getData();
+    window.onclick = function (event) {
+      if (!event.target.matches(".NavDropDown")) {
+        setDisplayDropdown(false);
+      }
+    };
   }, [history]);
 
   async function getData() {
@@ -103,20 +118,48 @@ function Blank({ history, ...props }) {
           position: "sticky",
           top: "0px",
           right: "0px",
+          zIndex: "10",
         }}
       >
         <h3 className="d-inline fo1 font-weight-light">Dashboard</h3>
         <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
-          <Power
-            onClick={() => {
-              localStorage.removeItem("token");
-              history.push("/interpretly");
-            }}
-          />
-        </div>
-        <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
           <Bell />
         </div>
+
+        <div className="NavDropDown c4 mr-3" onClick={HandleDisplyDropdown}>
+          <div className="NavDropDownchild ">
+            <span
+              style={{
+                position: "absolute",
+                top: "50%",
+                fontSize: "16px",
+                transform: "translate(25px, -50%)",
+              }}
+            >
+              Neo Ho..
+            </span>
+            <div className="NavDropDownchild2 ">
+              <DetailsRoundedIcon className="DetailsRoundedIcon" />
+            </div>
+          </div>
+        </div>
+
+        {DisplayDropdown && (
+          <ul className="dropdownMenu">
+            <li className="dropdownMenuli">Open Profile</li>
+            <li className="dropdownMenuli">Account Setting</li>
+            <li className="dropdownMenuli">Privacy Policy</li>
+            <li
+              className="dropdownMenuli"
+              onClick={() => {
+                localStorage.removeItem("token");
+                history.push("/interpretly");
+              }}
+            >
+              Log Out
+            </li>
+          </ul>
+        )}
       </div>
 
       <div className="col-12 pb-5">
