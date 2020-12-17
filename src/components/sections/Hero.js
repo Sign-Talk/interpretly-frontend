@@ -132,16 +132,20 @@ const Hero = ({
                         </label>
                       </div>
                       <div className='col-12'>
-                        <Button
-                          color='primary'
-                          style={ButtonHero}
-                          wideMobile
-                          onClick={() => {
-                            setClicked("left");
-                            setmodalState((o) => !o);
-                          }}>
-                          Looking for an Interpreter
-                        </Button>
+                        <Link
+                          to='interpretly/client/onboard'
+                        >
+                          <Button
+                            color='primary'
+                            style={ButtonHero}
+                            wideMobile
+                            onClick={() => {
+                              setClicked("left");
+                              setmodalState((o) => !o);
+                            }}>
+                            Looking for an Interpreter
+                          </Button>
+                        </Link>
                       </div>
                     </div>
                   </div>

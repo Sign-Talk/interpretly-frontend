@@ -61,6 +61,7 @@ const SignUpverificationModal = ({verify, isInterpreter}) => {
             setO(false);
           } else{
             notifySucess('Email verified successfully ! Login to proceed !')
+            localStorage.setItem("token", data.token);
             setLoading(false);
             setO(false);
           }

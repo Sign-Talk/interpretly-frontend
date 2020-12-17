@@ -21,6 +21,7 @@ import { ToastifyAlert } from "../src/components/AlertComponent/ToastifyAlert";
 import Home from "./views/Home";
 import Error from "./views/Error";
 import ClientJobPost from "./components/Client/JobPost/ClientJobPost";
+import OnBoard from "./components/Client/OnBoard";
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -53,10 +54,15 @@ const App = (props) => {
               : "row"
           }`}
         >
-          {props.location.pathname === "/interpretly" ||
-          props.location.pathname === "/interpretly/" ? null : (
+          {
+          props.location.pathname === "/interpretly" ||
+          props.location.pathname === "/interpretly/" ||
+          props.location.pathname === "/interpretly/client/onboard" 
+          ? null 
+          : (
             <Navbar />
-          )}
+            )
+          }
           <ToastifyAlert style={{ zIndex: "1" }} />
           <Switch>
             <AppRoute
@@ -65,6 +71,7 @@ const App = (props) => {
               component={Home}
               layout={LayoutDefault}
             />
+            <Route exact path="/interpretly/client/onboard" component={OnBoard} />
             <Route exact path="/interpretly/dashboard" component={Dashboard} />
             <Route exact path="/interpretly/profile" component={Profile} />
             <Route exact path="/interpretly/request" component={JobRequests} />
