@@ -23,12 +23,12 @@ const validation = {
   margin: "0px",
   padding: "0px",
 };
-function LeftLogin({ state, setState, setVerify, ...props }) {
+function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props }) {
   const [nameok, setnameok] = useState(true);
   const [mailok, setmailok] = useState(true);
   const [passok, setpassok] = useState(true);
   const [loading, setLoading] = useState(false);
-  const [signUpVerifyModal, setSignUpVerifyModal] = useState(false);
+  const [signUpVerifyModal, setSignUpVerifyModal] = useState(false)
   const [message, setmessage] = useState("");
   const [errorMSG, seterrorMSG] = useState(false);
 
@@ -92,7 +92,7 @@ function LeftLogin({ state, setState, setVerify, ...props }) {
   async function register() {
     try {
       setLoading(true);
-      const { data } = await Axios.post(`${state.base}/Register/user`, {
+      const response = await Axios.post(`${state.base}/Register/user`, {
         email: state.imail,
         firstname: state.iname.split(" ")[0],
         lastname:
@@ -101,18 +101,15 @@ function LeftLogin({ state, setState, setVerify, ...props }) {
             : null,
         password: state.ipass,
       });
-      setVerify(data);
+      setSignUpVerifyModal(true);
+      
+      setVerify(response.data);
       setLoading(true);
-      if(data){
-        setSignUpVerifyModal(true)
-      }
-      setmessage(`register sucessfully!\n${data.message}`);
+      setmessage(`register sucessfully!\n${response.data.message}`);
       seterrorMSG(true);
-      if (data.details.length > 0) {
+      if (response.data.details.length > 0) {
         setLoading(false);
       }
-      setLoading(false);
-      console.log(data);
     } catch (err) {
       setLoading(false);
       console.log(err.response);
@@ -126,6 +123,14 @@ function LeftLogin({ state, setState, setVerify, ...props }) {
   }
 
   return (
+    <>
+      { signUpVerifyModal === true && 
+            <VerifyModal 
+              formData={props.formData}
+              setFormData={props.setFormData}
+              isInterpreter={props.isInterpreter}
+            />       
+      }
     <div className="p-0 col-12" style={{ backgroundColor: "transparent" }}>
       <ToastContainer
         style={{ position: "absolute", top: "0px", left: "0px" }}
@@ -161,7 +166,6 @@ function LeftLogin({ state, setState, setVerify, ...props }) {
           </h3>
         </div>
       </div>
-      {signUpVerifyModal && <VerifyModal isInterpreter={props.isInterpreter}/>}
       <div
         className="row m-auto col-12 p-2 rounded"
         style={{ backgroundColor: "#272727" }}
@@ -490,6 +494,7 @@ function LeftLogin({ state, setState, setVerify, ...props }) {
         </div>
       </div>
     </div>
+    </>
   );
 }
 

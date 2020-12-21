@@ -6,7 +6,8 @@ import Axios from "axios"
 import './verifyModal.css'
 import Loader from "./dashboard/smallComponent/Spinner";
 import {notifySucess,notifyWarning} from "../AlertComponent/ToastifyAlert";
-const SignUpverificationModal = ({verify, isInterpreter}) => {
+
+const SignUpverificationModal = ({verify, isInterpreter, formData, setFormData, setPhoneModal}) => {
     const[pass, setOtp] = useState({
         disabled : true,
         otp :''
@@ -54,16 +55,17 @@ const SignUpverificationModal = ({verify, isInterpreter}) => {
                 : 
                 `https://whispering-lake-75400.herokuapp.com/Register/user/verify?email=${verify}&vcode=${pass.otp}`
           });
-          console.log(data)
           if(data.error){
             setError(true)
             setLoading(false);
             setO(false);
           } else{
-            notifySucess('Email verified successfully ! Login to proceed !')
+            // notifySucess('Email verified successfully ! Login to proceed !')
             localStorage.setItem("token", data.token);
             setLoading(false);
             setO(false);
+            setPhoneModal(true)
+            console.log(formData)
           }
        }  catch(err){
             setError(true)

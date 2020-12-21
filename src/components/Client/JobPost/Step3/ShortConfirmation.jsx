@@ -4,8 +4,11 @@ import infoIcon from '../../../../assets/images/Icon feather-info.svg'
 import SignUpLogin from "../../../LargeComponent/SignUpLogin";
 import ReactModal from 'react-responsive-modal'
 import classNames from "classnames";
+import VerifyForm from '../../../LargeComponent/dashboard/VerifyForm'
 
 const ShortConfirmation = ({
+    phoneModal,
+    setPhoneModal,
     formData, 
     setFormData, 
     closeModal,
@@ -141,6 +144,8 @@ const ShortConfirmation = ({
             >
                 <p style={{ textAlign : 'center'}}>You need to log yourself in first</p>
                 <SignUpLogin
+                    phoneModal={phoneModal}
+                    setPhoneModal={setPhoneModal}
                     isInterpreter={false}
                     setVerify={props.setVerify}
                     clicked={'left'}
@@ -148,6 +153,13 @@ const ShortConfirmation = ({
                     setmodalState={setLogModal}
                 />
             </ReactModal>
+        }
+        {
+            phoneModal &&
+                <VerifyForm
+                    phoneModal
+                    setPhoneModal
+                />
         }
         </>
     )

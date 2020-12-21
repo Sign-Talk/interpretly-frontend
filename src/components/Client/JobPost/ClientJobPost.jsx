@@ -39,6 +39,7 @@ const ClientJobPost = ({ closeModal, ...props }) => {
             description : ''
         }
     }
+    const[phoneModal, setPhoneModal] = useState(false)
     const[steps, setSteps] = useState(1)
     const[formData, setFormData] = useState(initialState)
 

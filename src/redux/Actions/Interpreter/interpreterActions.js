@@ -1,4 +1,4 @@
-import { LOG_IN } from "./ActionTypes.js/interpreterActionTypes";
+import { LOG_IN } from "../../ActionTypes/Interpreter/interpreterActionTypes";
 
 export default logIn  = (interpreterData, history) => dispatch => {
     try {

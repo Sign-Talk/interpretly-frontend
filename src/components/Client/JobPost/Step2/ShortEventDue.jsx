@@ -182,6 +182,18 @@ const ContractEventDue = ({
                                 />
                                 <p>English to ISL</p>
                             </div>
+                            <div className="d-flex mb-1">
+                                <input 
+                                    type="checkbox"
+                                />
+                                <p>ISL to English Transcript</p>
+                            </div>
+                            <div className="d-flex mb-1">
+                                <input 
+                                    type="checkbox"
+                                />
+                                <p>Transcript to ISL</p>
+                            </div>
                     </div>
                 </div>
             </div>

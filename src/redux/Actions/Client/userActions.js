@@ -3,7 +3,7 @@ import {
     REGISTER_USER,
     RESET_PASS,
     IS_LOADING
-} from "./ActionTypes.js/userActionTypes";
+} from "../../ActionTypes/Client/userActionTypes";
 
 export default registerUser = (userData, history) => dispatch => {
     try {

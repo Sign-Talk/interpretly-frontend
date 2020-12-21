@@ -132,9 +132,9 @@ const Hero = ({
                         </label>
                       </div>
                       <div className='col-12'>
-                        <Link
+                        {/* <Link
                           to='interpretly/client/onboard'
-                        >
+                        > */}
                           <Button
                             color='primary'
                             style={ButtonHero}
@@ -145,7 +145,7 @@ const Hero = ({
                             }}>
                             Looking for an Interpreter
                           </Button>
-                        </Link>
+                        {/* </Link> */}
                       </div>
                     </div>
                   </div>

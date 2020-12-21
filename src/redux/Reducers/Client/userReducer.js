@@ -1,4 +1,4 @@
-import { LOG_IN_USER } from "../Actions/ActionTypes.js/userActionTypes";
+import { LOG_IN_USER } from "../../ActionTypes/Client/userActionTypes";
 
 const initialState = {
     user : ''
