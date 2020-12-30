@@ -15,6 +15,7 @@ import ReactModal from 'react-responsive-modal'
 import 'react-responsive-modal/styles.css';
 import './Hero.css'
 import { Link } from 'react-router-dom'
+import OnBoard from "../Client/OnBoard";
 
 const propTypes = {
   ...SectionProps.types,
@@ -56,7 +57,6 @@ const Hero = ({
   const [videoModalActive, setVideomodalactive] = useState(false);
   const [modalState, setmodalState] = useState(false);
   const [clicked, setClicked] = useState("");
-  // const [clicked, setClicked] = useState("");
   const [verify,setVerify]=useState(null);
   
   if( verify!= null && verify.details!=undefined){
@@ -132,20 +132,21 @@ const Hero = ({
                         </label>
                       </div>
                       <div className='col-12'>
-                        {/* <Link
+                        <Link
                           to='interpretly/client/onboard'
-                        > */}
+                        >
                           <Button
                             color='primary'
                             style={ButtonHero}
                             wideMobile
-                            onClick={() => {
-                              setClicked("left");
-                              setmodalState((o) => !o);
-                            }}>
+                            // onClick={() => {
+                            //   setClicked("left");
+                            //   setmodalState((o) => !o);
+                            // }}
+                          >
                             Looking for an Interpreter
                           </Button>
-                        {/* </Link> */}
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -183,25 +184,26 @@ const Hero = ({
           <VerifyModal  verify={verify} />
           {
             clicked === 'left' ?
-              <ReactModal
-                  open={clicked == 'left'}
-                  onClose={()=> {
-                    setClicked("")
-                    setmodalState(false)
-                  }}
-                  classNames={{
-                    modal : 'client-job-modal'
-                  }}
-                  center
-                >
-                <ClientJobPost
-                  closeModal={setClicked}
-                  setVerify={setVerify}
-                  clicked={clicked}
-                  modalState={modalState}
-                  setmodalState={setmodalState}
-                />
-              </ReactModal>
+              null
+              // <ReactModal
+              //     open={clicked == 'left'}
+              //     onClose={()=> {
+              //       setClicked("")
+              //       setmodalState(false)
+              //     }}
+              //     classNames={{
+              //       modal : 'client-job-modal'
+              //     }}
+              //     center
+              //   >
+              //   <ClientJobPost
+              //     closeModal={setClicked}
+              //     setVerify={setVerify}
+              //     clicked={clicked}
+              //     modalState={modalState}
+              //     setmodalState={setmodalState}
+              //   />
+              // </ReactModal>
             : ( clicked === 'right' &&
                 <PopupComponent
                   Content={
