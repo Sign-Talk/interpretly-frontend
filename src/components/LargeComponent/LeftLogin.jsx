@@ -11,6 +11,7 @@ import Spinner from "./dashboard/smallComponent/Spinner";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import VerifyModal from "./SignUpverificationModal";
+import {withRouter} from "react-router-dom"
 
 const iconStyle = {
   width: "30px",
@@ -396,14 +397,26 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
               ) : (
                 <button
                   className="border-0 mt-2 mb-2 text-light pt-2 pb-2 pl-3 pr-3"
-                  onClick={
-                    state.iloginok === true
-                      ? login
-                      : () => {
-                          console.log(state.iloginok);
-                          console.log(state.ipass, state.imail);
-                        }
-                  }
+                  // onClick={
+                  //   state.iloginok === true
+                  //     ? login
+                  //     : () => {
+                  //         console.log(state.iloginok);
+                  //         console.log(state.ipass, state.imail);
+                  //       }
+                  // }
+                  onClick={()=>{
+                    let token =localStorage.getItem('token')
+                    if(token!=null){
+                      localStorage.removeItem('token')
+                    }
+                    localStorage.setItem('cToken',Math.random()*1000)
+                    props.history.push('/interpretly/dashboardclient')
+                }
+                    // setSteps(4)
+
+                }
+               
                   style={{
                     backgroundColor: "#6B20B6",
                     fontSize: "16px",
@@ -498,4 +511,4 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
   );
 }
 
-export default LeftLogin;
+export default withRouter(LeftLogin);

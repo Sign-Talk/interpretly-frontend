@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, Link } from "react-router-dom";
-import { Bell } from "react-feather";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import Avatar from "react-avatar";
-import DetailsRoundedIcon from "@material-ui/icons/DetailsRounded";
 import Policecap from "../../../assets/images/streamline-icon-police-hat-1@140x140 (1).png";
 
 import "./FullViewjobRequest.css";
@@ -37,100 +35,26 @@ export default function Profile() {
   ] = useState(`Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim ab voluptas odio, nulla, reiciendis perferendis ratione modi fugiat qui cum ea hic accusamus in suscipit ipsam iste voluptatibus quos quaerat.
 `);
 
-  const [DisplayDropdown, setDisplayDropdown] = useState(false);
-  const HandleDisplyDropdown = () => {
-    if (DisplayDropdown) {
-      setDisplayDropdown(false);
-    } else {
-      setDisplayDropdown(true);
-    }
-  };
-
-  useEffect(() => {
-    window.onclick = function (event) {
-      if (!event.target.matches(".NavDropDown")) {
-        setDisplayDropdown(false);
-      }
-    };
-  });
-
   return (
     <>
       <div
-        className="col-10 ml-auto c0 p-0"
         style={{
-          minWidth: "850px",
-          position: "relative",
+          borderRadius: "50%",
+          width: "8rem",
+          marginTop: "5%",
+          marginLeft: "2rem",
         }}
       >
-        <div
-          className="col-12 pl-3 pt-3 p-0 pb-5"
-          style={{
-            height: "80px",
-            position: "sticky",
-            top: 0,
-            boxShadow: "0px 5px 15px black",
-          }}
-        >
-          <h3 className="d-inline fo1 font-weight-light">Job Requests</h3>
-
-          <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
-            <Bell />
-          </div>
-
-          <div className="NavDropDown c4 mr-3" onClick={HandleDisplyDropdown}>
-            <div className="NavDropDownchild ">
-              <span
-                style={{
-                  position: "absolute",
-                  top: "50%",
-                  fontSize: "16px",
-                  transform: "translate(25px, -50%)",
-                }}
-              >
-                Neo Ho..
-              </span>
-              <div className="NavDropDownchild2 ">
-                <DetailsRoundedIcon className="DetailsRoundedIcon" />
-              </div>
-            </div>
-          </div>
-
-          {DisplayDropdown && (
-            <ul className="dropdownMenu">
-              <li className="dropdownMenuli">Open Profile</li>
-              <li className="dropdownMenuli">Account Setting</li>
-              <li className="dropdownMenuli">Privacy Policy</li>
-              <li
-                className="dropdownMenuli"
-                onClick={() => {
-                  localStorage.removeItem("token");
-                  history.push("/interpretly");
-                }}
-              >
-                Log Out
-              </li>
-            </ul>
-          )}
-        </div>
-        <div
-          style={{
-            borderRadius: "50%",
-            width: "8rem",
-            marginTop: "5%",
-            marginLeft: "2rem",
-          }}
-        >
-          <Avatar
-            name={name}
-            size="150"
-            textSizeRatio={1.75}
-            round={true}
-            src={image}
-          />
-        </div>
+        <Avatar
+          name={name}
+          size="150"
+          textSizeRatio={1.75}
+          round={true}
+          src={image}
+        />
       </div>
-      <div className="mainParent">
+
+      <div className="mainParent ">
         <div className="child1">
           <div className="marthalli">
             <div>

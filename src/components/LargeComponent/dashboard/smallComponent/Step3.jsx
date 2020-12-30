@@ -5,7 +5,7 @@ import Step2 from './step3form/Step2'
 import LastStep from './step3form/Step3'
 import StepLast from './step3form/StepLast'
 import Axios from 'axios'
-import { Languages } from '../../../DummyData/languageDummy'
+import { Languages } from './languageDummy'
 
 function Step3({ closeModal, loader, setLoader }) {
   const [state, setState] = useState({

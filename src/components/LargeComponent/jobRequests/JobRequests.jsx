@@ -1,15 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Bell } from "react-feather";
-import policeIcon from "../../../assets/images/streamline-icon-police-hat-1@140x140 (1).png";
-import crossIcon from "../../../assets/images/Icon ionic-ios-close.png";
-import bankingIcon from "../../../assets/images/banking.svg";
-import softwareIcon from "../../../assets/images/software.svg";
-import technicalIcon from "../../../assets/images/technical.svg";
+
 import "./jobRequests.css";
 import DetailsRoundedIcon from "@material-ui/icons/DetailsRounded";
+import FullViewjobRequest from "./FullViewjobRequest";
+import JobCard from "./JobCard";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+
+import Card from "../Notification/Card";
+
+let icon = require("../../../assets/images/message.svg");
 
 const JobRequests = ({ history }) => {
   const [DisplayDropdown, setDisplayDropdown] = useState(false);
+  const [DisplayNotification, setDisplayNotification] = useState(false);
+  const [data, setData] = useState([]);
+  const [JobData, setJobData] = useState([]);
+
+  const [ViewFullJobDetails, setViewFullJobDetails] = useState(false);
 
   const HandleDisplyDropdown = () => {
     if (DisplayDropdown) {
@@ -19,19 +27,71 @@ const JobRequests = ({ history }) => {
     }
   };
 
+  const HandleShowNotification = () => {
+    if (DisplayNotification) {
+      setDisplayNotification(false);
+    } else {
+      setDisplayNotification(true);
+    }
+  };
+  // fetch db
+  const getData = () => {
+    fetch("notificationDummyData.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then(function (response) {
+        // console.log(response);
+        return response.json();
+      })
+      .then(function (myJson) {
+        setData(myJson);
+      });
+  };
+
+  // fetch upcomming job db
+  const FetchJobJson = () => {
+    fetch("UpcommingJobData.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then(function (response) {
+        // console.log(response);
+        return response.json();
+      })
+      .then(function (myJson) {
+        console.log("myjson ", myJson);
+        setJobData(myJson);
+      });
+  };
+
+  const FullViewFunc = () => {
+    console.log("clicked");
+    setViewFullJobDetails(true);
+  };
+
   useEffect(() => {
+    getData();
+    FetchJobJson();
+
     window.onclick = function (event) {
-      if (!event.target.matches(".NavDropDown")) {
+      if (!event.target.matches(".sowthedic")) {
         setDisplayDropdown(false);
       }
+      if (!event.target.matches(".HandleShowNotification")) {
+        setDisplayNotification(false);
+      }
     };
-  });
-
+  }, []);
   return (
     <div
       className="col-10 ml-auto c0 p-0"
       style={{
-        minWidth: "850px",
+        Width: "44.271vw",
         position: "relative",
       }}
     >
@@ -44,26 +104,84 @@ const JobRequests = ({ history }) => {
           boxShadow: "0px 5px 15px black",
         }}
       >
-        <h3 className="d-inline fo1 font-weight-light">Job Requests</h3>
+        <h3 className="fo1 font-weight-light h3Forprofile">Job Requests</h3>
 
-        <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
+        <div
+          className="rounded-circle p-2 c4 bellIcon HandleShowNotification"
+          onClick={HandleShowNotification}
+        >
           <Bell />
         </div>
 
-        <div className="NavDropDown c4 mr-3" onClick={HandleDisplyDropdown}>
-          <div className="NavDropDownchild ">
-            <span
+        {/* // {{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}} */}
+        {DisplayNotification && (
+          <div className="col-6" style={{ position: "absolute", right: "0px" }}>
+            <div className=" col-12 mt-4 container text-center"></div>
+            <div
+              className="col-12 mt-4"
+              style={{ maxHeight: "400px", overflow: "scroll" }}
+            >
+              <div className="col-12 m-auto d-flex justify-content-between p-0">
+                <div className="col text-center">
+                  <h4>Notification</h4>
+                </div>
+              </div>
+              {
+                // {{{{{{{{{{{{{{{{{{{{ if 0 data in db }}}}}}}}}}}}}}}}}}}}
+
+                data && data.length === 0 ? (
+                  <div
+                    className="col text-center"
+                    style={{
+                      dipslay: "absolute",
+                      top: "10%",
+                      left: "25%",
+                    }}
+                  >
+                    <img
+                      className="notification"
+                      style={{ margin: "2em 0" }}
+                      src={icon}
+                      alt="notifiaction"
+                    />
+                    <p className="notification" style={{ margin: 0 }}>
+                      You Do not have any Notifications yet!
+                    </p>
+                  </div>
+                ) : (
+                  data.map((data, i) => (
+                    // {{{{{{{{{{{{{{{{{{{{ if any data in db }}}}}}}}}}}}}}}}}}}}
+
+                    <Card
+                      key={data.id}
+                      id={data.id}
+                      title={data.title}
+                      message={data.message}
+                      image={data.image}
+                    />
+                  ))
+                )
+              }
+            </div>
+          </div>
+        )}
+        {/* // {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}} */}
+
+        <div className="NavDropDown sowthedic" onClick={HandleDisplyDropdown}>
+          <div className="NavDropDownchild sowthedic">
+            <div
               style={{
                 position: "absolute",
                 top: "50%",
                 fontSize: "16px",
                 transform: "translate(25px, -50%)",
               }}
+              className="sowthedic"
             >
               Neo Ho..
-            </span>
-            <div className="NavDropDownchild2 ">
-              <DetailsRoundedIcon className="DetailsRoundedIcon" />
+            </div>
+            <div className="NavDropDownchild2 sowthedic">
+              <DetailsRoundedIcon className="DetailsRoundedIcon sowthedic" />
             </div>
           </div>
         </div>
@@ -100,250 +218,70 @@ const JobRequests = ({ history }) => {
         />
         <p>You have no job requests yet, but we will keep you informed !</p>
       </div>
-      <div className="row pl-5 pr-5 pt-4 job-section">
-        <div className="col-12">
-          <div className="row pb-4">
-            <div className="col-8">
-              <h4 className="p-0 mb-2">Posted jobs</h4>
-              <div className="filter-section-btns d-flex">
-                <p>Quick Filter :</p>
-                <span>
-                  <button className="btn ml-2">Onsite</button>
-                  <button className="btn ml-2">Remote</button>
-                </span>
+
+      {ViewFullJobDetails ? (
+        <>
+          <div
+            style={{
+              cursor: "pointer",
+              marginLeft: "100px",
+              marginTop: "30px",
+              height: "40px",
+              width: "40px",
+              borderRadius: "50%",
+            }}
+            onClick={() => setViewFullJobDetails(false)}
+          >
+            <ArrowBackIosIcon />
+          </div>
+          <FullViewjobRequest />
+        </>
+      ) : (
+        <div className="row pl-5 pr-5 pt-4 job-section">
+          <div className="col-12">
+            <div className="row pb-4">
+              <div className="col-8">
+                <h4 className="p-0 mb-2">Posted jobs</h4>
+                <div className="filter-section-btns d-flex">
+                  <p>Quick Filter :</p>
+                  <span>
+                    <button className="btn ml-2">Onsite</button>
+                    <button className="btn ml-2">Remote</button>
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col-12">
-              <div className="row">
-                <div className="col-12">
-                  <div
-                    className="card mb-4 p-3"
-                    style={{ position: "relative" }}
-                  >
-                    <div className="card-title p-0 m-0">
-                      <p>
-                        Marthahalli Police Station -{" "}
-                        <span style={{ color: "#76C1FC" }}>Onsite</span>{" "}
-                        <span style={{ color: "grey", fontSize: ".9em" }}>
-                          {" "}
-                          &#8226; 16th Oct at 03:30PM &#8226; 3 Hours
-                        </span>
-                      </p>
-                    </div>
-                    <div className="close-btn">
-                      <button>
-                        <img src={crossIcon} alt="" />
-                      </button>
-                    </div>
-                    <div className="d-flex card-footer-wrapper m-0 p-0">
-                      <div className="left-side mt-1">
-                        <div className="card-body p-0 mt-1 mb-1">
-                          <p>
-                            #769, GYR Chambers, Kaikondanhalli, Sarjapur Road,
-                            Bengaluru, Karnataka.
-                          </p>
-                        </div>
-                        <div className="card-img mt-3 mb-3">
-                          <img src={policeIcon} alt="" />
-                        </div>
-                        <div className="card-footer p-0 m-0 ">
-                          <p>
-                            Requirement:{" "}
-                            <span style={{ color: "white", fontWeight: 500 }}>
-                              Hindi Interpreter
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="right-side">
-                        <div className="cost">
-                          <p>&#8377; 500</p>
-                        </div>
-                        <div className="right-side-btns">
-                          <button className="btn btn-primary mr-3 accept-btn">
-                            Accept
-                          </button>
-                          <button className="btn negotiate-btn">
-                            Negotiate
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+            <div className="row">
+              <div className="col-12">
+                <div className="row">
+                  <div className="col-12">
+                    {/* ====================== */}
 
-                  <div
-                    className="card mb-4 p-3"
-                    style={{ position: "relative" }}
-                  >
-                    <div className="card-title p-0 m-0">
-                      <p>
-                        National Electronics -{" "}
-                        <span style={{ color: "#76C1FC" }}>Remote</span>{" "}
-                        <span style={{ color: "grey", fontSize: ".9em" }}>
-                          {" "}
-                          &#8226; 16th Oct at 03:30PM &#8226; 1 Hours
-                        </span>
-                      </p>
-                    </div>
-                    <div className="close-btn">
-                      <button>
-                        <img src={crossIcon} alt="" />
-                      </button>
-                    </div>
-                    <div className="d-flex card-footer-wrapper m-0 p-0">
-                      <div className="left-side mt-1">
-                        <div className="card-body p-0 mt-1 mb-1">
-                          <p>
-                            #769, GYR Chambers, Kaikondanhalli, Sarjapur Road,
-                            Bengaluru, Karnataka.
-                          </p>
-                        </div>
-                        <div className="card-img mt-3 mb-3">
-                          <img src={technicalIcon} alt="" />
-                        </div>
-                        <div className="card-footer p-0 m-0 ">
-                          <p>
-                            Requirement:{" "}
-                            <span style={{ color: "white", fontWeight: 500 }}>
-                              English Interpreter
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="right-side">
-                        <div className="cost">
-                          <p>&#8377; 300</p>
-                        </div>
-                        <div className="right-side-btns">
-                          <button className="btn btn-primary mr-3 accept-btn">
-                            Accept
-                          </button>
-                          <button className="btn negotiate-btn">
-                            Negotiate
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    {JobData.length > 0 &&
+                      JobData.map((data) => (
+                        <JobCard
+                          FullViewFunc={FullViewFunc}
+                          key={data.id}
+                          id={data.id}
+                          title={data.title}
+                          type={data.type}
+                          timeStamp={data.timeStamp}
+                          address={data.address}
+                          btntype={data.btntype}
+                          price={data.price}
+                          requirement={data.requirement}
+                          period={data.period}
+                        />
+                      ))}
 
-                  <div
-                    className="card mb-4 p-3"
-                    style={{ position: "relative" }}
-                  >
-                    <div className="card-title p-0 m-0">
-                      <p>
-                        State Bank Of India -{" "}
-                        <span style={{ color: "#76C1FC" }}>Onsite</span>{" "}
-                        <span style={{ color: "grey", fontSize: ".9em" }}>
-                          {" "}
-                          &#8226; 16th Oct at 03:30PM &#8226; 2 Hours
-                        </span>
-                      </p>
-                    </div>
-                    <div className="close-btn">
-                      <button>
-                        <img src={crossIcon} alt="" />
-                      </button>
-                    </div>
-                    <div className="d-flex card-footer-wrapper m-0 p-0">
-                      <div className="left-side mt-1">
-                        <div className="card-body p-0 mt-1 mb-1">
-                          <p>
-                            #769, GYR Chambers, Kaikondanhalli, Sarjapur Road,
-                            Bengaluru, Karnataka.
-                          </p>
-                        </div>
-                        <div className="card-img mt-3 mb-3">
-                          <img src={bankingIcon} alt="" />
-                        </div>
-                        <div className="card-footer p-0 m-0 ">
-                          <p>
-                            Requirement:{" "}
-                            <span style={{ color: "white", fontWeight: 500 }}>
-                              English Interpreter
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="right-side">
-                        <div className="cost">
-                          <p>&#8377; 300</p>
-                        </div>
-                        <div className="right-side-btns">
-                          <button className="btn btn-primary mr-3 accept-btn">
-                            Accept
-                          </button>
-                          <button className="btn negotiate-btn">
-                            Negotiate
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div
-                    className="card mb-4 p-3"
-                    style={{ position: "relative" }}
-                  >
-                    <div className="card-title p-0 m-0">
-                      <p>
-                        HP Showrooma -{" "}
-                        <span style={{ color: "#76C1FC" }}>Remote</span>{" "}
-                        <span style={{ color: "grey", fontSize: ".9em" }}>
-                          {" "}
-                          &#8226; 16th Oct at 03:30PM &#8226; 3 Hours
-                        </span>
-                      </p>
-                    </div>
-                    <div className="close-btn">
-                      <button>
-                        <img src={crossIcon} alt="" />
-                      </button>
-                    </div>
-                    <div className="d-flex card-footer-wrapper m-0 p-0">
-                      <div className="left-side mt-1">
-                        <div className="card-body p-0 mt-1 mb-1">
-                          <p>
-                            #769, GYR Chambers, Kaikondanhalli, Sarjapur Road,
-                            Bengaluru, Karnataka.
-                          </p>
-                        </div>
-                        <div className="card-img mt-3 mb-3">
-                          <img src={softwareIcon} alt="" />
-                        </div>
-                        <div className="card-footer p-0 m-0 ">
-                          <p>
-                            Requirement:{" "}
-                            <span style={{ color: "white", fontWeight: 500 }}>
-                              Hindi Interpreter
-                            </span>
-                          </p>
-                        </div>
-                      </div>
-                      <div className="right-side">
-                        <div className="cost">
-                          <p>&#8377; 400</p>
-                        </div>
-                        <div className="right-side-btns">
-                          <button className="btn btn-primary mr-3 accept-btn">
-                            Accept
-                          </button>
-                          <button className="btn negotiate-btn">
-                            Negotiate
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    {/* ================== */}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      {/* </div> */}
+      )}
     </div>
   );
 };
