@@ -1,86 +1,28 @@
-import React, { useState, useEffect } from "react";
-import { Bell } from "react-feather";
+import React, { useState } from "react";
 import Divider from "@material-ui/core/Divider";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
-import DetailsRoundedIcon from "@material-ui/icons/DetailsRounded";
+import Navbar from "../Navbar/Navbar";
+
+import ReactModal from "react-responsive-modal";
+import Step1 from "./steps/step1";
+import Step2 from "./steps/step2";
+import Step3 from "./steps/step3";
+
 import "./completed.css";
 
-const Completed = ({ history }) => {
-  const [DisplayDropdown, setDisplayDropdown] = useState(false);
-
-  const HandleDisplyDropdown = () => {
-    if (DisplayDropdown) {
-      setDisplayDropdown(false);
-    } else {
-      setDisplayDropdown(true);
-    }
-  };
-
-  useEffect(() => {
-    window.onclick = function (event) {
-      if (!event.target.matches(".NavDropDown")) {
-        setDisplayDropdown(false);
-      }
-    };
-  });
+const Completed = () => {
+  const [initiatePayment, setinitiatePayment] = useState(false);
+  const [steps, setSteps] = useState(1);
 
   return (
     <div
       className="col-10 ml-auto c0 p-0"
       style={{
-        minWidth: "850px",
+        Width: "44.271vw",
         position: "relative",
       }}
     >
-      <div
-        className="col-12 pl-3 pt-3 p-0 pb-5"
-        style={{
-          height: "80px",
-          position: "sticky",
-          top: 0,
-          boxShadow: "0px 5px 15px black",
-        }}
-      >
-        <h3 className="d-inline fo1 font-weight-light">Completed</h3>
-        <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
-          <Bell />
-        </div>
-
-        <div className="NavDropDown c4 mr-3" onClick={HandleDisplyDropdown}>
-          <div className="NavDropDownchild ">
-            <span
-              style={{
-                position: "absolute",
-                top: "50%",
-                fontSize: "16px",
-                transform: "translate(25px, -50%)",
-              }}
-            >
-              Neo Ho..
-            </span>
-            <div className="NavDropDownchild2 ">
-              <DetailsRoundedIcon className="DetailsRoundedIcon" />
-            </div>
-          </div>
-        </div>
-
-        {DisplayDropdown && (
-          <ul className="dropdownMenu">
-            <li className="dropdownMenuli">Open Profile</li>
-            <li className="dropdownMenuli">Account Setting</li>
-            <li className="dropdownMenuli">Privacy Policy</li>
-            <li
-              className="dropdownMenuli"
-              onClick={() => {
-                localStorage.removeItem("token");
-                history.push("/interpretly");
-              }}
-            >
-              Log Out
-            </li>
-          </ul>
-        )}
-      </div>
+      <Navbar title={"Completed"} />
 
       <div
         style={{
@@ -107,6 +49,29 @@ const Completed = ({ history }) => {
           </select>
         </div>
       </div>
+
+      {/* this will be shown when some one cliks on the initiate button */}
+      {initiatePayment === true && (
+        <ReactModal
+          open={initiatePayment === true}
+          onClose={() => {
+            setinitiatePayment(false);
+            setSteps(1);
+          }}
+          classNames={{
+            modal: "Step1Model",
+          }}
+          center
+        >
+          {steps === 1 ? (
+            <Step1 setSteps={setSteps} />
+          ) : steps === 2 ? (
+            <Step2 setSteps={setSteps} />
+          ) : (
+            steps === 3 && <Step3 setSteps={setSteps} />
+          )}
+        </ReactModal>
+      )}
       <div className="row">
         <div className="col-12">
           <div className="card p-3 m-4">
@@ -124,6 +89,13 @@ const Completed = ({ history }) => {
                   <div className="col left-body">
                     <p className="m-0"> Sarjapur Road, Bengaluru, Karnataka </p>
                     <p className="m-0"> 04/06/2020 at 04.39 PM </p>
+
+                    <button
+                      className="InitiatePaymentbtn"
+                      onClick={() => setinitiatePayment(true)}
+                    >
+                      Initiate Payment
+                    </button>
                   </div>
                 </div>
               </div>

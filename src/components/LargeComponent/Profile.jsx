@@ -2,9 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useHistory, Link } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import Axios from "axios";
+import PaymentOption from "./PaymentMethod/PaymentOption";
+import Navbar from "./Navbar/Navbar";
 
-import { Bell, Clock, UserPlus, CloudLightning } from "react-feather";
-import { toast } from "react-toastify";
+import stopwatchicon from "../../assets/images/stopwatchicon.png";
+import usericon from "../../assets/images/usericon.png";
+import certifiedicon from "../../assets/images/certifiedicon.png";
+
 import Avatar from "react-avatar";
 import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
@@ -22,7 +26,10 @@ import { Languages } from "../DummyData/languageDummy";
 
 import "./profile.css";
 import "react-toastify/dist/ReactToastify.css";
-import { notifySucess ,notifyWarning} from "../../components/AlertComponent/ToastifyAlert";
+import {
+  notifySucess,
+  notifyWarning,
+} from "../../components/AlertComponent/ToastifyAlert";
 import { Button, Form } from "semantic-ui-react";
 
 const styleObject = { fontSize: "14px", color: "white", marginRight: "1em" };
@@ -86,26 +93,21 @@ export default function Profile() {
   const [Reviews, setReviews] = useState("");
   const [ProfilePic, setProfilePic] = useState("");
 
-  const notify = (m) => {
-    toast.success(m, {
-      draggable: true,
-      position: toast.POSITION.TOP_CENTER,
-      zIndex: 1,
-
-      autoClose: 20000,
-    });
-  };
+  const [ShowPaymentMethod, setShowPaymentMethod] = useState(false);
 
   useEffect(() => {
+    let decoded;
+    let currentTime;
     const token = localStorage.getItem("token");
-    const decoded = jwt_decode(token);
-    const currentTime = Date.now() / 1000;
+    if (token) {
+      decoded = jwt_decode(token);
+      currentTime = Date.now() / 1000;
+    }
 
     if (!token) {
       history.push("/interpretly");
       notifyWarning("you must be logged in");
-    }
-    if (decoded.exp < currentTime) {
+    } else if (decoded.exp < currentTime) {
       notifyWarning("login required");
       history.push("/interpretly");
     } else {
@@ -122,8 +124,8 @@ export default function Profile() {
         setLoading(false);
         // console.log("user_data ", data);
         setlanguage(data.user.language);
-        setlanguageforgettingval(data.user.language)
-        setBackgroundforgettingval(data.user.Background)
+        setlanguageforgettingval(data.user.language);
+        setBackgroundforgettingval(data.user.Background);
         setBackground(data.user.Background);
         setemail(data.user.email);
         setimage(data.user.image);
@@ -192,12 +194,12 @@ export default function Profile() {
         notifySucess("language, background are required");
         setLoading(false);
       } else {
-        let data = await Axios({
+        let { data } = await Axios({
           method: "patch",
           url: `${base}/Home/profile`,
           data: {
-            language: languageforgettingval,
-            Background: Backgroundforgettingval,
+            language: language,
+            Background: Background,
             region: region,
             firstName: res[0],
             lastName: res[1],
@@ -297,128 +299,371 @@ export default function Profile() {
         }}
       >
         <Spinner loading={loading} />
-        <div
-          className="col-12 pl-3 pt-3 p-0 pb-5"
-          style={{
-            height: "80px",
-            boxShadow: "0px 5px 15px black",
-            position: "sticky",
-            MarginTop: "0px",
-            right: "0px",
-          }}
-        >
-          <h3 className="d-inline fo1 font-weight-light">Profile</h3>
+        {ShowPaymentMethod ? (
+          <PaymentOption ShowPaymentMethod={setShowPaymentMethod} />
+        ) : (
+          <>
+            <Navbar title={"Profile"} />
 
-          <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
-            <Bell />
-          </div>
-        </div>
-        {/* ================== <<<<<<<<< {{{{{ from here the user profile details are starting }}}}} >>>>>>>> ================== */}
-        <div className="row profile-centered" style={{ fontSize: "14px" }}>
-          <div
-            style={{
-              borderRadius: "50%",
-              width: "8rem",
-              marginTop: "1rem",
-              marginLeft: "2rem",
-            }}
-          >
-            <Avatar
-              name={name}
-              size="150"
-              textSizeRatio={1.75}
-              round={true}
-              src={image}
-            />
-            <label
-              style={{
-                marginLeft: "6rem",
-                zIndex: "+10",
-              }}
-              htmlFor="img"
-            >
-              <Fab
-                onClick={UploadImage}
+            {/* ================== <<<<<<<<< {{{{{ from here the user profile details are starting }}}}} >>>>>>>> ================== */}
+
+            <div className="row profile-centered" style={{ fontSize: "14px" }}>
+              <div
                 style={{
-                  marginTop: "-6rem",
-                  width: "2rem",
-                  height: "2rem",
-                  position: "relative",
+                  borderRadius: "50%",
+                  width: "8rem",
+                  marginTop: "1rem",
+                  marginLeft: "-20px",
                 }}
-                color="secondary"
-                aria-label="edit"
               >
-                <EditIcon />
-              </Fab>
-            </label>
-            <div
-              className="col"
-              style={{
-                display: "inline-flex",
-                fontSize: "16px",
-                height: "30px",
-              }}
-            >
-              <StarBorderIcon style={{ color: "#24e5af" }} />
-              <b style={{ margin: "3px" }}> {div1per} / 5.0 </b>
-            </div>
-          </div>
-
-          <div className="col-sm-9 p-4 mb-3" style={{ marginTop: "-1rem" }}>
-            {show ? (
-              <div style={{ lineHeight: "2.8rem", fontSize: "20px" }}>
-                <span
+                <Avatar
+                  name={name}
+                  size="150"
+                  textSizeRatio={1.75}
+                  round={true}
+                  src={image}
+                />
+                <label
                   style={{
-                    color: "white",
-                    fontSize: "30px",
-                    textTransform: "capitalize",
-                    position: "relative",
-                    marginRight: "40px",
+                    marginLeft: "6rem",
+                    zIndex: "+10",
+                  }}
+                  htmlFor="img"
+                >
+                  <Fab
+                    onClick={UploadImage}
+                    style={{
+                      marginTop: "-6rem",
+                      width: "2rem",
+                      height: "2rem",
+                      position: "relative",
+                    }}
+                    color="secondary"
+                    aria-label="edit"
+                  >
+                    <EditIcon />
+                  </Fab>
+                </label>
+                <div
+                  className="col"
+                  style={{
+                    display: "inline-flex",
+                    fontSize: "16px",
+                    height: "30px",
                   }}
                 >
-                  <b>{name}</b>
-                </span>
-                {showName === false ? (
-                  <Link
-                    to="#"
-                    className="far fa-edit"
-                    style={{ color: "#6aacdf" }}
-                    onClick={() => setshowName(true)}
-                  >
-                    Edit Name
-                  </Link>
-                ) : (
-                  <InputBase
-                    placeholder="FirstName LastName"
-                    onChange={(e) => setName(e.target.value)}
-                    style={{
-                      background: "white",
-                      borderRadius: "5px",
-                      // padding: "10px",
-                    }}
-                  />
-                )}
-                {/* ==================== number ============================ */}
+                  <StarBorderIcon style={{ color: "#24e5af" }} />
+                  <b style={{ margin: "3px" }}> {div1per} / 5.0 </b>
+                </div>
+              </div>
 
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={3}>
-                    Phone No.
-                  </Grid>
-
-                  <Grid item xs={1} sm={1}>
-                    :
-                  </Grid>
-
-                  <Grid item xs={12} sm={8}>
-                    <div
-                      className="col-12"
-                      style={{ paddingTop: ".8rem", marginLeft: "-1rem" }}
+              <div className="col-sm-9 p-4 mb-3" style={{ marginTop: "-1rem" }}>
+                {show ? (
+                  <div style={{ lineHeight: "2.8rem", fontSize: "20px" }}>
+                    <span
+                      style={{
+                        color: "white",
+                        fontSize: "30px",
+                        textTransform: "capitalize",
+                        position: "relative",
+                        marginRight: "40px",
+                      }}
                     >
-                      <p className="m-0 mb-2">
-                        <span style={styleObject} className="mr-2">
-                          {mobile === "" ? "UnRegistered" : mobile}
-                        </span>
-                        <span style={{ marginLeft: ".8em" }}>
+                      <b>{name}</b>
+                    </span>
+                    {showName === false ? (
+                      <Link
+                        to="#"
+                        className="far fa-edit"
+                        style={{ color: "#6aacdf" }}
+                        onClick={() => setshowName(true)}
+                      >
+                        Edit Name
+                      </Link>
+                    ) : (
+                      <InputBase
+                        placeholder="FirstName LastName"
+                        onChange={(e) => setName(e.target.value)}
+                        style={{
+                          background: "white",
+                          borderRadius: "5px",
+                          // padding: "10px",
+                        }}
+                      />
+                    )}
+                    {/* ==================== number ============================ */}
+
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={3}>
+                        Phone No.
+                      </Grid>
+
+                      <Grid item xs={1} sm={1}>
+                        :
+                      </Grid>
+
+                      <Grid item xs={12} sm={8}>
+                        <div
+                          className="col-12"
+                          style={{ paddingTop: ".8rem", marginLeft: "-1rem" }}
+                        >
+                          <p className="m-0 mb-2">
+                            <span style={styleObject} className="mr-2">
+                              {mobile === "" ? "UnRegistered" : mobile}
+                            </span>
+                            <span style={{ marginLeft: ".8em" }}>
+                              {mobile === "" ? (
+                                <CheckCircleOutlineOutlinedIcon
+                                  style={{ color: "red" }}
+                                />
+                              ) : (
+                                <CheckCircleOutlineOutlinedIcon
+                                  style={{ color: "#24e5af" }}
+                                />
+                              )}
+                            </span>
+                            {showNumber === false ? (
+                              <Link
+                                to="#"
+                                style={{
+                                  color: "#6aacdf",
+                                  marginLeft: "2rem",
+                                  fontSize: "14px",
+                                }}
+                                onClick={() => setshowNumber(true)}
+                              >
+                                Change Number
+                              </Link>
+                            ) : (
+                              <InputBase
+                                placeholder="Change Number"
+                                onChange={(e) => setmobile(e.target.value)}
+                                style={{
+                                  background: "white",
+                                  borderRadius: "5px",
+                                }}
+                              />
+                            )}
+                          </p>
+                        </div>
+                      </Grid>
+                    </Grid>
+                    {/* ==================== Email ============================ */}
+
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={3}>
+                        Email
+                      </Grid>
+                      <Grid item xs={12} sm={1}>
+                        :
+                      </Grid>
+
+                      <Grid item xs={12} sm={8}>
+                        <div
+                          className="col-12"
+                          style={{ paddingTop: ".8rem", marginLeft: "-1rem" }}
+                        >
+                          <p className="m-0 mb-2 ">
+                            <span style={styleObject}>
+                              {email === ""
+                                ? "no-email"
+                                : email.search("@") == "-1"
+                                ? "Social Login"
+                                : email}
+                            </span>
+                            <span style={{ marginLeft: ".8rem" }}>
+                              {email === "" ? (
+                                <CheckCircleOutlineOutlinedIcon
+                                  style={{ color: "red" }}
+                                />
+                              ) : (
+                                <CheckCircleOutlineOutlinedIcon
+                                  style={{ color: "#24e5af" }}
+                                />
+                              )}
+                            </span>
+                            {showEmail === false ? (
+                              <Link
+                                to="#"
+                                style={{
+                                  color: "#6aacdf",
+                                  marginLeft: "2rem",
+                                  fontSize: "14px",
+                                }}
+                                onClick={() => setshowEmail(true)}
+                              >
+                                Change Email
+                              </Link>
+                            ) : (
+                              <InputBase
+                                placeholder="Change Email"
+                                onChange={(e) => setemail(e.target.value)}
+                                style={{
+                                  background: "white",
+                                  borderRadius: "5px",
+                                }}
+                              />
+                            )}
+                          </p>
+                        </div>
+                      </Grid>
+                    </Grid>
+                    {/* ==================== Languages ============================ */}
+
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={3}>
+                        Languages
+                      </Grid>
+                      <Grid item xs={12} sm={1}>
+                        :
+                      </Grid>
+
+                      <Grid item xs={12} sm={8}>
+                        <div
+                          id="dropdown"
+                          style={{
+                            display: show ? "block" : "none",
+                            fontSize: "14px",
+                          }}
+                        >
+                          <Dropdown
+                            multiple
+                            style={{ width: "15rem" }}
+                            placeholder="update your Language"
+                            selectOnBlur={false}
+                            selection
+                            search
+                            value={languageforgettingval}
+                            size="20"
+                            options={Languageset}
+                            onChange={handleChange1}
+                          />
+                        </div>
+                      </Grid>
+                    </Grid>
+                    {/* ==================== Region / Location ============================ */}
+
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={3}>
+                        Location
+                      </Grid>
+                      <Grid item xs={12} sm={1}>
+                        :
+                      </Grid>
+
+                      <Grid item xs={12} sm={8}>
+                        <div
+                          id="dropdown"
+                          style={{
+                            display: show ? "block" : "none",
+                            fontSize: "14px",
+                          }}
+                        >
+                          <Dropdown
+                            style={{ width: "15rem" }}
+                            placeholder="update your region"
+                            selectOnBlur={false}
+                            selection
+                            search
+                            options={Reginset}
+                            onChange={(e) => setregion(e.target.textContent)}
+                          />
+                        </div>
+                      </Grid>
+                    </Grid>
+                    {/* ==================== Background ============================ */}
+
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={3}>
+                        Background
+                      </Grid>
+                      <Grid item xs={12} sm={1}>
+                        :
+                      </Grid>
+
+                      <Grid item xs={12} sm={8}>
+                        <div
+                          id="dropdown"
+                          style={{
+                            display: show ? "block" : "none",
+
+                            fontSize: "14px",
+                          }}
+                        >
+                          <Dropdown
+                            multiple
+                            style={{ width: "15rem" }}
+                            placeholder="update your Background"
+                            selectOnBlur={false}
+                            selection
+                            search
+                            value={Backgroundforgettingval}
+                            options={Backgroundset}
+                            onChange={handleChange3}
+                          />
+                        </div>
+                      </Grid>
+                    </Grid>
+                    {/* ==================== Upload Certificate ============================ */}
+
+                    <Grid container spacing={2}>
+                      <Grid item xs={12} sm={3}>
+                        Upload Certificate
+                      </Grid>
+                      <Grid item xs={12} sm={1}>
+                        :
+                      </Grid>
+
+                      <Grid item xs={12} sm={8}>
+                        {showUploadcertificate === false ? (
+                          <Link
+                            to="#"
+                            style={{
+                              color: "#6aacdf",
+                              fontSize: "18px",
+                            }}
+                            onClick={() => setshowUploadcertificate(true)}
+                          >
+                            Browse File
+                          </Link>
+                        ) : (
+                          <InputBase
+                            placeholder="Browse File"
+                            type="file"
+                            onChange={handleChangeFile}
+                            style={{
+                              background: "white",
+                              borderRadius: "5px",
+                            }}
+                          />
+                        )}
+                      </Grid>
+                    </Grid>
+                  </div>
+                ) : (
+                  <>
+                    <p
+                      style={{
+                        color: "white",
+                        fontSize: "30px",
+                        textTransform: "capitalize",
+                      }}
+                    >
+                      <b>{name}</b>
+                    </p>
+                    {/* ======================= {{{{{{{{{{{{{{ user details }}}}}}}}}}}}}} ======================= */}
+
+                    <Grid container>
+                      {/* 1 */}
+
+                      <Grid container spacing={2} sm={7}>
+                        <Grid sm={3} item>
+                          Mobile :
+                        </Grid>
+                        <Grid item>
+                          <span style={styleObject}>
+                            {mobile === "" ? "Registered" : mobile}
+                          </span>
                           {mobile === "" ? (
                             <CheckCircleOutlineOutlinedIcon
                               style={{ color: "red" }}
@@ -428,792 +673,531 @@ export default function Profile() {
                               style={{ color: "#24e5af" }}
                             />
                           )}
-                        </span>
-                        {showNumber === false ? (
-                          <Link
-                            to="#"
-                            style={{
-                              color: "#6aacdf",
-                              marginLeft: "2rem",
-                              fontSize: "14px",
-                            }}
-                            onClick={() => setshowNumber(true)}
-                          >
-                            Change Number
-                          </Link>
-                        ) : (
-                          <InputBase
-                            placeholder="Change Number"
-                            onChange={(e) => setmobile(e.target.value)}
-                            style={{
-                              background: "white",
-                              borderRadius: "5px",
-                            }}
-                          />
-                        )}
-                      </p>
-                    </div>
-                  </Grid>
-                </Grid>
-                {/* ==================== Email ============================ */}
+                        </Grid>
+                      </Grid>
 
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={3}>
-                    Email
-                  </Grid>
-                  <Grid item xs={12} sm={1}>
-                    :
-                  </Grid>
+                      {/* 2 */}
 
-                  <Grid item xs={12} sm={8}>
-                    <div
-                      className="col-12"
-                      style={{ paddingTop: ".8rem", marginLeft: "-1rem" }}
-                    >
-                      <p className="m-0 mb-2 ">
-                        <span style={styleObject}>
-                          {email === ""
-                            ? "no-email"
-                            : email.search("@") == "-1"
-                            ? "Social Login"
-                            : email}
-                        </span>
-                        <span style={{ marginLeft: ".8rem" }}>
-                          {email === "" ? (
-                            <CheckCircleOutlineOutlinedIcon
-                              style={{ color: "red" }}
-                            />
-                          ) : (
-                            <CheckCircleOutlineOutlinedIcon
-                              style={{ color: "#24e5af" }}
-                            />
-                          )}
-                        </span>
-                        {showEmail === false ? (
-                          <Link
-                            to="#"
-                            style={{
-                              color: "#6aacdf",
-                              marginLeft: "2rem",
-                              fontSize: "14px",
-                            }}
-                            onClick={() => setshowEmail(true)}
-                          >
-                            Change Email
-                          </Link>
-                        ) : (
-                          <InputBase
-                            placeholder="Change Email"
-                            onChange={(e) => setemail(e.target.value)}
-                            style={{
-                              background: "white",
-                              borderRadius: "5px",
-                            }}
-                          />
-                        )}
-                      </p>
-                    </div>
-                  </Grid>
-                </Grid>
-                {/* ==================== Languages ============================ */}
+                      <Grid container spacing={2} sm={5}>
+                        <Grid sm={5} item>
+                          Location :
+                        </Grid>
+                        <Grid item>
+                          <span style={styleObject}>
+                            {region === "" ? "update your region" : region}
+                          </span>
+                        </Grid>
+                      </Grid>
 
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={3}>
-                    Languages
-                  </Grid>
-                  <Grid item xs={12} sm={1}>
-                    :
-                  </Grid>
+                      {/* 3 */}
 
-                  <Grid item xs={12} sm={8}>
-                    <div
-                      id="dropdown"
-                      style={{
-                        display: show ? "block" : "none",
-                        fontSize: "14px",
-                      }}
-                    >
-                      <Dropdown
-                        multiple
-                        style={{ width: "15rem" }}
-                        placeholder="update your Language"
-                        selectOnBlur={false}
-                        selection
-                        search
-                        value={languageforgettingval}
-                        size="20"
-                        options={Languageset}
-                        onChange={handleChange1}
-                      />
-                    </div>
-                  </Grid>
-                </Grid>
-                {/* ==================== Region / Location ============================ */}
-
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={3}>
-                    Location
-                  </Grid>
-                  <Grid item xs={12} sm={1}>
-                    :
-                  </Grid>
-
-                  <Grid item xs={12} sm={8}>
-                    <div
-                      id="dropdown"
-                      style={{
-                        display: show ? "block" : "none",
-                        fontSize: "14px",
-                      }}
-                    >
-                      <Dropdown
-                        style={{ width: "15rem" }}
-                        placeholder="update your region"
-                        selectOnBlur={false}
-                        selection
-                        search
-                        options={Reginset}
-                        onChange={(e) => setregion(e.target.textContent)}
-                      />
-                    </div>
-                  </Grid>
-                </Grid>
-                {/* ==================== Background ============================ */}
-
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={3}>
-                    Background
-                  </Grid>
-                  <Grid item xs={12} sm={1}>
-                    :
-                  </Grid>
-
-                  <Grid item xs={12} sm={8}>
-                    <div
-                      id="dropdown"
-                      style={{
-                        display: show ? "block" : "none",
-
-                        fontSize: "14px",
-                      }}
-                    >
-                      <Dropdown
-                        multiple
-                        style={{ width: "15rem" }}
-                        placeholder="update your Background"
-                        selectOnBlur={false}
-                        selection
-                        search
-                        value={Backgroundforgettingval}
-                        options={Backgroundset}
-                        onChange={handleChange3}
-                      />
-                    </div>
-                  </Grid>
-                </Grid>
-                {/* ==================== Upload Certificate ============================ */}
-
-                <Grid container spacing={2}>
-                  <Grid item xs={12} sm={3}>
-                    Upload Certificate
-                  </Grid>
-                  <Grid item xs={12} sm={1}>
-                    :
-                  </Grid>
-
-                  <Grid item xs={12} sm={8}>
-                    {showUploadcertificate === false ? (
-                      <Link
-                        to="#"
-                        style={{
-                          color: "#6aacdf",
-                          fontSize: "18px",
-                        }}
-                        onClick={() => setshowUploadcertificate(true)}
+                      <Grid
+                        container
+                        spacing={2}
+                        sm={7}
+                        style={{ marginTop: "10px" }}
                       >
-                        Browse File
-                      </Link>
-                    ) : (
-                      <InputBase
-                        placeholder="Browse File"
-                        type="file"
-                        onChange={handleChangeFile}
+                        <Grid sm={3} item>
+                          Email :
+                        </Grid>
+                        <Grid item>
+                          <p>
+                            <span style={styleObject}>
+                              {email === ""
+                                ? "no-email"
+                                : email.search("@") == "-1"
+                                ? "Social Login"
+                                : email}
+                            </span>
+                            {email === "" ? (
+                              <CheckCircleOutlineOutlinedIcon
+                                style={{ color: "red" }}
+                              />
+                            ) : (
+                              <CheckCircleOutlineOutlinedIcon
+                                style={{ color: "#24e5af" }}
+                              />
+                            )}
+                          </p>
+                        </Grid>
+                      </Grid>
+
+                      {/* 4 */}
+
+                      <Grid
+                        container
+                        spacing={2}
+                        sm={5}
+                        style={{ marginTop: "10px" }}
+                      >
+                        <Grid sm={5} item>
+                          Background :
+                        </Grid>
+                        <Grid item>
+                          <span style={styleObject}>
+                            {Background && Background.length === 0
+                              ? "update your Background"
+                              : Background}
+                          </span>
+                        </Grid>
+                      </Grid>
+
+                      {/* 5 */}
+
+                      <Grid
+                        container
+                        spacing={2}
+                        sm={7}
+                        style={{ marginTop: "10px" }}
+                      >
+                        <Grid sm={3} item>
+                          Language :
+                        </Grid>
+                        <Grid item>
+                          <span style={styleObject}>
+                            {language.length === 0
+                              ? "update your Language"
+                              : language}
+                          </span>
+                        </Grid>
+                      </Grid>
+
+                      {/* 6 */}
+
+                      <Grid
+                        container
+                        spacing={2}
+                        sm={7}
                         style={{
-                          background: "white",
-                          borderRadius: "5px",
+                          marginTop: "10px",
+                          fontSize: "11px",
+                          color: "#6aacdf",
                         }}
-                      />
-                    )}
-                  </Grid>
-                </Grid>
+                      >
+                        <Grid item>Account Settings</Grid>
+                        <Grid
+                          className="PaymentMethods"
+                          onClick={() => setShowPaymentMethod(true)}
+                          item
+                        >
+                          Payment Methods
+                        </Grid>
+                        <Grid item>PrivAcy Policy</Grid>
+                      </Grid>
+
+                      {/* 7 */}
+
+                      <Grid
+                        container
+                        spacing={2}
+                        sm={7}
+                        style={{
+                          marginTop: "10px",
+
+                          color: "#6aacdf",
+                        }}
+                      >
+                        <Grid
+                          item
+                          style={{
+                            cursor: "pointer",
+                          }}
+                          onClick={() => {
+                            localStorage.removeItem("token");
+                            let Ctoken = localStorage.getItem("cToken");
+                            if (Ctoken != null) {
+                              localStorage.removeItem("cToken");
+                            }
+                            history.push("/interpretly");
+                          }}
+                        >
+                          LogOut <ChevronRightIcon />
+                        </Grid>
+                        <Grid item></Grid>
+                      </Grid>
+                    </Grid>
+                  </>
+                )}
               </div>
-            ) : (
-              <>
-                <p
-                  style={{
-                    color: "white",
-                    fontSize: "30px",
-                    textTransform: "capitalize",
-                  }}
-                >
-                  <b>{name}</b>
-                </p>
-                {/* ======================= {{{{{{{{{{{{{{ user details }}}}}}}}}}}}}} ======================= */}
+            </div>
 
-                <Grid container>
-                  {/* 1 */}
+            {/* ================== <<<<<<<<< {{{{{ End Of user profile details  }}}}} >>>>>>>> ================== */}
 
-                  <Grid container spacing={2} sm={7}>
-                    <Grid sm={3} item>
-                      Mobile :
-                    </Grid>
-                    <Grid item>
-                      <span style={styleObject}>
-                        {mobile === "" ? "Registered" : mobile}
-                      </span>
-                      {mobile === "" ? (
-                        <CheckCircleOutlineOutlinedIcon
-                          style={{ color: "red" }}
-                        />
-                      ) : (
-                        <CheckCircleOutlineOutlinedIcon
-                          style={{ color: "#24e5af" }}
-                        />
-                      )}
-                    </Grid>
-                  </Grid>
-
-                  {/* 2 */}
-
-                  <Grid container spacing={2} sm={5}>
-                    <Grid sm={5} item>
-                      Location :
-                    </Grid>
-                    <Grid item>
-                      <span style={styleObject}>
-                        {region === "" ? "update your region" : region}
-                      </span>
-                    </Grid>
-                  </Grid>
-
-                  {/* 3 */}
-
-                  <Grid
-                    container
-                    spacing={2}
-                    sm={7}
-                    style={{ marginTop: "10px" }}
-                  >
-                    <Grid sm={3} item>
-                      Email :
-                    </Grid>
-                    <Grid item>
-                      <p>
-                        <span style={styleObject}>
-                          {email === ""
-                            ? "no-email"
-                            : email.search("@") == "-1"
-                            ? "Social Login"
-                            : email}
-                        </span>
-                        {email === "" ? (
-                          <CheckCircleOutlineOutlinedIcon
-                            style={{ color: "red" }}
-                          />
-                        ) : (
-                          <CheckCircleOutlineOutlinedIcon
-                            style={{ color: "#24e5af" }}
-                          />
-                        )}
-                      </p>
-                    </Grid>
-                  </Grid>
-
-                  {/* 4 */}
-
-                  <Grid
-                    container
-                    spacing={2}
-                    sm={5}
-                    style={{ marginTop: "10px" }}
-                  >
-                    <Grid sm={5} item>
-                      Background :
-                    </Grid>
-                    <Grid item>
-                      <span style={styleObject}>
-                        {Background && Background.length === 0
-                          ? "update your Background"
-                          : Background}
-                      </span>
-                    </Grid>
-                  </Grid>
-
-                  {/* 5 */}
-
-                  <Grid
-                    container
-                    spacing={2}
-                    sm={7}
-                    style={{ marginTop: "10px" }}
-                  >
-                    <Grid sm={3} item>
-                      Language :
-                    </Grid>
-                    <Grid item>
-                      <span style={styleObject}>
-                        {language.length === 0
-                          ? "update your Language"
-                          : language}
-                      </span>
-                    </Grid>
-                  </Grid>
-
-                  {/* 6 */}
-
-                  <Grid
-                    container
-                    spacing={2}
-                    sm={7}
+            <div className="row p-3 text-center ">
+              {show ? (
+                <></>
+              ) : (
+                <>
+                  <Link
+                    to="#"
+                    className="far fa-edit"
                     style={{
-                      marginTop: "10px",
-                      fontSize: "11px",
                       color: "#6aacdf",
+                      left: "75%",
+                      position: "absolute",
+                      top: "20vh",
+                      left: "60vw",
+                    }}
+                    onClick={handleDisplay}
+                  >
+                    Edit Details
+                  </Link>
+                </>
+              )}
+
+              <Grid container spacing={2} style={{ marginTop: "-3rem" }}>
+                <Grid item xs={12} sm={4}>
+                  <Button
+                    inverted
+                    color="blue"
+                    onClick={handleSave}
+                    style={{
+                      background: "#54acf0",
+                      color: "white",
+                      float: "right",
+                      outline: "none",
+                      display: show ? "block" : "none",
                     }}
                   >
-                    <Grid sm={3} item>
-                      Account Settings
-                    </Grid>
-                    <Grid item>PrivAcy Policy</Grid>
-                  </Grid>
+                    Save Changes
+                  </Button>
+                </Grid>
 
-                  {/* 7 */}
-
-                  <Grid
-                    container
-                    spacing={2}
-                    sm={7}
+                <Grid item xs={12} sm={4}>
+                  <Button
+                    inverted
+                    color="blue"
+                    onMouseEnter={(e) =>
+                      (e.target.style.background = "#54acf0")
+                    }
+                    onMouseLeave={(e) => (e.target.style.background = "")}
+                    onClick={handleDisplay}
                     style={{
-                      marginTop: "10px",
+                      color: "white",
+                      border: "#54acf0",
 
-                      color: "#6aacdf",
+                      display: show ? "block" : "none",
                     }}
                   >
-                    <Grid
-                      sm={3}
-                      item
-                      style={{
-                        cursor: "pointer",
-                      }}
-                      onClick={() => {
-                        localStorage.removeItem("token");
-                        history.push("/interpretly");
-                      }}
-                    >
-                      LogOut <ChevronRightIcon />
-                    </Grid>
-                    <Grid item></Grid>
-                  </Grid>
+                    Cancel
+                  </Button>
                 </Grid>
-              </>
-            )}
-          </div>
-        </div>
-
-        {/* ================== <<<<<<<<< {{{{{ End Of user profile details  }}}}} >>>>>>>> ================== */}
-
-        <div className="row p-3 text-center ">
-          {show ? (
-            <></>
-          ) : (
-            <>
-              <Link
-                to="#"
-                className="far fa-edit"
-                style={{
-                  color: "#6aacdf",
-                  left: "75%",
-                  position: "absolute",
-                  top: "20vh",
-                  left: "60vw",
-                }}
-                onClick={handleDisplay}
-              >
-                Edit Details
-              </Link>
-            </>
-          )}
-
-          <Grid container spacing={2} style={{ marginTop: "-3rem" }}>
-            <Grid item xs={12} sm={4}>
-              <Button
-                inverted
-                color="blue"
-                onClick={handleSave}
-                style={{
-                  background: "#54acf0",
-                  color: "white",
-                  float: "right",
-                  outline: "none",
-                  display: show ? "block" : "none",
-                }}
-              >
-                Save Changes
-              </Button>
-            </Grid>
-
-            <Grid item xs={12} sm={4}>
-              <Button
-                inverted
-                color="blue"
-                onMouseEnter={(e) => (e.target.style.background = "#54acf0")}
-                onMouseLeave={(e) => (e.target.style.background = "")}
-                onClick={handleDisplay}
-                style={{
-                  color: "white",
-                  border: "#54acf0",
-
-                  display: show ? "block" : "none",
-                }}
-              >
-                Cancel
-              </Button>
-            </Grid>
-          </Grid>
-        </div>
-
-        <PopupComponent
-          modalState={profileimageModel}
-          setmodalState={setprofileimageModel}
-          Content={ContentPic()}
-        />
-
-        {/* ================== <<<<<<<<< {{{{{ End of Editible code responsible because of this code   }}}}} >>>>>>>> ================== */}
-
-        {/* ====================== Rating sestion ==============  */}
-        <Divider
-          variant="middle"
-          style={{ height: "1px", background: "grey", margin: "2em" }}
-        />
-
-        <div className="col-12 ">
-          <h4 style={{ marginLeft: "3rem" }}>Rating</h4>
-          <div
-            className="row"
-            style={{ marginLeft: "5.5rem", textAlign: "center" }}
-          >
-            <div
-              className="col-2"
-              style={{
-                background: "#272727",
-                height: "160px",
-                paddingTop: "1.5rem",
-                alignItems: "center",
-                textAlign: "center",
-                borderRadius: "10px",
-              }}
-            >
-              <div
-                className="col"
-                style={{
-                  position: "relative",
-                  height: "3em",
-                }}
-              >
-                <Clock
-                  size="50"
-                  color={"white"}
-                  style={{ position: "absolute", left: "35%", top: 0 }}
-                />
-              </div>
-              <div className="col">On-Time</div>
-              <div className="col">
-                <span style={{ color: "#24e5af" }}>{div1per}</span> / 5.0
-              </div>
-            </div>
-            <div
-              className="col-2"
-              style={{
-                background: "#272727",
-                height: "160px",
-                padding: "1.5rem",
-                borderRadius: "10px",
-                textAlign: "center",
-                marginLeft: "1rem",
-              }}
-            >
-              <div
-                className="col"
-                style={{
-                  position: "relative",
-                  height: "3em",
-                }}
-              >
-                <UserPlus
-                  size="50"
-                  color={"white"}
-                  style={{ position: "absolute", left: "35%", top: 0 }}
-                />
-              </div>
-              <div className="col">Attitude</div>
-              <div className="col">
-                <span style={{ color: "#24e5af" }}>{div2per}</span> / 5.0
-              </div>
-            </div>
-            <div
-              className="col-2"
-              style={{
-                background: "#272727",
-                height: "160px",
-                padding: "1.5rem",
-                borderRadius: "10px",
-                textAlign: "center",
-                marginLeft: "1rem",
-              }}
-            >
-              <div
-                className="col"
-                style={{
-                  position: "relative",
-                  height: "3em",
-                }}
-              >
-                <CloudLightning
-                  size="50"
-                  color={"white"}
-                  style={{ position: "absolute", left: "35%", top: 0 }}
-                />
-              </div>
-              <div className="col">Quality</div>
-              <div className="col">
-                <span style={{ color: "#ffa173" }}> {div3per} </span> / 5.0
-              </div>
+              </Grid>
             </div>
 
-            <Divider
-              variant="middle"
-              orientation="vertical"
-              flexItem
-              style={{ background: "white", marginLeft: "2rem" }}
+            <PopupComponent
+              modalState={profileimageModel}
+              setmodalState={setprofileimageModel}
+              Content={ContentPic()}
             />
 
-            <div
-              className="col-3"
-              style={{
-                background: "#272727",
-                height: "160px",
-                padding: "1rem",
-                borderRadius: "10px",
-                textAlign: "center",
-                marginLeft: "1rem",
-              }}
-            >
-              <div className="col">Recommended By</div>
-              <div className="col">
-                <h1 style={{ color: "#24e5af" }}>{div4per} %</h1>
-              </div>
-              <div className="col"> ( {Reviews} reviews)</div>
-            </div>
-          </div>
-        </div>
-        {/* ====================== feedback sestion ==============  */}
+            {/* ================== <<<<<<<<< {{{{{ End of Editible code responsible because of this code   }}}}} >>>>>>>> ================== */}
 
-        <div className="col-12 p-3 mb-5 ">
-          <h4 style={{ marginLeft: "3rem" }}>Feedback</h4>
-          <div className="col-12">
-            <div
-              className="row"
+            {/* ====================== Rating sestion ==============  */}
+            <Divider
+              variant="middle"
               style={{
-                background: "#272727",
-                borderRadius: "10px",
-                paddingTop: "2rem",
+                height: "1px",
+                background: "grey",
+                margin: "-1em 0em 2em 0em",
               }}
-            >
+            />
+            <div className="col-12 ">
+              <h4 style={{ marginLeft: "3rem" }}>Rating</h4>
               <div
-                className="col-4"
-                style={{
-                  height: "160px",
-
-                  borderRadius: "10px",
-                }}
+                className="row"
+                style={{ marginLeft: "5.5rem", textAlign: "center" }}
               >
-                <div className="col">
-                  <b style={{ color: "white" }}> Appolo Hospital - </b>
-                  <span style={{ color: "#54acf0" }}>Onsite</span>
+                <div
+                  className="col-2"
+                  style={{
+                    background: "#272727",
+                    height: "160px",
+                    borderRadius: "10px",
+                    position: "relative",
+                  }}
+                >
+                  <div className="stopwatch">
+                    <div className="stopwatchimg">
+                      <img src={stopwatchicon} alt="stopwatch" />
+                    </div>
+                    <div className="">On-Time</div>
+                    <div className="">
+                      <span style={{ color: "#24e5af" }}>{div1per}</span> / 5.0
+                    </div>
+                  </div>
                 </div>
-                <div className="col">Sarjapur Road, Bengaluru, Karnataka</div>
-                <div className="col">04/06/2020 at 04.39 PM</div>
-              </div>
+                <div
+                  className="col-2"
+                  style={{
+                    background: "#272727",
+                    height: "160px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                    marginLeft: "1rem",
+                  }}
+                >
+                  <div className="stopwatch">
+                    <div className="stopwatchimg">
+                      <img src={usericon} alt="usericon" />
+                    </div>
+                    <div className="">Attitude</div>
+                    <div className="">
+                      <span style={{ color: "#24e5af" }}>{div2per}</span> / 5.0
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="col-2"
+                  style={{
+                    background: "#272727",
+                    height: "160px",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                    marginLeft: "1rem",
+                  }}
+                >
+                  <div className="stopwatch">
+                    <div className="stopwatchimg">
+                      <img src={certifiedicon} alt="certifiedicon" />
+                    </div>
+                    <div className="">Quality</div>
+                    <div className="">
+                      <span style={{ color: "#ffa173" }}> {div3per} </span> /
+                      5.0
+                    </div>
+                  </div>
+                </div>
 
-              <Divider
-                variant="middle"
-                orientation="vertical"
-                flexItem
-                style={{
-                  background: "white",
-                  marginLeft: "2rem",
-                  height: "100px",
-                  marginTop: ".8rem",
-                }}
-              />
-              <div>
-                <StarBorderIcon
-                  style={{ color: "#24e5af", marginTop: "1.5rem" }}
+                <Divider
+                  variant="middle"
+                  orientation="vertical"
+                  flexItem
+                  style={{ background: "white", marginLeft: "2rem" }}
                 />
-                <br /> 4.5
-              </div>
 
-              <div
-                className="col-6"
-                style={{
-                  background: "#272727",
-                  height: "160px",
-
-                  borderRadius: "10px",
-
-                  marginLeft: "1rem",
-                }}
-              >
-                <div className="col">
-                  <b style={{ color: "white" }}>
-                    Quality Services , Very Professional and arrived on Time ,
-                    Happy with the assistance.
-                  </b>
+                <div
+                  className="col-3"
+                  style={{
+                    background: "#272727",
+                    height: "160px",
+                    padding: "1%",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                  }}
+                >
+                  <div className="col">Recommended By</div>
+                  <div className="col">
+                    <h1 style={{ color: "#24e5af", font: "16%" }}>
+                      {div4per} %
+                    </h1>
+                  </div>
+                  <div className="col"> ( {Reviews} reviews)</div>
                 </div>
-                <div className="col">- Asif Mohammed (Receptionist)</div>
-                <div className="col"> ( {Reviews} reviews)</div>
               </div>
             </div>
+            {/* ====================== feedback sestion ==============  */}
 
-            <div
-              className="row"
-              style={{
-                background: "#272727",
-                marginTop: "1rem",
-                borderRadius: "10px",
-                paddingTop: "2rem",
-              }}
-            >
-              <div
-                className="col-4"
-                style={{
-                  height: "160px",
+            <div className="col-12 p-3 mb-5 ">
+              <h4 style={{ marginLeft: "3rem" }}>Feedback</h4>
+              <div className="col-12">
+                <div
+                  className="row"
+                  style={{
+                    background: "#272727",
+                    borderRadius: "10px",
+                    paddingTop: "2rem",
+                  }}
+                >
+                  <div
+                    className="col-4"
+                    style={{
+                      height: "160px",
 
-                  borderRadius: "10px",
-                }}
-              >
-                <div className="col">
-                  <b style={{ color: "white" }}> Neso Hospital - </b>
-                  <span style={{ color: "#54acf0" }}>Remote</span>{" "}
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <div className="col">
+                      <b style={{ color: "white" }}> Appolo Hospital - </b>
+                      <span style={{ color: "#54acf0" }}>Onsite</span>
+                    </div>
+                    <div className="col">
+                      Sarjapur Road, Bengaluru, Karnataka
+                    </div>
+                    <div className="col">04/06/2020 at 04.39 PM</div>
+                  </div>
+
+                  <Divider
+                    variant="middle"
+                    orientation="vertical"
+                    flexItem
+                    style={{
+                      background: "white",
+                      marginLeft: "2rem",
+                      height: "100px",
+                      marginTop: ".8rem",
+                    }}
+                  />
+                  <div>
+                    <StarBorderIcon
+                      style={{ color: "#24e5af", marginTop: "1.5rem" }}
+                    />
+                    <br /> 4.5
+                  </div>
+
+                  <div
+                    className="col-6"
+                    style={{
+                      background: "#272727",
+                      height: "160px",
+
+                      borderRadius: "10px",
+
+                      marginLeft: "1rem",
+                    }}
+                  >
+                    <div className="col">
+                      <b style={{ color: "white" }}>
+                        Quality Services , Very Professional and arrived on Time
+                        , Happy with the assistance.
+                      </b>
+                    </div>
+                    <div className="col">- Asif Mohammed (Receptionist)</div>
+                    <div className="col"> ( {Reviews} reviews)</div>
+                  </div>
                 </div>
-                <div className="col">Marthahali , Bangaluru, karnataka</div>
-                <div className="col">04/06/2020 at 4.30 PM</div>
-              </div>
 
-              <Divider
-                variant="middle"
-                orientation="vertical"
-                flexItem
-                style={{
-                  background: "white",
-                  marginLeft: "2rem",
-                  height: "100px",
-                  marginTop: ".8rem",
-                }}
-              />
-              <div>
-                <StarBorderIcon
-                  style={{ color: "#ffa173", marginTop: "1.5rem" }}
-                />{" "}
-                <br /> 3.5
-              </div>
-              <div
-                className="col-6"
-                style={{
-                  background: "#272727",
-                  height: "160px",
+                <div
+                  className="row"
+                  style={{
+                    background: "#272727",
+                    marginTop: "1rem",
+                    borderRadius: "10px",
+                    paddingTop: "2rem",
+                  }}
+                >
+                  <div
+                    className="col-4"
+                    style={{
+                      height: "160px",
 
-                  borderRadius: "10px",
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <div className="col">
+                      <b style={{ color: "white" }}> Neso Hospital - </b>
+                      <span style={{ color: "#54acf0" }}>Remote</span>{" "}
+                    </div>
+                    <div className="col">Marthahali , Bangaluru, karnataka</div>
+                    <div className="col">04/06/2020 at 4.30 PM</div>
+                  </div>
 
-                  marginLeft: "1rem",
-                }}
-              >
-                <div className="col">
-                  <b style={{ color: "white" }}>
-                    {" "}
-                    Quality Services , Very Professional and arrived on Time ,
-                    Happy with the assistance.
-                  </b>
+                  <Divider
+                    variant="middle"
+                    orientation="vertical"
+                    flexItem
+                    style={{
+                      background: "white",
+                      marginLeft: "2rem",
+                      height: "100px",
+                      marginTop: ".8rem",
+                    }}
+                  />
+                  <div>
+                    <StarBorderIcon
+                      style={{ color: "#ffa173", marginTop: "1.5rem" }}
+                    />{" "}
+                    <br /> 3.5
+                  </div>
+                  <div
+                    className="col-6"
+                    style={{
+                      background: "#272727",
+                      height: "160px",
+
+                      borderRadius: "10px",
+
+                      marginLeft: "1rem",
+                    }}
+                  >
+                    <div className="col">
+                      <b style={{ color: "white" }}>
+                        {" "}
+                        Quality Services , Very Professional and arrived on Time
+                        , Happy with the assistance.
+                      </b>
+                    </div>
+                    <div className="col">- Asif Mohammed (Receptionist)</div>
+                  </div>
                 </div>
-                <div className="col">- Asif Mohammed (Receptionist)</div>
+
+                <div
+                  className="row"
+                  style={{
+                    background: "#272727",
+                    marginTop: "1rem",
+                    borderRadius: "10px",
+                    paddingTop: "2rem",
+                  }}
+                >
+                  <div
+                    className="col-4"
+                    style={{
+                      height: "160px",
+
+                      borderRadius: "10px",
+                    }}
+                  >
+                    <div className="col">
+                      <b style={{ color: "white" }}> Neso Hospital - </b>{" "}
+                      <span style={{ color: "#54acf0" }}>Remote</span>{" "}
+                    </div>
+                    <div className="col">Marthahali , Bangaluru, karnataka</div>
+                    <div className="col">04/06/2020 at 4.30 PM</div>
+                  </div>
+
+                  <Divider
+                    variant="middle"
+                    orientation="vertical"
+                    flexItem
+                    style={{
+                      background: "white",
+                      marginLeft: "2rem",
+                      height: "100px",
+                      marginTop: ".8rem",
+                    }}
+                  />
+                  <div>
+                    <StarBorderIcon
+                      style={{ color: "#fc6070", marginTop: "1.5rem" }}
+                    />{" "}
+                    <br /> 1.5
+                  </div>
+                  <div
+                    className="col-6"
+                    style={{
+                      background: "#272727",
+                      height: "160px",
+
+                      borderRadius: "10px",
+
+                      marginLeft: "1rem",
+                    }}
+                  >
+                    <div className="col">
+                      <b style={{ color: "white" }}>
+                        {" "}
+                        Quality Services , Very Professional and arrived on Time
+                        , Happy with the assistance.
+                      </b>
+                    </div>
+                    <div className="col">- Asif Mohammed (Receptionist)</div>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <div
-              className="row"
-              style={{
-                background: "#272727",
-                marginTop: "1rem",
-                borderRadius: "10px",
-                paddingTop: "2rem",
-              }}
-            >
-              <div
-                className="col-4"
-                style={{
-                  height: "160px",
-
-                  borderRadius: "10px",
-                }}
-              >
-                <div className="col">
-                  <b style={{ color: "white" }}> Neso Hospital - </b>{" "}
-                  <span style={{ color: "#54acf0" }}>Remote</span>{" "}
-                </div>
-                <div className="col">Marthahali , Bangaluru, karnataka</div>
-                <div className="col">04/06/2020 at 4.30 PM</div>
-              </div>
-
-              <Divider
-                variant="middle"
-                orientation="vertical"
-                flexItem
-                style={{
-                  background: "white",
-                  marginLeft: "2rem",
-                  height: "100px",
-                  marginTop: ".8rem",
-                }}
-              />
-              <div>
-                <StarBorderIcon
-                  style={{ color: "#fc6070", marginTop: "1.5rem" }}
-                />{" "}
-                <br /> 1.5
-              </div>
-              <div
-                className="col-6"
-                style={{
-                  background: "#272727",
-                  height: "160px",
-
-                  borderRadius: "10px",
-
-                  marginLeft: "1rem",
-                }}
-              >
-                <div className="col">
-                  <b style={{ color: "white" }}>
-                    {" "}
-                    Quality Services , Very Professional and arrived on Time ,
-                    Happy with the assistance.
-                  </b>
-                </div>
-                <div className="col">- Asif Mohammed (Receptionist)</div>
-              </div>
-            </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </>
   );
