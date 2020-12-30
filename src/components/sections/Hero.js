@@ -11,20 +11,11 @@ import { centralStyle } from "../elements/centralStyle";
 import SignUpLogin from "../LargeComponent/SignUpLogin";
 import VerifyModal from "../LargeComponent/SignUpverificationModal";
 import ClientJobPost from "../Client/JobPost/ClientJobPost";
-<<<<<<< Updated upstream
-import ReactModal from 'react-responsive-modal'
 import 'react-responsive-modal/styles.css';
 import './Hero.css'
 import { Link } from 'react-router-dom'
-<<<<<<< HEAD
 import OnBoard from "../Client/OnBoard";
-=======
-=======
 import ReactModal from "react-responsive-modal";
-import "react-responsive-modal/styles.css";
-import "./Hero.css";
->>>>>>> Stashed changes
->>>>>>> 8889f86983169fa16fb0aafaa2465688c590d4db
 
 const propTypes = {
   ...SectionProps.types,
@@ -66,16 +57,9 @@ const Hero = ({
   const [videoModalActive, setVideomodalactive] = useState(false);
   const [modalState, setmodalState] = useState(false);
   const [clicked, setClicked] = useState("");
-<<<<<<< HEAD
   const [verify,setVerify]=useState(null);
   
   if( verify!= null && verify.details!=undefined){
-=======
-  // const [clicked, setClicked] = useState("");
-  const [verify, setVerify] = useState(null);
-
-  if (verify !== null && verify.details !== undefined) {
->>>>>>> 8889f86983169fa16fb0aafaa2465688c590d4db
     setVerify(verify.details[0].email);
 
     setmodalState(false);
@@ -147,7 +131,6 @@ const Hero = ({
                           Need assistance
                         </label>
                       </div>
-<<<<<<< Updated upstream
                       <div className='col-12'>
                         <Link
                           to='interpretly/client/onboard'
@@ -163,25 +146,7 @@ const Hero = ({
                           >
                             Looking for an Interpreter
                           </Button>
-<<<<<<< HEAD
                         </Link>
-=======
-                        {/* </Link> */}
-=======
-                      <div className="col-12">
-                        <Button
-                          color="primary"
-                          style={ButtonHero}
-                          wideMobile
-                          onClick={() => {
-                            setClicked("left");
-                            setmodalState((o) => !o);
-                          }}
-                        >
-                          Looking for an Interpreter
-                        </Button>
->>>>>>> Stashed changes
->>>>>>> 8889f86983169fa16fb0aafaa2465688c590d4db
                       </div>
                     </div>
                   </div>
@@ -217,7 +182,6 @@ const Hero = ({
             </div>
           </div>
           <hr />
-<<<<<<< HEAD
           <VerifyModal  verify={verify} />
           {
             clicked === 'left' ?
@@ -256,8 +220,7 @@ const Hero = ({
                 />
             ) 
           }
-=======
-          <VerifyModal verify={verify} />
+          {/* <VerifyModal verify={verify} />
           {clicked === "left" ? (
             <ReactModal
               open={clicked == "left"}
@@ -293,8 +256,7 @@ const Hero = ({
                 setmodalState={setmodalState}
               />
             )
-          )}
->>>>>>> 8889f86983169fa16fb0aafaa2465688c590d4db
+          )} */}
 
           <SectionHeader data={sectionHeader} className="center-content" />
           <div color="primary" style={hl}></div>
