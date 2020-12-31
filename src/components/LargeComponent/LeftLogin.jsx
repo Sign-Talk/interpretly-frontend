@@ -102,10 +102,10 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
             : null,
         password: state.ipass,
       });
-      setSignUpVerifyModal(true);
-      
       setVerify(response.data);
       setLoading(true);
+      response.data && setSignUpVerifyModal(true);
+
       setmessage(`register sucessfully!\n${response.data.message}`);
       seterrorMSG(true);
       if (response.data.details.length > 0) {
@@ -125,7 +125,7 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
 
   return (
     <>
-      { signUpVerifyModal === true && 
+      { signUpVerifyModal && 
             <VerifyModal 
               formData={props.formData}
               setFormData={props.setFormData}
