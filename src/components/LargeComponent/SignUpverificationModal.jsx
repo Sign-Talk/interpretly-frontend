@@ -5,28 +5,16 @@ import { Modal } from "react-responsive-modal";
 import Axios from "axios";
 import "./verifyModal.css";
 import Loader from "./dashboard/smallComponent/Spinner";
-<<<<<<< Updated upstream
-import {notifySucess,notifyWarning} from "../AlertComponent/ToastifyAlert";
+import { notifySucess, notifyWarning } from "../AlertComponent/ToastifyAlert";
 
-const SignUpverificationModal = ({verify, isInterpreter, formData, setFormData, setPhoneModal}) => {
-    const[pass, setOtp] = useState({
-        disabled : true,
-        otp :''
-    })
-    const [loading, setLoading] = useState(false);
-    const [o,setO]=useState(false);
-    const[error, setError] = useState(false);
-=======
-import { notifySucess } from "../AlertComponent/ToastifyAlert";
-const SignUpverificationModal = ({ verify }) => {
+const SignUpverificationModal = ({ verify, isInterpreter, formData, setFormData, setPhoneModal }) => {
   const [pass, setOtp] = useState({
     disabled: true,
-    otp: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [o, setO] = useState(false);
+    otp: ''
+  })
+  const[loading, setLoading] = useState(false);
+  const[o, setO] = useState(false);
   const [error, setError] = useState(false);
->>>>>>> Stashed changes
 
   useEffect(() => {
     if (verify != null) {
@@ -56,62 +44,36 @@ const SignUpverificationModal = ({ verify }) => {
     }
   };
 
-<<<<<<< Updated upstream
-    const handleClick = async () => {
-       try{
-        setLoading(true)
-        let data= await Axios({
-            method: "get",
-            url: 
-                isInterpreter ?
-                `https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=${verify}&vcode=${pass.otp}`
-                : 
-                `https://whispering-lake-75400.herokuapp.com/Register/user/verify?email=${verify}&vcode=${pass.otp}`
-          });
-          if(data.error){
-            setError(true)
-            setLoading(false);
-            setO(false);
-          } else{
-            // notifySucess('Email verified successfully ! Login to proceed !')
-            localStorage.setItem("token", data.token);
-            setLoading(false);
-            setO(false);
-            setPhoneModal(true)
-            console.log(formData)
-          }
-       }  catch(err){
-            setError(true)
-           console.log(err);
-           setLoading(false);
-       }
-
-=======
   const handleClick = async () => {
     try {
-      setLoading(true);
+      setLoading(true)
       let data = await Axios({
         method: "get",
-        url: `https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=${verify}&vcode=${pass.otp}`,
+        url:
+          isInterpreter ?
+            `https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=${verify}&vcode=${pass.otp}`
+            :
+            `https://whispering-lake-75400.herokuapp.com/Register/user/verify?email=${verify}&vcode=${pass.otp}`
       });
-      console.log(data);
       if (data.error) {
-        setError(true);
+        setError(true)
         setLoading(false);
         setO(false);
       } else {
-        notifySucess("Email verified successfully ! Login to proceed !");
+        // notifySucess('Email verified successfully ! Login to proceed !')
+        localStorage.setItem("token", data.token);
         setLoading(false);
         setO(false);
+        setPhoneModal(true)
+        console.log(formData)
       }
     } catch (err) {
-      setError(true);
+      setError(true)
       console.log(err);
       setLoading(false);
->>>>>>> Stashed changes
     }
-  };
 
+  }
   return (
     <Modal
       open={o}
@@ -155,25 +117,25 @@ const SignUpverificationModal = ({ verify }) => {
           }}
         />
         {/* {
-                        error && (
-                            <p classNam='p-0 m-0' style={{ color : 'red',}}>Wrong OTP</p>
-                        )
-                    } */}
+                          error && (
+                              <p classNam='p-0 m-0' style={{ color : 'red',}}>Wrong OTP</p>
+                          )
+                      } */}
         {pass.disabled === true ? (
           <button disabled className="continue-btn btn btn-primary">
             Continue
           </button>
         ) : (
-          <button
-            onClick={handleClick}
-            className="continue-btn btn btn-primary"
-          >
-            Continue
-          </button>
-        )}
+            <button
+              onClick={handleClick}
+              className="continue-btn btn btn-primary"
+            >
+              Continue
+            </button>
+          )}
         <p style={{ fontSize: "0.8em" }}>
           code not received?
-          <span>
+            <span>
             <button
               style={{
                 outline: "none",
@@ -191,5 +153,6 @@ const SignUpverificationModal = ({ verify }) => {
     </Modal>
   );
 };
+
 
 export default SignUpverificationModal;

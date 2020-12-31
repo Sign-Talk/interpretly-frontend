@@ -11,16 +11,11 @@ import { centralStyle } from "../elements/centralStyle";
 import SignUpLogin from "../LargeComponent/SignUpLogin";
 import VerifyModal from "../LargeComponent/SignUpverificationModal";
 import ClientJobPost from "../Client/JobPost/ClientJobPost";
-<<<<<<< Updated upstream
-import ReactModal from 'react-responsive-modal'
 import 'react-responsive-modal/styles.css';
 import './Hero.css'
 import { Link } from 'react-router-dom'
-=======
+import OnBoard from "../Client/OnBoard";
 import ReactModal from "react-responsive-modal";
-import "react-responsive-modal/styles.css";
-import "./Hero.css";
->>>>>>> Stashed changes
 
 const propTypes = {
   ...SectionProps.types,
@@ -62,10 +57,9 @@ const Hero = ({
   const [videoModalActive, setVideomodalactive] = useState(false);
   const [modalState, setmodalState] = useState(false);
   const [clicked, setClicked] = useState("");
-  // const [clicked, setClicked] = useState("");
-  const [verify, setVerify] = useState(null);
-
-  if (verify !== null && verify.details !== undefined) {
+  const [verify,setVerify]=useState(null);
+  
+  if( verify!= null && verify.details!=undefined){
     setVerify(verify.details[0].email);
 
     setmodalState(false);
@@ -137,36 +131,22 @@ const Hero = ({
                           Need assistance
                         </label>
                       </div>
-<<<<<<< Updated upstream
                       <div className='col-12'>
-                        {/* <Link
+                        <Link
                           to='interpretly/client/onboard'
-                        > */}
+                        >
                           <Button
                             color='primary'
                             style={ButtonHero}
                             wideMobile
-                            onClick={() => {
-                              setClicked("left");
-                              setmodalState((o) => !o);
-                            }}>
+                            // onClick={() => {
+                            //   setClicked("left");
+                            //   setmodalState((o) => !o);
+                            // }}
+                          >
                             Looking for an Interpreter
                           </Button>
-                        {/* </Link> */}
-=======
-                      <div className="col-12">
-                        <Button
-                          color="primary"
-                          style={ButtonHero}
-                          wideMobile
-                          onClick={() => {
-                            setClicked("left");
-                            setmodalState((o) => !o);
-                          }}
-                        >
-                          Looking for an Interpreter
-                        </Button>
->>>>>>> Stashed changes
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -202,7 +182,45 @@ const Hero = ({
             </div>
           </div>
           <hr />
-          <VerifyModal verify={verify} />
+          <VerifyModal  verify={verify} />
+          {
+            clicked === 'left' ?
+              null
+              // <ReactModal
+              //     open={clicked == 'left'}
+              //     onClose={()=> {
+              //       setClicked("")
+              //       setmodalState(false)
+              //     }}
+              //     classNames={{
+              //       modal : 'client-job-modal'
+              //     }}
+              //     center
+              //   >
+              //   <ClientJobPost
+              //     closeModal={setClicked}
+              //     setVerify={setVerify}
+              //     clicked={clicked}
+              //     modalState={modalState}
+              //     setmodalState={setmodalState}
+              //   />
+              // </ReactModal>
+            : ( clicked === 'right' &&
+                <PopupComponent
+                  Content={
+                    <SignUpLogin
+                      setVerify={setVerify}
+                      clicked={clicked}
+                      modalState={modalState}
+                      setmodalState={setmodalState}
+                    />
+                  }
+                  modalState={modalState}
+                  setmodalState={setmodalState}
+                />
+            ) 
+          }
+          {/* <VerifyModal verify={verify} />
           {clicked === "left" ? (
             <ReactModal
               open={clicked == "left"}
@@ -238,7 +256,7 @@ const Hero = ({
                 setmodalState={setmodalState}
               />
             )
-          )}
+          )} */}
 
           <SectionHeader data={sectionHeader} className="center-content" />
           <div color="primary" style={hl}></div>
