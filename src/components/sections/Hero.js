@@ -10,12 +10,12 @@ import { PopupComponent } from "../elements/PopupComponent";
 import { centralStyle } from "../elements/centralStyle";
 import SignUpLogin from "../LargeComponent/SignUpLogin";
 import VerifyModal from "../LargeComponent/SignUpverificationModal";
-import ClientJobPost from "../Client/JobPost/ClientJobPost";
-import 'react-responsive-modal/styles.css';
-import './Hero.css'
-import { Link } from 'react-router-dom'
-import OnBoard from "../Client/OnBoard";
-import ReactModal from "react-responsive-modal";
+// import ClientJobPost from "../Client/JobPost/ClientJobPost";
+import "react-responsive-modal/styles.css";
+import "./Hero.css";
+import { Link } from "react-router-dom";
+// import OnBoard from "../Client/OnBoard";
+// import ReactModal from "react-responsive-modal";
 
 const propTypes = {
   ...SectionProps.types,
@@ -57,9 +57,9 @@ const Hero = ({
   const [videoModalActive, setVideomodalactive] = useState(false);
   const [modalState, setmodalState] = useState(false);
   const [clicked, setClicked] = useState("");
-  const [verify,setVerify]=useState(null);
-  
-  if( verify!= null && verify.details!=undefined){
+  const [verify, setVerify] = useState(null);
+
+  if (verify !== null && verify.details !== undefined) {
     setVerify(verify.details[0].email);
 
     setmodalState(false);
@@ -131,12 +131,10 @@ const Hero = ({
                           Need assistance
                         </label>
                       </div>
-                      <div className='col-12'>
-                        <Link
-                          to='interpretly/client/onboard'
-                        >
+                      <div className="col-12">
+                        <Link to="interpretly/client/onboard">
                           <Button
-                            color='primary'
+                            color="primary"
                             style={ButtonHero}
                             wideMobile
                             // onClick={() => {
@@ -182,11 +180,10 @@ const Hero = ({
             </div>
           </div>
           <hr />
-          <VerifyModal  verify={verify} />
-          {
-            clicked === 'left' ?
-              null
-              // <ReactModal
+          <VerifyModal verify={verify} />
+          {clicked === "left"
+            ? null
+            : // <ReactModal
               //     open={clicked == 'left'}
               //     onClose={()=> {
               //       setClicked("")
@@ -205,7 +202,7 @@ const Hero = ({
               //     setmodalState={setmodalState}
               //   />
               // </ReactModal>
-            : ( clicked === 'right' &&
+              clicked === "right" && (
                 <PopupComponent
                   Content={
                     <SignUpLogin
@@ -218,8 +215,7 @@ const Hero = ({
                   modalState={modalState}
                   setmodalState={setmodalState}
                 />
-            ) 
-          }
+              )}
           {/* <VerifyModal verify={verify} />
           {clicked === "left" ? (
             <ReactModal

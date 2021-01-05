@@ -8,40 +8,40 @@ import ShortConfirmation from "./Step3/ShortConfirmation";
 import ContractConfirmMsg from "./Step4/ContractConfirmMsg";
 import ShortConfirmMsg from "./Step4/ShortConfirmMsg";
 import "./clientJobPost.css";
-import { Languages } from "../../DummyData/languageDummy";
+// import { Languages } from "../../DummyData/languageDummy";
 
 const ClientJobPost = ({ closeModal, ...props }) => {
-    const initialState = {
-        background : '',
-        langugae : '',
-        region : '',
-        type : '',
-        meeting: '',
-        languages : '',
-        contractDue : {
-            durationhr : '',
-            durationm : '',
-            startDate : '01-01-2021',
-            endDate : '02-01-2021',
-            interpreters : 1,
-            amount : 600,
-            description : ''
-        },
-        shortDue : {
-            address1 : '',
-            address2 : '',
-            durationhr : '',
-            durationm : '',
-            startDate : '01-01-2021',
-            bookingTime : '00:00',
-            interpreters : 1,
-            amount : 1500,
-            description : ''
-        }
-    }
-    const[phoneModal, setPhoneModal] = useState(false)
-    const[steps, setSteps] = useState(1)
-    const[formData, setFormData] = useState(initialState)
+  const initialState = {
+    background: "",
+    langugae: "",
+    region: "",
+    type: "",
+    meeting: "",
+    languages: "",
+    contractDue: {
+      durationhr: "",
+      durationm: "",
+      startDate: "01-01-2021",
+      endDate: "02-01-2021",
+      interpreters: 1,
+      amount: 600,
+      description: "",
+    },
+    shortDue: {
+      address1: "",
+      address2: "",
+      durationhr: "",
+      durationm: "",
+      startDate: "01-01-2021",
+      bookingTime: "00:00",
+      interpreters: 1,
+      amount: 1500,
+      description: "",
+    },
+  };
+  // const[phoneModal, setPhoneModal] = useState(false)
+  const [steps, setSteps] = useState(1);
+  const [formData, setFormData] = useState(initialState);
 
   return (
     <>

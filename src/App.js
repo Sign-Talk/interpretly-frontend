@@ -12,7 +12,7 @@ import ReactGA from "react-ga";
 import "./App.css";
 import Navbar from "./components/LargeComponent/dashboard/Navbar";
 import Dashboard from "./components/LargeComponent/dashboard/Dashboard";
-import Profile from "./components/LargeComponent/Profile";
+import Profile from "./components/LargeComponent/Profile/Profile";
 import JobRequests from "./components/LargeComponent/jobRequests/JobRequests";
 import Schedule from "./components/LargeComponent/Schedule/Schedule";
 import Completed from "./components/LargeComponent/completed/Completed";
@@ -25,8 +25,6 @@ import { ToastifyAlert } from "../src/components/AlertComponent/ToastifyAlert";
 // Views
 import Home from "./views/Home";
 import Error from "./views/Error";
-import ClientJobPost from "./components/Client/JobPost/ClientJobPost";
-import OnBoard from "./components/Client/OnBoard";
 
 import AsidebarClient from "./dashboradClient/Asidebar/Asidebar";
 import DashboardClient from "./dashboradClient/DashboardClient/DashboardClient";
@@ -47,7 +45,7 @@ const trackPage = (page) => {
 const App = (props) => {
   const history = useHistory();
 
-  const [token, setToken] = useState(null);
+  const [Token, setToken] = useState(null);
   const [ctoken, setcToken] = useState(null);
 
   useEffect(() => {
@@ -61,7 +59,7 @@ const App = (props) => {
     } else {
       history.push("/interpretly");
     }
-  }, [token, ctoken]);
+  }, [Token, ctoken]);
 
   const childRef = useRef();
   let location = useLocation();
@@ -74,7 +72,7 @@ const App = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
   useEffect(() => {
-    if (token !== null) {
+    if (Token !== null) {
       props.history.push("/interpretly/dashboard");
     }
     if (ctoken !== null) {
@@ -93,19 +91,9 @@ const App = (props) => {
               : "row"
           }`}
         >
-          {/* {
-          props.location.pathname === "/interpretly" ||
-          props.location.pathname === "/interpretly/" ||
-          props.location.pathname === "/interpretly/client/onboard" 
-          ? null 
-          : (
-            <Navbar />
-            )
-          } */}
           {props.location.pathname === "/interpretly" ||
-            props.location.pathname === "/interpretly/client/onboard" ||
           (props.location.pathname === "/interpretly" &&
-            token === null) ? null : ctoken !== null ? (
+            Token === null) ? null : ctoken !== null ? (
             <AsidebarClient />
           ) : (
             <Navbar />
@@ -119,7 +107,6 @@ const App = (props) => {
               component={Home}
               layout={LayoutDefault}
             />
-            <Route exact path="/interpretly/client/onboard" component={OnBoard} />
             <Route exact path="/interpretly/dashboard" component={Dashboard} />
             <Route exact path="/interpretly/profile" component={Profile} />
             <Route exact path="/interpretly/request" component={JobRequests} />

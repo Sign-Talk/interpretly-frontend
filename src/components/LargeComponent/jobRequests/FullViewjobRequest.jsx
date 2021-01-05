@@ -1,40 +1,26 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Avatar from "react-avatar";
 import Policecap from "../../../assets/images/streamline-icon-police-hat-1@140x140 (1).png";
 
 import "./FullViewjobRequest.css";
 
-export default function Profile() {
-  const history = useHistory();
-  let [name, setName] = useState("");
-  let [jobstatus, setjobstatus] = useState("OnSite");
-  let [image, setimage] = useState("");
-  let [title, settitle] = useState("Marthahalli Police Station");
-  let [date, setdate] = useState("16th Oct at 03:30PM");
-  let [timeperiod, settimeperiod] = useState("3 Hour");
-  let [requirement, setrequirement] = useState("Hindi Interpreter");
-  let [irequired, setirequired] = useState("4 (3 Left)");
-
-  let [address, setaddress] = useState(
-    "#769,Gyr Chambers, Kalkondahali, Sarjapur Road,"
-  );
-  let [addressCityState, setaddressCityState] = useState(
-    "Bengaluru, Karnataka,"
-  );
-  let [Application, setApplication] = useState(12);
-  let [Requirement, setRequirement] = useState(4);
-  let [Selected, setSelected] = useState(1);
-  let [RemainingVacancies, setRemainingVacancies] = useState(3);
-  let [price, setprice] = useState(500);
-  let [rateperhour, setrateperhour] = useState(800);
-
-  let [
-    paragraph,
-    setparagraph,
-  ] = useState(`Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim ab voluptas odio, nulla, reiciendis perferendis ratione modi fugiat qui cum ea hic accusamus in suscipit ipsam iste voluptatibus quos quaerat.
-`);
-
+export default function Profile({
+  jobstatus,
+  image,
+  title,
+  date,
+  timeperiod,
+  requirement,
+  irequired,
+  address,
+  addressCityState,
+  Application,
+  Requirement,
+  Selected,
+  RemainingVacancies,
+  rateperhour,
+  paragraph,
+}) {
   return (
     <>
       <div
@@ -46,7 +32,7 @@ export default function Profile() {
         }}
       >
         <Avatar
-          name={name}
+          name={title}
           size="150"
           textSizeRatio={1.75}
           round={true}

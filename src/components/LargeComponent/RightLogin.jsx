@@ -9,9 +9,7 @@ import MicrosoftLogin from "react-microsoft-login";
 import { withRouter } from "react-router-dom";
 import Input from "./Input";
 import Loader from "react-loader-spinner";
-import OtpInput from "react-otp-input";
 import VerifyModal from "./SignUpverificationModal";
-import { notifySucess, notifyWarning } from "../AlertComponent/ToastifyAlert";
 
 const iconStyle = {
   width: "30px",

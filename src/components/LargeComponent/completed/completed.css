@@ -47,7 +47,7 @@
 
 .Step1Model {
   width: 30em;
-  background-color: #171717;
+  background-color: #171717 !important;
   border-radius: 8px;
 }
 

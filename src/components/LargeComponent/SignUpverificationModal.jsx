@@ -5,15 +5,20 @@ import { Modal } from "react-responsive-modal";
 import Axios from "axios";
 import "./verifyModal.css";
 import Loader from "./dashboard/smallComponent/Spinner";
-import { notifySucess, notifyWarning } from "../AlertComponent/ToastifyAlert";
 
-const SignUpverificationModal = ({ verify, isInterpreter, formData, setFormData, setPhoneModal }) => {
+const SignUpverificationModal = ({
+  verify,
+  isInterpreter,
+  formData,
+  setFormData,
+  setPhoneModal,
+}) => {
   const [pass, setOtp] = useState({
     disabled: true,
-    otp: ''
-  })
-  const[loading, setLoading] = useState(false);
-  const[o, setO] = useState(false);
+    otp: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [o, setO] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -46,17 +51,15 @@ const SignUpverificationModal = ({ verify, isInterpreter, formData, setFormData,
 
   const handleClick = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       let data = await Axios({
         method: "get",
-        url:
-          isInterpreter ?
-            `https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=${verify}&vcode=${pass.otp}`
-            :
-            `https://whispering-lake-75400.herokuapp.com/Register/user/verify?email=${verify}&vcode=${pass.otp}`
+        url: isInterpreter
+          ? `https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=${verify}&vcode=${pass.otp}`
+          : `https://whispering-lake-75400.herokuapp.com/Register/user/verify?email=${verify}&vcode=${pass.otp}`,
       });
       if (data.error) {
-        setError(true)
+        setError(true);
         setLoading(false);
         setO(false);
       } else {
@@ -64,16 +67,15 @@ const SignUpverificationModal = ({ verify, isInterpreter, formData, setFormData,
         localStorage.setItem("token", data.token);
         setLoading(false);
         setO(false);
-        setPhoneModal(true)
-        console.log(formData)
+        setPhoneModal(true);
+        console.log(formData);
       }
     } catch (err) {
-      setError(true)
+      setError(true);
       console.log(err);
       setLoading(false);
     }
-
-  }
+  };
   return (
     <Modal
       open={o}
@@ -126,16 +128,16 @@ const SignUpverificationModal = ({ verify, isInterpreter, formData, setFormData,
             Continue
           </button>
         ) : (
-            <button
-              onClick={handleClick}
-              className="continue-btn btn btn-primary"
-            >
-              Continue
-            </button>
-          )}
+          <button
+            onClick={handleClick}
+            className="continue-btn btn btn-primary"
+          >
+            Continue
+          </button>
+        )}
         <p style={{ fontSize: "0.8em" }}>
           code not received?
-            <span>
+          <span>
             <button
               style={{
                 outline: "none",
@@ -153,6 +155,5 @@ const SignUpverificationModal = ({ verify, isInterpreter, formData, setFormData,
     </Modal>
   );
 };
-
 
 export default SignUpverificationModal;

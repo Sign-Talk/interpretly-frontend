@@ -71,6 +71,7 @@ function Navbar(props) {
         position: "sticky",
         top: "0px",
         right: "0px",
+        zIndex: "4",
       }}
     >
       <h3 className="fo1 font-weight-light h3Forprofile h3Forprofileinclient">
@@ -172,6 +173,7 @@ function Navbar(props) {
             className="dropdownMenuli"
             onClick={() => {
               localStorage.removeItem("token");
+              localStorage.removeItem("cToken");
               history.push("/interpretly");
             }}
           >

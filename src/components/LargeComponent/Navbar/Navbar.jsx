@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Bell } from "react-feather";
 import DetailsRoundedIcon from "@material-ui/icons/DetailsRounded";
-import Card from "../../LargeComponent/Notification/Card";
+import NatificationCard from "./NotificationCard";
 
 import "./Navbar.css";
 
@@ -71,6 +71,7 @@ function Navbar({ Backicon, title, ShowPaymentMethod }) {
         position: "sticky",
         top: "0px",
         right: "0px",
+        zIndex: "4",
       }}
     >
       <h3 className="fo1 font-weight-light h3Forprofile h3Forprofileinclient">
@@ -94,18 +95,27 @@ function Navbar({ Backicon, title, ShowPaymentMethod }) {
 
       {/* // {{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}} */}
       {DisplayNotification && (
-        <div className="col-6" style={{ position: "absolute", right: "0px" }}>
-          <div className=" col-12 mt-4 container text-center"></div>
+        <div
+          style={{
+            position: "absolute",
+            right: "10px",
+          }}
+        >
           <div
-            className="col-12 mt-4"
+            className="col-12"
             style={{
               maxHeight: "400px",
+              marginTop: "50px",
               overflow: "scroll",
               border: "2px solid #54acf0",
+              background: "#171717",
             }}
           >
             <div className="col-12 m-auto d-flex justify-content-between p-0">
-              <div className="col text-center">
+              <div
+                className="col text-center"
+                style={{ marginBottom: "-20px" }}
+              >
                 <h4>Notification</h4>
               </div>
             </div>
@@ -116,18 +126,17 @@ function Navbar({ Backicon, title, ShowPaymentMethod }) {
                 <div
                   className="col text-center"
                   style={{
-                    dipslay: "absolute",
-                    top: "10%",
-                    left: "25%",
+                    width: "100%",
+                    textAlign: "center",
                   }}
                 >
                   <img
                     className="notification"
-                    style={{ margin: "2em 0" }}
+                    style={{ margin: "2em auto" }}
                     src={icon}
                     alt="notifiaction"
                   />
-                  <p className="notification" style={{ margin: 0 }}>
+                  <p className="notification" style={{ margin: "auto" }}>
                     You Do not have any Notifications yet!
                   </p>
                 </div>
@@ -135,7 +144,7 @@ function Navbar({ Backicon, title, ShowPaymentMethod }) {
                 data.map((data, i) => (
                   // {{{{{{{{{{{{{{{{{{{{ if any data in db }}}}}}}}}}}}}}}}}}}}
 
-                  <Card
+                  <NatificationCard
                     className="cardINDashBoardClient"
                     key={data.id}
                     id={data.id}
@@ -187,6 +196,8 @@ function Navbar({ Backicon, title, ShowPaymentMethod }) {
           </li>
         </ul>
       )}
+
+      {/* <ProfileInNotification /> */}
     </div>
   );
 }
