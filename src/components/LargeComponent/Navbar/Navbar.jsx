@@ -106,7 +106,8 @@ function Navbar({ Backicon, title, ShowPaymentMethod }) {
             style={{
               maxHeight: "400px",
               marginTop: "50px",
-              overflow: "scroll",
+              overflowY: "scroll",
+              overflowX: "hidden",
               border: "2px solid #54acf0",
               background: "#171717",
             }}

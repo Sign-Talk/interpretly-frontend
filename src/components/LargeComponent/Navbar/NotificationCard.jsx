@@ -5,7 +5,10 @@ function NotificationCard(props) {
     <div className="row ">
       <div
         className="col notificationChild"
-        style={{ marginBottom: "-30px", marginLeft: "-10px" }}
+        style={{
+          marginBottom: "-30px",
+          marginLeft: "-10px",
+        }}
       >
         <div className="rounddiv">
           <div className="rounddivchild">{props.image}</div>

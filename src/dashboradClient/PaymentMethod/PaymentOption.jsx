@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
+import ManagePaymentMethod from "./ManagePaymentMethod";
+
 import upiIcon from "../../assets/images/upi.svg";
 import bhimIcon from "../../assets/images/bhim.png";
 import gpayIcon from "../../assets/images/gpay.png";
@@ -24,6 +26,8 @@ import cpaypalIcon from "../../assets/images/paypalcon.png";
 import "./PaymentOption.css";
 
 function PaymentOption({ ShowPaymentMethod }) {
+  const [ShowManagePaymentMethod, setShowManagePaymentMethod] = useState(false);
+
   const [colorforBank, setcolorforBank] = useState(true);
   const [colorforUpi, setcolorforUpi] = useState(false);
   const [colorforWallets, setcolorforWallets] = useState(false);
@@ -93,6 +97,9 @@ function PaymentOption({ ShowPaymentMethod }) {
         ShowPaymentMethod={ShowPaymentMethod}
         Backicon={ArrowBackIosIcon}
       />
+
+      {ShowManagePaymentMethod && <ManagePaymentMethod />}
+
       <div className="col-12 pb-5">
         <h4 className="text-light font-weight-light mt-3 ml-4">
           Add Payment Method
@@ -197,7 +204,10 @@ function PaymentOption({ ShowPaymentMethod }) {
                 </div>
               </div>
               <br />
-              <button className="btn backgroundPink mr-3 accept-btn">
+              <button
+                className="btn backgroundPink mr-3 accept-btn"
+                onClick={() => setShowManagePaymentMethod(true)}
+              >
                 Add Card
               </button>
             </div>
@@ -267,7 +277,10 @@ function PaymentOption({ ShowPaymentMethod }) {
                   <div className="exapleatupivarify colorPink">Verify</div>
                 </div>
                 <br />
-                <button className="btn mr-3 accept-btn backgroundPink">
+                <button
+                  className="btn mr-3 accept-btn backgroundPink"
+                  onClick={() => setShowManagePaymentMethod(true)}
+                >
                   Add UPI
                 </button>
               </div>
@@ -395,7 +408,10 @@ function PaymentOption({ ShowPaymentMethod }) {
 
               <div>
                 <br />
-                <button className="btn mr-3 accept-btn backgroundPink">
+                <button
+                  className="btn mr-3 accept-btn backgroundPink"
+                  onClick={() => setShowManagePaymentMethod(true)}
+                >
                   Add Wallet
                 </button>
               </div>
@@ -423,7 +439,10 @@ function PaymentOption({ ShowPaymentMethod }) {
               <br />
               <br />
 
-              <button className="btn mr-3 accept-btn backgroundPink">
+              <button
+                className="btn mr-3 accept-btn backgroundPink"
+                onClick={() => setShowManagePaymentMethod(true)}
+              >
                 Add Paypal
               </button>
             </div>

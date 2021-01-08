@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../Navbar/Navbar";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 
+import ManagePaymentMethod from "./ManagePaymentMethod";
+
 import bankIcon from "../../../assets/images/streamline-icon-saving-bank@140x140.svg";
 import upiIcon from "../../../assets/images/upi.svg";
 import bhimIcon from "../../../assets/images/bhim.png";
@@ -12,6 +14,7 @@ import phonepayIcon from "../../../assets/images/phonepay.png";
 import "./PaymentOption.css";
 
 function PaymentOption({ ShowPaymentMethod }) {
+  const [ShowManagePaymentMethod, setShowManagePaymentMethod] = useState(false);
   const [colorforBank, setcolorforBank] = useState(true);
   const [colorforUpi, setcolorforUpi] = useState(false);
 
@@ -49,6 +52,8 @@ function PaymentOption({ ShowPaymentMethod }) {
         ShowPaymentMethod={ShowPaymentMethod}
         Backicon={ArrowBackIosIcon}
       />
+
+      {ShowManagePaymentMethod && <ManagePaymentMethod />}
       <div className="col-12 pb-5">
         <h4 className="text-light font-weight-light mt-3 ml-4">
           Add Payment Method
@@ -112,7 +117,10 @@ function PaymentOption({ ShowPaymentMethod }) {
                 <div className="accNAndIfscChild2"></div>
               </div>
               <br />
-              <button className="btn btn-primary mr-3 accept-btn">
+              <button
+                className="btn btn-primary mr-3 accept-btn"
+                onClick={() => setShowManagePaymentMethod(true)}
+              >
                 Add Bank Account
               </button>
             </div>
@@ -182,7 +190,10 @@ function PaymentOption({ ShowPaymentMethod }) {
                   <div className="exapleatupivarify co">Verify</div>
                 </div>
                 <br />
-                <button className="btn btn-primary mr-3 accept-btn">
+                <button
+                  className="btn btn-primary mr-3 accept-btn"
+                  onClick={() => setShowManagePaymentMethod(true)}
+                >
                   Add UPI
                 </button>
               </div>
