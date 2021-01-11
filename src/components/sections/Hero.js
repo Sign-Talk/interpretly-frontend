@@ -16,6 +16,8 @@ import './Hero.css'
 import { Link } from 'react-router-dom'
 import OnBoard from "../Client/OnBoard";
 import ReactModal from "react-responsive-modal";
+import { useDispatch, useSelector } from 'react-redux'
+import {setClicked, setmodalState, setVerify} from '../../redux/Actions/HeroActions'
 
 const propTypes = {
   ...SectionProps.types,
@@ -55,20 +57,22 @@ const Hero = ({
   ...props
 }) => {
   const [videoModalActive, setVideomodalactive] = useState(false);
-  const [modalState, setmodalState] = useState(false);
-  const [clicked, setClicked] = useState("");
-  const [verify,setVerify]=useState(null);
+  // const [modalState, setmodalState] = useState(false);
+  const [popupClicked, setpopUpClicked] = useState(false);
+  // const [verify,setVerify]=useState(null);
+  const dispatch = useDispatch()
+  const HeroState = useSelector(state => state.HeroState)
   
-  if( verify!= null && verify.details!=undefined){
-    setVerify(verify.details[0].email);
+  if( HeroState.verify!= null && HeroState.verify.details!=undefined){
+    dispatch(setVerify(HeroState.verify.details[0].email));
 
-    setmodalState(false);
+    dispatch(setmodalState(false));
   }
   useEffect(() => {
-    if (verify != null && verify.details === undefined) {
-      setmodalState(false);
+    if (HeroState.verify != null && HeroState.verify.details === undefined) {
+      dispatch(setmodalState(false));
     }
-  }, [verify]);
+  }, [HeroState.verify]);
   const openModal = (e) => {
     e.preventDefault();
     setVideomodalactive(true);
@@ -133,16 +137,16 @@ const Hero = ({
                       </div>
                       <div className='col-12'>
                         <Link
-                          to='interpretly/client/onboard'
+                          to='/client/onboard'
                         >
                           <Button
                             color='primary'
                             style={ButtonHero}
                             wideMobile
-                            // onClick={() => {
-                            //   setClicked("left");
-                            //   setmodalState((o) => !o);
-                            // }}
+                            onClick={() => {
+                              dispatch(setClicked("left"))
+                              // dispatch(setmodalState(true));
+                            }}
                           >
                             Looking for an Interpreter
                           </Button>
@@ -168,8 +172,9 @@ const Hero = ({
                           style={ButtonHero}
                           wideMobile
                           onClick={() => {
-                            setClicked("right");
-                            setmodalState((o) => !o);
+                            dispatch(setClicked("right"));
+                            // dispatch(setmodalState(true));
+                            setpopUpClicked(true)
                           }}
                         >
                           I am an Interpreter
@@ -182,9 +187,9 @@ const Hero = ({
             </div>
           </div>
           <hr />
-          <VerifyModal  verify={verify} />
-          {
-            clicked === 'left' ?
+          {/* <VerifyModal /> */}
+          {/* {
+            HeroState.clicked === 'left' ?
               null
               // <ReactModal
               //     open={clicked == 'left'}
@@ -197,28 +202,43 @@ const Hero = ({
               //     }}
               //     center
               //   >
-              //   <ClientJobPost
-              //     closeModal={setClicked}
-              //     setVerify={setVerify}
-              //     clicked={clicked}
-              //     modalState={modalState}
-              //     setmodalState={setmodalState}
-              //   />
+                // <ClientJobPost
+                //   closeModal={setClicked}
+                //   setVerify={setVerify}
+                //   clicked={clicked}
+                //   modalState={modalState}
+                //   setmodalState={setmodalState}
+                // />
               // </ReactModal>
-            : ( clicked === 'right' &&
+            : ( HeroState.clicked  === 'right' &&
                 <PopupComponent
                   Content={
                     <SignUpLogin
-                      setVerify={setVerify}
-                      clicked={clicked}
-                      modalState={modalState}
-                      setmodalState={setmodalState}
+                      // setVerify={setVerify}
+                      // clicked={clicked}
+                      // modalState={modalState}
+                      // setmodalState={setmodalState}
                     />
                   }
-                  modalState={modalState}
-                  setmodalState={setmodalState}
                 />
             ) 
+          } */}
+          {
+            popupClicked === true && (
+              <PopupComponent
+                popupClicked={popupClicked}
+                setpopUpClicked={setpopUpClicked}
+                  Content={
+                    <SignUpLogin
+                      setpopUpClicked={setpopUpClicked}
+                      // setVerify={setVerify}
+                      // clicked={clicked}
+                      // modalState={modalState}
+                      // setmodalState={setmodalState}
+                    />
+                  }
+                />
+            )
           }
           {/* <VerifyModal verify={verify} />
           {clicked === "left" ? (

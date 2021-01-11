@@ -103,7 +103,7 @@ const App = (props) => {
             )
           } */}
           {props.location.pathname === "/interpretly" ||
-            props.location.pathname === "/interpretly/client/onboard" ||
+            props.location.pathname === "/client/onboard" ||
           (props.location.pathname === "/interpretly" &&
             token === null) ? null : ctoken !== null ? (
             <AsidebarClient />
@@ -119,7 +119,7 @@ const App = (props) => {
               component={Home}
               layout={LayoutDefault}
             />
-            <Route exact path="/interpretly/client/onboard" component={OnBoard} />
+            <Route exact path="/client/onboard" component={OnBoard} />
             <Route exact path="/interpretly/dashboard" component={Dashboard} />
             <Route exact path="/interpretly/profile" component={Profile} />
             <Route exact path="/interpretly/request" component={JobRequests} />

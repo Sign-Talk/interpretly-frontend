@@ -4,14 +4,14 @@ import VerifyForm from "./VerifyForm";
 import "./style.css";
 import { Bell } from "react-feather";
 import DetailsRoundedIcon from "@material-ui/icons/DetailsRounded";
-
 import insurance from "../../../assets/images/streamline-icon-insurance-hands@140x140.svg";
-
 import Calendar from "react-calendar";
 import { withRouter } from "react-router-dom";
 import "react-calendar/dist/Calendar.css";
 import UpcommingJobCard from "./Cards/UpcommingJobCard";
 import Card from "../Notification/Card";
+import { useSelector, useDispatch } from 'react-redux'
+import { setDashboard } from '../../../redux/Actions/Interpreter/interpreterTempActions'
 
 let icon = require("../../../assets/images/message.svg");
 
@@ -38,6 +38,25 @@ function Blank({ history, ...props }) {
   const [DisplayNotification, setDisplayNotification] = useState(false);
   const [data, setData] = useState([]);
   const [UpcommingJobData, setUpcommingJobData] = useState([]);
+
+  const dispatch = useDispatch()
+  const {
+    o,
+    phone,
+    formState,
+    otp,
+    matchedOtp,
+    disabled,
+    verified,
+    base,
+    loader,
+    phoneVer,
+    cityVer,
+    langVer,
+    backVer,
+    timer,
+    active,
+  } = useSelector(state => state.interpreterTempState)
 
   const HandleDisplyDropdown = () => {
     if (DisplayDropdown) {
@@ -90,6 +109,7 @@ function Blank({ history, ...props }) {
   };
 
   useEffect(() => {
+    // dispatch(setDashboard({ o : true}))
     FetchNotificationdbJson();
     FetchUpcommingJobJson();
     setTimeout(() => {
@@ -109,16 +129,16 @@ function Blank({ history, ...props }) {
     try {
       let { data } = await Axios({
         method: "get",
-        url: `${state.base}/Home/profile`,
+        url: `${base}/Home/profile`,
         headers: {
           token: localStorage.getItem("token"),
         },
       });
 
       if (data.user.mobile_no === undefined) {
-        return setState({ ...state, o: true });
+        return dispatch(setDashboard({ o: true }));
       } else {
-        return setState({ ...state, o: false });
+        return dispatch(setDashboard({ o: false }));
       }
     } catch (err) {
       history.push("/interpretly");
@@ -128,34 +148,34 @@ function Blank({ history, ...props }) {
 
   async function sendOtp() {
     try {
-      console.log(state.phone.slice(2));
-      setState({ ...state, loader: true });
+      console.log(phone.slice(2));
+      dispatch(setDashboard({ loader: true }));
       const { data } = await Axios.get(
-        `${state.base}/Home/requestotp?mobile_no=${state.phone.slice(2)}`,
+        `${base}/Home/requestotp?mobile_no=${phone.slice(2)}`,
         {
           headers: {
             token: localStorage.getItem("token"),
           },
         }
       );
-      // const {data} = await Axios.post(`${state.base}/Register/resetpass/i?type=mobile&mobile_no=${state.phone.slice(2)}`,{
+      // const {data} = await Axios.post(`${base}/Register/resetpass/i?type=mobile&mobile_no=${phone.slice(2)}`,{
       //     headers: {
       //         token: localStorage.getItem("token"),
       //     }
       // })
       if (data.err === undefined)
-        setState({ ...state, loader: false, formState: 1, timer: 300 });
+        dispatch(setDashboard({ loader: false, formState: 1, timer: 300 }));
       else {
-        setState({ ...state, loader: false, timer: 300 });
+        dispatch(setDashboard({ loader: false, timer: 300 }));
         console.log(data);
       }
     } catch (err) {
-      setState({ ...state, loader: false });
+      dispatch(setDashboard({ loader: false }));
       console.log(err.message);
     }
   }
 
-  const closeModal = () => setState({ ...state, o: false });
+  const closeModal = () => dispatch(setDashboard({ o: false }));
   const arr = [1, 1, 1, 1, 1, 1, 1, 1];
 
   return (

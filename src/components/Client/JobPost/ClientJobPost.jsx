@@ -18,6 +18,8 @@ const ClientJobPost = ({ closeModal, ...props }) => {
         type : '',
         meeting: '',
         languages : '',
+        organisationName : '',
+        organisationType : '',
         contractDue : {
             durationhr : '',
             durationm : '',
@@ -39,16 +41,16 @@ const ClientJobPost = ({ closeModal, ...props }) => {
             description : ''
         }
     }
-    const[phoneModal, setPhoneModal] = useState(false)
+    // const[phoneModal, setPhoneModal] = useState(false)
     const[steps, setSteps] = useState(1)
     const[formData, setFormData] = useState(initialState)
-
   return (
     <>
       {steps !== 4 && <FormTracker steps={steps} setSteps={setSteps} />}
       <div className="job-post">
         {steps === 1 ? ( // step 1
           <JobSpecs
+            isOnBoard={props.onBoard}
             formData={formData}
             setFormData={setFormData}
             closeModal={closeModal}
@@ -77,6 +79,8 @@ const ClientJobPost = ({ closeModal, ...props }) => {
           />
         ) : steps === 3 && formData.type === "short" ? ( // step 3 for short
           <ShortConfirmation
+            // setPhoneModal={setPhoneModal}
+            // phoneModal={phoneModal}
             formData={formData}
             setFormData={setFormData}
             closeModal={closeModal}

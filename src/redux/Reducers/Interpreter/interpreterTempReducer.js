@@ -18,12 +18,12 @@ const initialState = {
     active: "",
 }
 
-export default interpreterTempReducer = (state=initialState, Action) => {
+export const interpreterTempReducer = (state=initialState, Action) => {
     const { type, payload } =  Action
     switch (type) {
-        case EMAIL_VERIFY:
+        case DASHBOARD:
             return {
-                ...state, verified : true
+                ...state, [payload[0]] : payload[1]
             }
     
         default:

@@ -12,6 +12,9 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import VerifyModal from "./SignUpverificationModal";
 import {withRouter} from "react-router-dom"
+import { useSelector, useDispatch } from 'react-redux'
+import { setClicked, setVerify, setmodalState } from '../../redux/Actions/HeroActions'
+import { setClientSignupModal, setEmailVerifyModal } from "../../redux/Actions/ModalActions";
 
 const iconStyle = {
   width: "30px",
@@ -24,7 +27,7 @@ const validation = {
   margin: "0px",
   padding: "0px",
 };
-function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props }) {
+function LeftLogin({ state, setState, formData, setFormData, ...props }) {
   const [nameok, setnameok] = useState(true);
   const [mailok, setmailok] = useState(true);
   const [passok, setpassok] = useState(true);
@@ -32,6 +35,10 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
   const [signUpVerifyModal, setSignUpVerifyModal] = useState(false)
   const [message, setmessage] = useState("");
   const [errorMSG, seterrorMSG] = useState(false);
+
+  const dispatch = useDispatch()
+  const heroState = useSelector(state => state.HeroState)
+  const { emailVerificationModal } = useSelector(state => state.ModalState)
 
   if (nameok === true && mailok === true && passok === true) {
     state.iregsisterok = true;
@@ -65,10 +72,16 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
       localStorage.setItem("userToken", data.token);
       if(data){
         setLoading(false);
+        // if(data.email){
+        //   dispatch(setEmailVerifyModal(true));
+        // }
       } 
     } catch (err) {
+      err.response.data.email && (
+        dispatch(setEmailVerifyModal(true))
+      )
       setLoading(false);
-      setVerify(err.response.data.email);
+      dispatch(setVerify(err.response.data.email));
       setmessage(err.response.data.message);
 
       seterrorMSG(true);
@@ -102,13 +115,17 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
             : null,
         password: state.ipass,
       });
-      setVerify(response.data);
+      dispatch(setVerify(response.data.details[0].email));
       setLoading(true);
-      response.data && setSignUpVerifyModal(true);
-
+      if(response.data){
+        dispatch(setEmailVerifyModal(true));
+        // dispatch(setClientSignupModal(false))
+        // setSignUpVerifyModal(true);
+      }
       setmessage(`register sucessfully!\n${response.data.message}`);
       seterrorMSG(true);
       if (response.data.details.length > 0) {
+        props.setpopUpClicked(false);
         setLoading(false);
       }
     } catch (err) {
@@ -125,8 +142,12 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
 
   return (
     <>
-      { signUpVerifyModal && 
+      { emailVerificationModal && 
+      // { signUpVerifyModal && 
             <VerifyModal 
+              isOnBoard={props.isOnBoard}
+              phoneModal={props.phoneModal}
+              setPhoneModal={props.setPhoneModal}
               formData={props.formData}
               setFormData={props.setFormData}
               isInterpreter={props.isInterpreter}
@@ -139,7 +160,7 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
       <Spinner loading={loading} />
       <div className="row col-12 p-0 m-auto">
         <div
-          className="col-6"
+          className={props.isOnBoard ? "col-12" : "col-6"} 
           style={{
             height: "60px",
             backgroundColor: "#7E21DB",
@@ -147,25 +168,29 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
             marginTop: "-8px",
             cursor: "pointer",
           }}
-          onClick={() => setState({ ...state, selected: "left" })}
+          onClick={() => dispatch(setClicked("left"))}
         >
           <h6 className="mt-2 text-light text-center">Find an Interpreter</h6>
         </div>
-        <div
-          className="col-6 text-center"
-          onClick={() => setState({ ...state, selected: "right" })}
-          style={{
-            backgroundColor: "#4F4F4F",
-            borderRadius: "5px 5px 0px 0px",
-            fontSize: "20px",
-            margin: "0 0 0 0",
-            cursor: "pointer",
-          }}
-        >
-          <h3 style={{ color: "white", fontSize: "20px" }}>
-            I'm an Interpreter
-          </h3>
-        </div>
+        {
+          !props.isOnBoard ?
+            <div
+              className="col-6 text-center"
+              onClick={() => dispatch(setClicked("right"))}
+              style={{
+                backgroundColor: "#4F4F4F",
+                borderRadius: "5px 5px 0px 0px",
+                fontSize: "20px",
+                margin: "0 0 0 0",
+                cursor: "pointer",
+              }}
+            >
+              <h3 style={{ color: "white", fontSize: "20px" }}>
+                I'm an Interpreter
+              </h3>
+            </div>
+            : null
+        }
       </div>
       <div
         className="row m-auto col-12 p-2 rounded"
@@ -397,26 +422,22 @@ function LeftLogin({ state, setState, setVerify, formData, setFormData, ...props
               ) : (
                 <button
                   className="border-0 mt-2 mb-2 text-light pt-2 pb-2 pl-3 pr-3"
-                  // onClick={
-                  //   state.iloginok === true
-                  //     ? login
-                  //     : () => {
-                  //         console.log(state.iloginok);
-                  //         console.log(state.ipass, state.imail);
-                  //       }
-                  // }
-                  onClick={()=>{
-                    let token =localStorage.getItem('token')
-                    if(token!=null){
-                      localStorage.removeItem('token')
-                    }
-                    localStorage.setItem('cToken',Math.random()*1000)
-                    props.history.push('/interpretly/dashboardclient')
-                }
-                    // setSteps(4)
-
-                }
-               
+                  onClick={
+                    state.iloginok === true
+                      ? login
+                      : () => {
+                          console.log(state.iloginok);
+                          console.log(state.ipass, state.imail);
+                        }
+                  }
+                  // onClick={()=>{
+                  //   let token =localStorage.getItem('token')
+                  //   if(token!=null){
+                  //     localStorage.removeItem('token')
+                  //   }
+                  //   localStorage.setItem('cToken',Math.random()*1000)
+                  //   props.history.push('/interpretly/dashboardclient')
+                  // }}
                   style={{
                     backgroundColor: "#6B20B6",
                     fontSize: "16px",
