@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import VerifyForm from "../../components/LargeComponent/dashboard/VerifyForm";
-import insurance from "../../assets/images/streamline-icon-insurance-hands@140x140.svg";
 import Calendar from "react-calendar";
 import { withRouter } from "react-router-dom";
 import "react-calendar/dist/Calendar.css";

@@ -1,5 +1,7 @@
 import React from 'react'
 import ClientJobPost from './JobPost/ClientJobPost'
+import Header from '../../components/layout/Header';
+import Footer from '../../components/layout/Footer';
 
 const OnBoard = (props) => {
     return (

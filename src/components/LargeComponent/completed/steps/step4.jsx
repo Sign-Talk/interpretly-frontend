@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
 import Radio from "@material-ui/core/Radio";
@@ -63,8 +63,9 @@ function StyledRadio(props) {
     />
   );
 }
+function Step4({ setSteps }) {
+  const [showOther, setshowOther] = useState(false);
 
-function step3({ setSteps }) {
   return (
     <div className="step1parent">
       <p
@@ -75,53 +76,78 @@ function step3({ setSteps }) {
           fontSize: "1em",
         }}
       >
-        We Noticed there was a delay. <br /> Can you tell us why the meeting
-        started late ?
+        Did your meeting end at
+        <br />
+        <span className="textcolorblue"> 10:30 AM ?</span>
       </p>
+
       <RadioGroup
-        aria-label="delayed"
+        defaultValue="yes"
+        aria-label="yes"
         name="customized-radios"
-        className="extrainputFieldForStep3"
+        className="inputFieldForStep3parent"
       >
         <div className="childofinputStep3">
           <FormControlLabel
-            value="1"
+            value="yes"
+            onClick={() => setshowOther(false)}
             control={<StyledRadio />}
-            label="Problems on transit"
+            label="Yes"
           />
         </div>
         <div className="childofinputStep3">
           <FormControlLabel
-            value="2"
+            value="no"
+            onClick={() => setshowOther(true)}
             control={<StyledRadio />}
-            label="Problem from client side"
-          />
-        </div>
-        <div className="childofinputStep3">
-          <FormControlLabel
-            value="3"
-            control={<StyledRadio />}
-            label="Problem from End-user"
-          />
-        </div>
-        <div className="childofinputStep3">
-          <FormControlLabel
-            value="4"
-            control={<StyledRadio />}
-            label="Connectivity issues"
-          />
-        </div>
-        <div className="childofinputStep3">
-          <FormControlLabel
-            value="5"
-            control={<StyledRadio />}
-            label="Others"
+            label="No"
           />
         </div>
       </RadioGroup>
+
+      {showOther === true && (
+        <>
+          <p>How long was the meeting delayed?</p>
+          <RadioGroup
+            aria-label="delayed"
+            name="customized-radios"
+            className="extrainputFieldForStep3"
+          >
+            <div className="childofinputStep3">
+              <FormControlLabel
+                value="+15min"
+                control={<StyledRadio />}
+                label="More than 15 minutes"
+              />
+            </div>
+            <div className="childofinputStep3">
+              <FormControlLabel
+                value="+30min"
+                control={<StyledRadio />}
+                label="More than 30 minutes"
+              />
+            </div>
+            <div className="childofinputStep3">
+              <FormControlLabel
+                value="+45min"
+                control={<StyledRadio />}
+                label="More than 45 minutes"
+              />
+            </div>
+            <div className="childofinputStep3">
+              <FormControlLabel
+                value="+1hour"
+                control={<StyledRadio />}
+                label="More than an Hour"
+              />
+            </div>
+          </RadioGroup>
+        </>
+      )}
+
       <button
         className="InitiatePaymentbtn continuebtn"
-        onClick={() => setSteps(4)}
+        onClick={() => setSteps(5)}
       >
         Continue
       </button>
@@ -129,4 +155,4 @@ function step3({ setSteps }) {
   );
 }
 
-export default step3;
+export default Step4;

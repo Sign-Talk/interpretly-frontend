@@ -6,7 +6,7 @@
 }
 
 .paymentMethodChild1 {
-  flex: 1;
+  flex: 1.2;
   font-size: 16px;
 }
 
@@ -66,7 +66,7 @@ input::-webkit-inner-spin-button {
   margin-top: -25px;
 }
 
-.addUpiParent {
+.addUpiParent111 {
   display: flex;
 }
 
@@ -88,17 +88,12 @@ input::-webkit-inner-spin-button {
 
 .bhimIconSize {
   width: 30px;
-  /* background: yellow; */
   height: 40px;
   margin-left: 2px;
 }
 .googleIconSize {
   margin-left: 10px;
 }
-/* .bhimIconSize {
-
-  margin-left: 2px;
-} */
 
 .phonepayIconSize {
   margin-left: 10px;
@@ -123,81 +118,50 @@ input::-webkit-inner-spin-button {
   flex: 1;
 }
 
-.ParentOfCardForMaPaMethod1st {
-  background: #272727;
-  height: 70px;
-  min-width: 265px;
-  border-radius: 5px;
-  margin-right: 20px;
-  display: flex;
-}
-
-.ParentOfCardForMaPaMethod {
-  background: #272727;
-  height: 80px;
-  min-width: 230px;
-  border-radius: 5px;
-  margin-right: 20px;
-  display: flex;
-}
-
-.LogoInsideMPCParent {
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  /* background: red; */
-  margin: auto 10px;
-}
-
-.LogoInsideMPCParent1st {
-  height: 50px;
-  width: 50px;
-  /* border-radius: 50%; */
-  margin: 15px 10px;
-}
-
-.LogoInsideMPC {
-  margin: 5px 0px 0px 5px;
-  height: 40px;
-  width: 40px;
-  /* border-radius: 50%; */
-}
-
-.LogoInsideMPC1st {
-  margin: 5px 0px 0px 5px;
-  height: 30px;
-  width: 40px;
-}
-
-.whitetext {
+.backgroundPink {
+  background: #7e21db;
   color: white;
 }
 
-.afterlogoInsideMPC {
-  margin: auto;
-  margin-left: 0px;
-  text-align: left;
-  line-height: 1.2;
-  font-size: 1.263vw;
+.colorPink {
+  color: #7e21db;
 }
 
-.beforelogoInsideMPC {
-  margin: auto;
-  margin-left: 20px;
-  text-align: left;
-  line-height: 1.2;
-  font-size: 1.263vw;
+.flexsmall {
+  flex: 1;
 }
 
-.MpaymentMethod {
-  display: flex;
-  width: 90%;
-  margin: auto;
-  margin-top: 20px;
-  overflow-x: scroll;
-  overflow-y: hidden;
+.flexbig {
+  flex: 5;
 }
 
-.MpaymentMethod::-webkit-scrollbar {
-  display: none;
+.amazonpayimage {
+  margin-left: 15%;
+}
+.freechargeimage {
+  margin-left: 15%;
+}
+
+.payzimage {
+  margin-left: 10%;
+}
+.mobiquickimage {
+  margin-left: 10%;
+}
+.sbiyonoimage {
+  margin-left: 10%;
+}
+.airtelimage {
+  margin-left: 20%;
+}
+
+.paypalBreak {
+  position: absolute;
+  margin-top: -10px;
+  margin-left: -20px;
+}
+
+.div2iconmargintop {
+  margin-top: 30px;
+  margin-left: -10px;
 }

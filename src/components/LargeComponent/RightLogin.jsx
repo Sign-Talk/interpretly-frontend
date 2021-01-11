@@ -9,12 +9,14 @@ import MicrosoftLogin from "react-microsoft-login";
 import { withRouter } from "react-router-dom";
 import Input from "./Input";
 import Loader from "react-loader-spinner";
-import OtpInput from "react-otp-input";
 import VerifyModal from "./SignUpverificationModal";
+<<<<<<< HEAD
 import { notifySucess, notifyWarning } from "../AlertComponent/ToastifyAlert";
 import { useSelector, useDispatch } from 'react-redux'
 import { setVerify, setClicked } from '../../redux/Actions/HeroActions'
 // import { setDashboard } from '../../redux/Actions/Interpreter/interpreterTempActions'
+=======
+>>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
 
 const iconStyle = {
   width: "30px",

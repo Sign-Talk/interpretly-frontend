@@ -8,7 +8,7 @@ import ShortConfirmation from "./Step3/ShortConfirmation";
 import ContractConfirmMsg from "./Step4/ContractConfirmMsg";
 import ShortConfirmMsg from "./Step4/ShortConfirmMsg";
 import "./clientJobPost.css";
-import { Languages } from "../../DummyData/languageDummy";
+// import { Languages } from "../../DummyData/languageDummy";
 
 const ClientJobPost = ({ closeModal, ...props }) => {
     const initialState = {
