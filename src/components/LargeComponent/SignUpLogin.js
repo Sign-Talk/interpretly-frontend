@@ -4,7 +4,7 @@ import RightLogin from "./RightLogin";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from 'react-redux'
-// import { setmodalState } from '../../redux/Actions/HeroActions'
+import { setClicked } from '../../redux/Actions/HeroActions'
 import { setClientSignupModal } from '../../redux/Actions/ModalActions'
 
 // const inputStyle = {
@@ -66,7 +66,15 @@ function SignUpLogin({ isInterpreter, formData, setFormData, setPhoneModal, phon
       <FontAwesomeIcon
         icon={faTimes}
         className='text-danger'
-        onClick={() => dispatch(setClientSignupModal(!ModalState.clientSignUpModal))}
+        onClick={() => 
+          heroState.clicked == 'left' ?
+            dispatch(setClientSignupModal(!ModalState.clientSignUpModal))
+          : (
+            // dispatch(setClicked(false)),
+            // setState({...state, selected : ""})
+            props.setpopUpClicked(false)
+          )
+        }
         style={{
           position: "absolute",
           right: "0px",
@@ -74,7 +82,7 @@ function SignUpLogin({ isInterpreter, formData, setFormData, setPhoneModal, phon
           cursor: "pointer",
         }}
       />
-      {heroState.clicked === "left" || ModalState.clientSignUpModal ? (
+      {heroState.clicked === "left" || ModalState.clientSignUpModal || state.selected =='left' ? (
         <LeftLogin 
           // setVerify={setVerify} 
           state={state} 

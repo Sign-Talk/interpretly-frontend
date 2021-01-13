@@ -10,13 +10,10 @@ import { withRouter } from "react-router-dom";
 import Input from "./Input";
 import Loader from "react-loader-spinner";
 import VerifyModal from "./SignUpverificationModal";
-<<<<<<< HEAD
 import { notifySucess, notifyWarning } from "../AlertComponent/ToastifyAlert";
 import { useSelector, useDispatch } from 'react-redux'
 import { setVerify, setClicked } from '../../redux/Actions/HeroActions'
 // import { setDashboard } from '../../redux/Actions/Interpreter/interpreterTempActions'
-=======
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
 
 const iconStyle = {
   width: "30px",
@@ -165,7 +162,11 @@ function RightLogin({ state, setState, ...props }){
       <div className="row col-12 p-0 m-auto">
         <div
           className="col-6 text-center"
-          onClick={() => dispatch(setClicked("left"))}
+          onClick={() =>{
+            // dispatch(setClicked("left"))
+            setState({ ...state, selected: "left" })
+           }}
+          // onClick={() => setState({ ...state, selected: "left" })}
           style={{
             backgroundColor: "#4F4F4F",
             borderRadius: "5px 5px 0px 0px",
@@ -187,7 +188,11 @@ function RightLogin({ state, setState, ...props }){
             marginTop: "-8px",
             cursor: "pointer",
           }}
-          onClick={() => dispatch(setClicked("right"))}
+          onClick={() =>{
+          //  dispatch(setClicked("right"))
+           setState({ ...state, selected: "right" })
+          }}
+          // onClick={() => setState({ ...state, selected: "right" })}
         >
           <h6 className="mt-2 text-light text-center">I'm an Interpreter</h6>
         </div>

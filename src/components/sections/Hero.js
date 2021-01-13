@@ -10,7 +10,6 @@ import { PopupComponent } from "../elements/PopupComponent";
 import { centralStyle } from "../elements/centralStyle";
 import SignUpLogin from "../LargeComponent/SignUpLogin";
 import VerifyModal from "../LargeComponent/SignUpverificationModal";
-<<<<<<< HEAD
 import ClientJobPost from "../Client/JobPost/ClientJobPost";
 import 'react-responsive-modal/styles.css';
 import './Hero.css'
@@ -19,14 +18,9 @@ import OnBoard from "../Client/OnBoard";
 import ReactModal from "react-responsive-modal";
 import { useDispatch, useSelector } from 'react-redux'
 import {setClicked, setmodalState, setVerify} from '../../redux/Actions/HeroActions'
-=======
 // import ClientJobPost from "../Client/JobPost/ClientJobPost";
-import "react-responsive-modal/styles.css";
-import "./Hero.css";
-import { Link } from "react-router-dom";
 // import OnBoard from "../Client/OnBoard";
 // import ReactModal from "react-responsive-modal";
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
 
 const propTypes = {
   ...SectionProps.types,
@@ -66,7 +60,6 @@ const Hero = ({
   ...props
 }) => {
   const [videoModalActive, setVideomodalactive] = useState(false);
-<<<<<<< HEAD
   // const [modalState, setmodalState] = useState(false);
   const [popupClicked, setpopUpClicked] = useState(false);
   // const [verify,setVerify]=useState(null);
@@ -75,14 +68,6 @@ const Hero = ({
   
   if( HeroState.verify!= null && HeroState.verify.details!=undefined){
     dispatch(setVerify(HeroState.verify.details[0].email));
-=======
-  const [modalState, setmodalState] = useState(false);
-  const [clicked, setClicked] = useState("");
-  const [verify, setVerify] = useState(null);
-
-  if (verify !== null && verify.details !== undefined) {
-    setVerify(verify.details[0].email);
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
 
     dispatch(setmodalState(false));
   }
@@ -153,15 +138,10 @@ const Hero = ({
                           Need assistance
                         </label>
                       </div>
-<<<<<<< HEAD
                       <div className='col-12'>
                         <Link
                           to='/client/onboard'
                         >
-=======
-                      <div className="col-12">
-                        <Link to="interpretly/client/onboard">
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
                           <Button
                             color="primary"
                             style={ButtonHero}
@@ -210,18 +190,11 @@ const Hero = ({
             </div>
           </div>
           <hr />
-<<<<<<< HEAD
           {/* <VerifyModal /> */}
           {/* {
             HeroState.clicked === 'left' ?
               null
               // <ReactModal
-=======
-          <VerifyModal verify={verify} />
-          {clicked === "left"
-            ? null
-            : // <ReactModal
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
               //     open={clicked == 'left'}
               //     onClose={()=> {
               //       setClicked("")
@@ -240,11 +213,7 @@ const Hero = ({
                 //   setmodalState={setmodalState}
                 // />
               // </ReactModal>
-<<<<<<< HEAD
             : ( HeroState.clicked  === 'right' &&
-=======
-              clicked === "right" && (
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
                 <PopupComponent
                   Content={
                     <SignUpLogin
@@ -255,7 +224,6 @@ const Hero = ({
                     />
                   }
                 />
-<<<<<<< HEAD
             ) 
           } */}
           {
@@ -275,9 +243,6 @@ const Hero = ({
                 />
             )
           }
-=======
-              )}
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
           {/* <VerifyModal verify={verify} />
           {clicked === "left" ? (
             <ReactModal

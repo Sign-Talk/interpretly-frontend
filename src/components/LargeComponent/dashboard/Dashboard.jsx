@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
 import Axios from "axios";
 import VerifyForm from "./VerifyForm";
 import "./style.css";
@@ -13,23 +12,20 @@ import UpcommingJobCard from "./Cards/UpcommingJobCard";
 import Card from "../Notification/Card";
 import { useSelector, useDispatch } from 'react-redux'
 import { setDashboard } from '../../../redux/Actions/Interpreter/interpreterTempActions'
-
-let icon = require("../../../assets/images/message.svg");
-=======
-
-import UpcommingJobCard from "./Cards/UpcommingJobCard";
 import Navbar from "../Navbar/Navbar";
-import insurance from "../../../assets/images/streamline-icon-insurance-hands@140x140.svg";
-import Calendar from "react-calendar";
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
 
 import "react-calendar/dist/Calendar.css";
 import "./style.css";
 
-function Dashboard() {
+let icon = require("../../../assets/images/message.svg");
+
+
+function Dashboard({history}) {
+  const [DisplayDropdown, setDisplayDropdown] = useState(false);
+  const [DisplayNotification, setDisplayNotification] = useState(false);
+  const [data, setData] = useState([]);
   const [UpcommingJobData, setUpcommingJobData] = useState([]);
 
-<<<<<<< HEAD
   const dispatch = useDispatch()
   const {
     o,
@@ -81,8 +77,6 @@ function Dashboard() {
       });
   };
 
-=======
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
   // fetch upcomming job db
   const FetchUpcommingJobJson = () => {
     fetch("UpcommingJobData.json", {
@@ -102,15 +96,11 @@ function Dashboard() {
   };
 
   useEffect(() => {
-<<<<<<< HEAD
     // dispatch(setDashboard({ o : true}))
     FetchNotificationdbJson();
-=======
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
     FetchUpcommingJobJson();
   }, []);
 
-<<<<<<< HEAD
   async function getData() {
     try {
       let { data } = await Axios({
@@ -162,8 +152,6 @@ function Dashboard() {
   }
 
   const closeModal = () => dispatch(setDashboard({ o: false }));
-=======
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
   const arr = [1, 1, 1, 1, 1, 1, 1, 1];
 
   return (

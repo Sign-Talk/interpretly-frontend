@@ -7,7 +7,7 @@ import classNames from "classnames";
 import VerifyForm from '../../../LargeComponent/dashboard/VerifyForm'
 import Org from '../org/Org'
 import { useSelector, useDispatch } from 'react-redux'
-// import { setmodalState } from '../../../../redux/Actions/HeroActions'
+import { setClicked } from '../../../../redux/Actions/HeroActions'
 import { setPhoneModal, setClientSignupModal, setOrganisationModal } from '../../../../redux/Actions/ModalActions'
 
 const ShortConfirmation = ({
@@ -143,7 +143,10 @@ const ShortConfirmation = ({
                                     dispatch(setPhoneModal(true))
                             )
                             // : dispatch(setmodalState(true))
-                            : dispatch(setClientSignupModal(true))
+                            : (
+                                dispatch(setClicked('left')),
+                                dispatch(setClientSignupModal(true))
+                            )
                         )
                     }
                     }

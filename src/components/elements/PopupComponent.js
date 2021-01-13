@@ -4,13 +4,14 @@ import "semantic-ui-css/semantic.min.css";
 import { centralStyle } from "./centralStyle";
 import { useSelector, useDispatch } from 'react-redux'
 import { setmodalState, setClicked} from '../../redux/Actions/HeroActions'
+import ReactModal from 'react-responsive-modal'
+import './popup.css'
 
 export const PopupComponent = ({
   Header = "Basic",
   Content = <> </>,
   ...rest
 }) => {
-
   const dispatch = useDispatch()
   const heroState = useSelector(state => state.HeroState)
   // const [open, setOpen] = useState(false);
@@ -19,7 +20,7 @@ export const PopupComponent = ({
       onClose={() => rest.setpopUpClicked(false)}
       onOpen={() =>rest.setpopUpClicked(true)}
       open={rest.popupClicked}
-
+      closeIcon={false}
       // onClose={() => {
       //   dispatch(setmodalState(false))
       //   dispatch(setClicked(""))
@@ -36,5 +37,18 @@ export const PopupComponent = ({
         {Content}
       </Modal.Content>
     </Modal>
+
+    // <ReactModal
+    //   onClose={() => rest.setpopUpClicked(false)}
+    //   open={rest.popupClicked}
+    //   // showCloseIcon={false}
+    //   classNames={{
+    //       modal : 'client-job-modal4'
+    //   }}
+    //   center
+    // >
+    // {/* {rest.Children} */}
+    // {Content}
+    // </ReactModal>
   );
 };

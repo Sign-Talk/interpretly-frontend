@@ -5,7 +5,6 @@ import { Modal } from "react-responsive-modal";
 import Axios from "axios";
 import "./verifyModal.css";
 import Loader from "./dashboard/smallComponent/Spinner";
-<<<<<<< HEAD
 import { notifySucess, notifyWarning } from "../AlertComponent/ToastifyAlert";
 import { useSelector, useDispatch } from 'react-redux'
 import { setmodalState } from "../../redux/Actions/HeroActions";
@@ -24,22 +23,6 @@ const SignUpverificationModal = ({ isInterpreter, formData, setFormData, ...prop
   const { verify } = useSelector(state => state.HeroState)
   const[loading, setLoading] = useState(false);
   const[o, setO] = useState(false);
-=======
-
-const SignUpverificationModal = ({
-  verify,
-  isInterpreter,
-  formData,
-  setFormData,
-  setPhoneModal,
-}) => {
-  const [pass, setOtp] = useState({
-    disabled: true,
-    otp: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [o, setO] = useState(false);
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -81,13 +64,8 @@ const SignUpverificationModal = ({
 
   const handleClick = async () => {
     try {
-<<<<<<< HEAD
       setLoading(true)
       let {data} = await Axios({
-=======
-      setLoading(true);
-      let data = await Axios({
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
         method: "get",
         url: isInterpreter
           ? `https://whispering-lake-75400.herokuapp.com/Register/interpretor/verify?email=${verify}&vcode=${pass.otp}`
@@ -102,17 +80,11 @@ const SignUpverificationModal = ({
         // notifySucess('Email verified successfully ! Login to proceed !')
         localStorage.setItem("userToken", data.token);
         setLoading(false);
-<<<<<<< HEAD
         // setO(false);
         dispatch(setClientSignupModal(false))
         // dispatch(setmodalState(false))
         dispatch(setPhoneModal(true))
         console.log(formData)
-=======
-        setO(false);
-        setPhoneModal(true);
-        console.log(formData);
->>>>>>> 66fea706ff487d74546b548e30bf2bec943b4550
       }
     } catch (err) {
       setError(true);
