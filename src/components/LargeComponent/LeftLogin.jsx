@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Image from "../elements/Image";
-import Axios from "axios";
 import g_icon from "../../assets/images/g_icon.png";
 import f_icon from "../../assets/images/f_icon.png";
 import { GoogleLogin } from "react-google-login";
@@ -8,13 +7,12 @@ import SocialButton from "./SocialButton";
 import MicrosoftLogin from "react-microsoft-login";
 import Input from "./Input";
 import Spinner from "./dashboard/smallComponent/Spinner";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import VerifyModal from "./SignUpverificationModal";
-import {withRouter} from "react-router-dom"
+import { withRouter } from "react-router-dom"
 import { useSelector, useDispatch } from 'react-redux'
-import { setClicked, setVerify, setmodalState } from '../../redux/Actions/HeroActions'
-import { setClientSignupModal, setEmailVerifyModal } from "../../redux/Actions/ModalActions";
+import { loginUser, registerUser, resetPass } from "../../redux/Actions/Client/userActions";
 
 const iconStyle = {
   width: "30px",
@@ -31,14 +29,11 @@ function LeftLogin({ state, setState, formData, setFormData, ...props }) {
   const [nameok, setnameok] = useState(true);
   const [mailok, setmailok] = useState(true);
   const [passok, setpassok] = useState(true);
-  const [loading, setLoading] = useState(false);
-  const [signUpVerifyModal, setSignUpVerifyModal] = useState(false);
-  const [message, setmessage] = useState("");
-  const [errorMSG, seterrorMSG] = useState(false);
 
   const dispatch = useDispatch()
   const heroState = useSelector(state => state.HeroState)
   const { emailVerificationModal } = useSelector(state => state.ModalState)
+  const { isLoading } = useSelector(state => state.clientAuthState)
 
   if (nameok === true && mailok === true && passok === true) {
     state.iregsisterok = true;
@@ -62,106 +57,49 @@ function LeftLogin({ state, setState, formData, setFormData, ...props }) {
     state.iresetok = false;
   }
 
-  async function login() {
-    try {
-      setLoading(true);
-      const { data } = await Axios.post(`${state.base}/Login/user`, {
-        email: state.imail,
-        password: state.ipass,
-      });
-      localStorage.setItem("userToken", data.token);
-      if(data){
-        setLoading(false);
-        // if(data.email){
-        //   dispatch(setEmailVerifyModal(true));
-        // }
-      } 
-    } catch (err) {
-      err.response.data.email && (
-        dispatch(setEmailVerifyModal(true))
-      )
-      setLoading(false);
-      dispatch(setVerify(err.response.data.email));
-      setmessage(err.response.data.message);
-
-  //     seterrorMSG(true);
-  //     console.log(err.message);
-    }
+  const handleLogin = e => {
+    e.preventDefault();
+    dispatch(loginUser({
+      email: state.imail,
+      password: state.ipass
+    }))
   }
 
-  async function resetPass() {
-    try {
-      setLoading(true);
-      const { data } = await Axios.post(
-        `${state.base}/Register/resetpass/i?type=email&email=${state.imail}`
-      );
-      setLoading(false);
-      console.log(data);
-    } catch (err) {
-      setLoading(false);
-      console.log(err.message);
-    }
+  const handleReset = e => {
+    e.preventDefault();
+    dispatch(resetPass({email : state.imail}))
   }
 
-  async function register() {
-    try {
-      setLoading(true);
-      const response = await Axios.post(`${state.base}/Register/user`, {
-        email: state.imail,
-        firstname: state.iname.split(" ")[0],
-        lastname:
-          state.iname.split(" ")[1] !== undefined
-            ? state.iname.split(" ")[1]
-            : null,
-        password: state.ipass,
-      });
-      dispatch(setVerify(response.data.details[0].email));
-      setLoading(true);
-      if(response.data){
-        dispatch(setEmailVerifyModal(true));
-        // dispatch(setClientSignupModal(false))
-        // setSignUpVerifyModal(true);
-      }
-      setSignUpVerifyModal(true);
-
-      // setVerify(response.data);
-      setLoading(true);
-      setmessage(`register sucessfully!\n${response.data.message}`);
-      seterrorMSG(true);
-      if (response.data.details.length > 0) {
-        props.setpopUpClicked(false);
-        setLoading(false);
-      }
-    } catch (err) {
-      setLoading(false);
-      console.log(err.response);
-      if (err.response) {
-        err.response.data.message == "Email Id exists"
-          ? setmessage("Email id already registered")
-          : setmessage(err.response.data.message);
-      }
-      seterrorMSG(true);
-    }
+  const handleRegister = e => {
+    e.preventDefault();
+    dispatch(registerUser({
+      email: state.imail,
+      firstname: state.iname.split(" ")[0],
+      lastname:
+        state.iname.split(" ")[1] !== undefined
+          ? state.iname.split(" ")[1]
+          : null,
+      password: state.ipass,
+    }))
   }
 
   return (
     <>
-      { emailVerificationModal && 
-      // { signUpVerifyModal && 
-            <VerifyModal 
-              isOnBoard={props.isOnBoard}
-              phoneModal={props.phoneModal}
-              setPhoneModal={props.setPhoneModal}
-              formData={props.formData}
-              setFormData={props.setFormData}
-              isInterpreter={props.isInterpreter}
-            />       
+      { emailVerificationModal &&
+        <VerifyModal
+          isOnBoard={props.isOnBoard}
+          phoneModal={props.phoneModal}
+          setPhoneModal={props.setPhoneModal}
+          formData={props.formData}
+          setFormData={props.setFormData}
+          isInterpreter={props.isInterpreter}
+        />
       }
       <div className="p-0 col-12" style={{ backgroundColor: "transparent" }}>
         <ToastContainer
           style={{ position: "absolute", top: "0px", left: "0px" }}
         />
-        <Spinner loading={loading} />
+        <Spinner loading={isLoading} />
         <div className="row col-12 p-0 m-auto">
           <div
             className={
@@ -209,15 +147,15 @@ function LeftLogin({ state, setState, formData, setFormData, ...props }) {
                   Login for assistance
                 </h6>
               ) : (
-                <h6 className="ml-0 mt-1 mb-0" style={{ color: "#AB57FF" }}>
-                  Sign up with us
-                </h6>
-              )
+                  <h6 className="ml-0 mt-1 mb-0" style={{ color: "#AB57FF" }}>
+                    Sign up with us
+                  </h6>
+                )
             ) : (
-              <h5 className="mt-2 mb-3" style={{ color: "#AB57FF" }}>
-                Recover Password
-              </h5>
-            )}
+                <h5 className="mt-2 mb-3" style={{ color: "#AB57FF" }}>
+                  Recover Password
+                </h5>
+              )}
             <label
               style={{
                 fontSize: "12px",
@@ -295,24 +233,6 @@ function LeftLogin({ state, setState, formData, setFormData, ...props }) {
                   className="col-12 p-0 bg-light"
                   style={{ borderRadius: "3px" }}
                 >
-                  {/* <input 
-                  type={state.ipassvisible===true?"text":"password"} 
-                  className='col-10 p-1 pl-2 border-0' 
-                  autoComplete="new-password"
-                    style={{fontSize:"16px",backgroundColor:"transparent"}} 
-                    placeholder='Password' 
-                    onChange={e=>{
-                        const val = state.validatePass(e.target.value)
-                        if(val===false)setpassok(false)
-                        if(val===true){
-                           setpassok(true)
-                           setState({...state,ipass:e.target.value})
-                        }
-                    }}/>
-                    <FontAwesomeIcon 
-                    style={{cursor:"pointer",color:"black"}} 
-                    onClick={()=>setState({...state,ipassvisible:!state.ipassvisible})}
-                    icon={state.ipassvisible===false?faEye:faEyeSlash} /> */}
 
                   <Input
                     setValue={(e) => {
@@ -412,9 +332,7 @@ function LeftLogin({ state, setState, formData, setFormData, ...props }) {
                 {state.lSelected !== "login" ? (
                   <button
                     onClick={
-                      state.iregsisterok === true
-                        ? register
-                        : () => console.log("please fill required fields")
+                      state.iregsisterok === true && handleRegister
                     }
                     className="border-0 mt-2 mb-2 text-light pt-2 pb-2 pl-3 pr-3"
                     style={{
@@ -426,83 +344,65 @@ function LeftLogin({ state, setState, formData, setFormData, ...props }) {
                     Sign up
                   </button>
                 ) : (
+                    <button
+                      className="border-0 mt-2 mb-2 text-light pt-2 pb-2 pl-3 pr-3"
+                      onClick={
+                        heroState.clicked == 'left' ?
+                          state.iloginok === true && handleLogin
+                          :
+                          () => {
+                            let token = localStorage.getItem("token");
+                            if (token != null) {
+                              localStorage.removeItem("token");
+                            }
+                            localStorage.setItem("cToken", Math.random() * 1000);
+                            props.history.push("/interpretly/dashboardclient");
+                          }
+                      }
+                      style={{
+                        backgroundColor: "#6B20B6",
+                        fontSize: "16px",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      Login
+                    </button>
+                  )}
+              </>
+            ) : (
+                <>
                   <button
                     className="border-0 mt-2 mb-2 text-light pt-2 pb-2 pl-3 pr-3"
                     onClick={
-                      heroState.clicked == 'left' ?
-                        state.iloginok === true
-                          ? login
-                          : () => {
-                              console.log(state.iloginok);
-                              console.log(state.ipass, state.imail);
-                            }
-                        :
-                            () => {
-                              let token = localStorage.getItem("token");
-                              if (token != null) {
-                                localStorage.removeItem("token");
-                              }
-                              localStorage.setItem("cToken", Math.random() * 1000);
-                              props.history.push("/interpretly/dashboardclient");
-                            }
+                      state.iresetok === true && handleReset
                     }
-                    // onClick={
-                    //   () => {
-                    //     let token = localStorage.getItem("token");
-                    //     if (token != null) {
-                    //       localStorage.removeItem("token");
-                    //     }
-                    //     localStorage.setItem("cToken", Math.random() * 1000);
-                    //     props.history.push("/interpretly/dashboardclient");
-                    //   }
-                    //   // setSteps(4)
-                    // }
                     style={{
                       backgroundColor: "#6B20B6",
                       fontSize: "16px",
-                      borderRadius: "8px",
+                      borderRadius: "5px",
                     }}
                   >
-                    Login
-                  </button>
-                )}
-              </>
-            ) : (
-              <>
-                <button
-                  className="border-0 mt-2 mb-2 text-light pt-2 pb-2 pl-3 pr-3"
-                  onClick={
-                    state.iresetok === true
-                      ? resetPass
-                      : () => console.log("please fill required fields")
-                  }
-                  style={{
-                    backgroundColor: "#6B20B6",
-                    fontSize: "16px",
-                    borderRadius: "5px",
-                  }}
-                >
-                  Reset Password
+                    Reset Password
                 </button>
-                <h5
-                  style={{
-                    color: "#AB57FF",
-                    fontSize: "15px",
-                    margin: "0 0 0 0",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => setState({ ...state, lfp: false, rpf: false })}
-                >
-                  <p
-                    className="h3 d-inline-block mr-2"
-                    style={{ color: "#AB57FF", fontWeight: "bold" }}
+                  <h5
+                    style={{
+                      color: "#AB57FF",
+                      fontSize: "15px",
+                      margin: "0 0 0 0",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => setState({ ...state, lfp: false, rpf: false })}
                   >
-                    &laquo;
+                    <p
+                      className="h3 d-inline-block mr-2"
+                      style={{ color: "#AB57FF", fontWeight: "bold" }}
+                    >
+                      &laquo;
                   </p>
                   Back to Login
                 </h5>
-              </>
-            )}
+                </>
+              )}
           </div>
           <div className="col-6 text-center">
             <Image
@@ -520,13 +420,13 @@ function LeftLogin({ state, setState, formData, setFormData, ...props }) {
                 Already Registered with us?
               </h5>
             ) : (
-              <h5
-                className="m-0 p-0"
-                style={{ color: "white", fontSize: "15px" }}
-              >
-                Are you new here?
-              </h5>
-            )}
+                <h5
+                  className="m-0 p-0"
+                  style={{ color: "white", fontSize: "15px" }}
+                >
+                  Are you new here?
+                </h5>
+              )}
             {state.lSelected !== "register" ? (
               <h5
                 className="m-0 p-0"
@@ -540,18 +440,18 @@ function LeftLogin({ state, setState, formData, setFormData, ...props }) {
                 Sign right up!
               </h5>
             ) : (
-              <h5
-                className="m-0 p-0"
-                onClick={() => setState({ ...state, lSelected: "login" })}
-                style={{
-                  color: "#7E21DB",
-                  fontSize: "20px",
-                  cursor: "pointer",
-                }}
-              >
-                Go to login
-              </h5>
-            )}
+                <h5
+                  className="m-0 p-0"
+                  onClick={() => setState({ ...state, lSelected: "login" })}
+                  style={{
+                    color: "#7E21DB",
+                    fontSize: "20px",
+                    cursor: "pointer",
+                  }}
+                >
+                  Go to login
+                </h5>
+              )}
           </div>
         </div>
       </div>

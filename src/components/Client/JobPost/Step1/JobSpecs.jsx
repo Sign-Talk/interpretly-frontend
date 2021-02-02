@@ -112,6 +112,7 @@ const JobSpecs = ({
                         <div className="short">
                             <input 
                                 type="checkbox"
+                                className='job-spec-checkbox'
                                 onClick={() => setFormData({...formData, type:"short"})}
                                 checked={
                                     formData.type == "short" && true
@@ -122,6 +123,7 @@ const JobSpecs = ({
                         <div className="contract">
                             <input 
                                 type="checkbox"
+                                className='job-spec-checkbox'
                                 onClick={() => setFormData({...formData, type:"contract"})}
                                 checked={
                                     formData.type == "contract" && true
@@ -138,6 +140,7 @@ const JobSpecs = ({
                             <div className="short remote">
                                 <input 
                                     type="checkbox"
+                                    className='job-spec-checkbox'
                                     onClick={() => setFormData({...formData, meeting:"remote"})}
                                     checked={
                                         formData.meeting == "remote" && true
@@ -148,6 +151,7 @@ const JobSpecs = ({
                             <div className="contract">
                                 <input 
                                     type="checkbox"
+                                    className='job-spec-checkbox'
                                     onClick={() => setFormData({...formData, meeting:"on-site"})}
                                     checked={
                                         formData.meeting == "on-site" && true

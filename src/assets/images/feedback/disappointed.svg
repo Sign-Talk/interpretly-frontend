@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="104" height="104" viewBox="0 0 104 104">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke:#ff6171;stroke-linecap:round;stroke-linejoin:round;stroke-width:4px}
+        </style>
+    </defs>
+    <g id="streamline-icon-smiley-disapointed-mad_140x140" transform="translate(2 2)">
+        <path id="Path_801" d="M43.229 62.4a1.667 1.667 0 1 1 1.671-1.671 1.667 1.667 0 0 1-1.671 1.671" class="cls-1" transform="translate(-13.229 -17.396)"/>
+        <path id="Path_802" d="M95.729 62.4a1.667 1.667 0 1 1 1.671-1.671 1.667 1.667 0 0 1-1.671 1.671" class="cls-1" transform="translate(-25.729 -17.396)"/>
+        <path id="Path_805" d="M4.375 54.375a50 50 0 1 0 50-50 50 50 0 0 0-50 50z" class="cls-1" transform="translate(-4.375 -4.375)"/>
+        <path id="Path_806" d="M71.345 94.471a20.451 20.451 0 0 0-36.649 0" class="cls-1" transform="translate(-3.03 -20.462)"/>
+    </g>
+</svg>

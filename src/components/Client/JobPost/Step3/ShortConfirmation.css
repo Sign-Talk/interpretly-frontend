@@ -25,3 +25,14 @@
     background-color: #171717;
     border-radius: 8px;
 }
+
+.event-y, .event-n{
+    display: flex;
+    align-self: center;
+    width: 50%;
+}
+
+.event{
+    display: flex;
+    justify-content: space-evenly;
+}

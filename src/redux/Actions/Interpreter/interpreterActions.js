@@ -1,9 +1,101 @@
-import { LOG_IN } from "../../ActionTypes/Interpreter/interpreterActionTypes";
+import Types from "../../ActionTypes/Interpreter/interpreterActionTypes";
+import { EMAIL_VERIFICATION } from "../../ActionTypes/ModalActionTypes";
+import { SET_VERIFY } from "../../ActionTypes/HeroActionTypes";
+import ApiEndpoints from "../../ApiEndpoints";
+import Axios from "axios";
 
-export default logIn  = (interpreterData, history) => dispatch => {
-    try {
-        
-    } catch (error) {
-        
+export const registerUser = (userData, history) => async (dispatch) => {
+  try {
+    dispatch({
+      type: Types.REGISTER_INTERPRETER_PROGRESS,
+    });
+    const { data } = await Axios({
+      baseURL: `${ApiEndpoints.BASE_URL}/${ApiEndpoints.INTERPRETER_REGISTER}`,
+      method: "POST",
+      data: userData,
+    });
+    if (data) {
+      return (
+        dispatch({
+          type: Types.REGISTER_INTERPRETER_SUCCESS,
+          payload: data,
+        }),
+        dispatch({
+          type: SET_VERIFY,
+          payload: data.details[0].email,
+        }),
+        dispatch({
+          type: EMAIL_VERIFICATION,
+          payload: true,
+        })
+      );
     }
-}
+  } catch (error) {
+    dispatch({
+      type: Types.REGISTER_INTERPRETER_FAILURE,
+      payload: error.response?.data?.message,
+    });
+  }
+};
+
+export const loginUser = (userData, history) => async (dispatch) => {
+  try {
+    dispatch({
+      type: Types.LOGIN_INTERPRETER_PROGRESS,
+    });
+    const { data } = await Axios({
+      baseURL: `${ApiEndpoints.BASE_URL}/${ApiEndpoints.INTERPRETER_LOGIN}`,
+      method: "POST",
+      data: userData,
+    });
+    if (data) {
+      localStorage.setItem("token", data.token);
+      dispatch({
+        type: Types.LOGIN_INTERPRETER_SUCCESS,
+        payload: data,
+      });
+      history.push('/interpretly/dashboard')
+    }
+  } catch (error) {
+    dispatch({
+      type: Types.LOGIN_INTERPRETER_FAILURE,
+      payload: error.response?.data,
+    });
+    // if the user hasn't verified it's email id
+    if (error.response?.data?.email) {
+      return (
+        dispatch({
+          type: EMAIL_VERIFICATION,
+          payload: true,
+        }),
+        dispatch({
+          type: SET_VERIFY,
+          payload: error.response?.data?.email,
+        })
+      );
+    }
+  }
+};
+
+export const resetPass = (email, history) => async (dispatch) => {
+  try {
+    dispatch({
+      type: Types.RESET_PASS_INTERPRETER_PROGRESS,
+    });
+    const { data } = await Axios({
+      baseURL: `${ApiEndpoints.BASE_URL}/${ApiEndpoints.INTERPRETER_RESET_PASS}=${email}`,
+      method: "POST",
+    });
+    if (data) {
+      dispatch({
+        type: Types.RESET_PASS_INTERPRETER_SUCCESS,
+        payload: data,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: Types.RESET_PASS_INTERPRETER_FAILURE,
+      payload: error.response?.data,
+    });
+  }
+};

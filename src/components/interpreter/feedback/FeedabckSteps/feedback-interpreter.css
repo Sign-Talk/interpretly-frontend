@@ -1,0 +1,92 @@
+/* feedback-client1 */
+.meeting-time-container, .attitude-container, .punctual-container, .recommend-container, .review-container, .regards-container, .delay-reason-container{
+    height: 25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 4em auto;
+    text-align: center;
+}
+
+.feedback-interpreter-checkbox{
+    height: 29px;
+    width: 29px;
+}
+
+.feedback-interpreter-checkbox:after, .feedback-interpreter-checkbox:checked:active{
+    border: 14px solid #7E21DB; 
+}
+
+.feedback-interpreter-checkbox:checked{
+    border: 14px solid #7E21DB; 
+}
+
+/* feedback-client2 */
+.delay-reason-container{
+    width: 70%;
+    height: 25em;
+    margin: 4em auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.check-text{
+    font-size: 24px;
+}
+
+/* feedback-client3 */
+/* .attitude-container{} */
+
+.star-icons-container{
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.star-icons{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.no{
+    color : #a3a3a3;
+    font-size: 24px;
+}
+
+.msg{
+    color: #4f4f4f;
+    font-size: 18px;
+}
+
+.ratings-btn{
+    background: none;
+    color: none;
+    border: none;
+    outline: none;
+}
+
+/* feedback-client4 */
+/* .recommend-container{} */
+
+/* feedback-client5 */
+.review-content{
+    width: 80%;
+    height: 25%;
+    margin: 0 auto;
+    border-radius: 10px; 
+    padding: 15px;
+    font-size: 15px;  
+}
+textarea::placeholder{
+    color: #a3a3a3;
+}
+
+/* Regards */
+
+.regards-container img{
+    margin: 2em auto 0;
+}

@@ -60,12 +60,38 @@ const ShortConfirmation = ({
                         <div className='interpreter-info d-flex' style={{ width : '78%', justifyContent : 'space-between', alignItems : 'center'}}>
                             <img width={20} src={infoIcon} alt=""/>
                             <div className='d-flex p-0 m-0' style={{ flexDirection : 'column', width: '90%'}}>
-                                <p className='p-0 m-0' style={{ fontSize : '13px' }}>Recommended: <span style={{color :'#AB57FF'}}>3</span> interpreters</p>
+                                <p className='p-0 m-0' style={{ fontSize : '13px' }}>Recommended: <span style={{color :'#ab57ff'}}>3</span> interpreters</p>
                                 <p className='p-0 m-0' style={{ fontSize : '10px' }}>Based on the duration we suggest you to hire 3 interpreters</p>
                             </div>
                         </div>
                     </div>
                 </div>
+                {/* <div className="event mt-2">
+                    <p className='labels' style={{width : '30%'}} >Is this a Public Event Or Confidence</p>
+                    <p>:</p>
+                    <div style={{width : '60%'}}  className="types-item">
+                        <div className="event-y">
+                            <input 
+                                type="checkbox"
+                                onClick={() => setFormData({...formData, publicEvent:"yes"})}
+                                checked={
+                                    formData.publicEvent == "yes" && true
+                                }
+                            />
+                            <p>Yes</p>
+                        </div>
+                        <div className="event-n">
+                            <input 
+                                type="checkbox"
+                                onClick={() => setFormData({...formData, publicEvent:"no"})}
+                                checked={
+                                    formData.publicEvent == "no" && true
+                                }
+                            />
+                            <p>No</p>
+                        </div>
+                    </div>
+                </div> */}
                 <div className="amount mt-2">
                     <p className='labels' style={{width : '30%'}}>Amount</p>
                     <p>:</p>

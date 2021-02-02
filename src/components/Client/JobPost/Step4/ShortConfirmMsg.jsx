@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './ShortConfirmMsg.css'
 import infoIcon from '../../../../assets/images/Icon feather-info.svg'
+import { Link } from 'react-router-dom'
 
 const ShortConfirmMsg = ({
     formData, 
@@ -68,11 +69,13 @@ const ShortConfirmMsg = ({
                 <button onClick={() => {
                     setSteps(3)
                 }}>Back</button>
-                <button 
-                    style={{
-                        marginLeft : '1rem'
-                    }}
-                >Continue</button>
+                <Link to='/client/payment'>
+                    <button 
+                        style={{
+                            marginLeft : '1rem'
+                        }}
+                    >Continue</button>
+                </Link>
             </div>
         </div>
         

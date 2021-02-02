@@ -84,7 +84,9 @@ function VerifyForm({getData,
             <Spinner loading={loader} />
                 {
                     formState===0?
-                    <Step1 state={state} 
+                    <Step1 
+                    isOnboard={isOnboard}
+                    state={state} 
                     setState={setState} 
                     sendOtp={sendOtp} />
                     :null
