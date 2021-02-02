@@ -7,6 +7,7 @@ import ContractConfirmation from "./Step3/ContractConfirmation";
 import ShortConfirmation from "./Step3/ShortConfirmation";
 import ContractConfirmMsg from "./Step4/ContractConfirmMsg";
 import ShortConfirmMsg from "./Step4/ShortConfirmMsg";
+import ClientPayment from '../../Client/Payment/ClientPayment'
 import "./clientJobPost.css";
 // import { Languages } from "../../DummyData/languageDummy";
 
@@ -20,6 +21,7 @@ const ClientJobPost = ({ closeModal, ...props }) => {
         languages : '',
         organisationName : '',
         organisationType : '',
+        publicEvent : '',
         contractDue : {
             durationhr : '',
             durationm : '',
@@ -46,7 +48,7 @@ const ClientJobPost = ({ closeModal, ...props }) => {
     const[formData, setFormData] = useState(initialState)
   return (
     <>
-      {steps !== 4 && <FormTracker steps={steps} setSteps={setSteps} />}
+      {(steps === 1 || steps === 2 || steps === 3) && <FormTracker steps={steps} setSteps={setSteps} />}
       <div className="job-post">
         {steps === 1 ? ( // step 1
           <JobSpecs
@@ -97,8 +99,7 @@ const ClientJobPost = ({ closeModal, ...props }) => {
             setSteps={setSteps}
           />
         ) : (
-          steps === 4 &&
-          formData.type === "contract" && (
+          steps === 4 && formData.type === "contract" ? (
             <ContractConfirmMsg
               formData={formData}
               setFormData={setFormData}
@@ -106,7 +107,12 @@ const ClientJobPost = ({ closeModal, ...props }) => {
               initialState={initialState}
               setSteps={setSteps}
             />
-          )
+          ) : ( steps === 5 && (
+            <ClientPayment
+              
+              setSteps={setSteps}
+            />
+          ))
         )}
       </div>
     </>

@@ -1,0 +1,248 @@
+
+.payment-container{
+  width: 100%;
+  margin-top: 4em;
+  /* border: 1px solid red; */
+}
+
+/* to shrink the size of the pay modes */
+.payment-content{
+  width: 70%;
+  margin: auto;
+  /* border: 1px solid red; */
+}
+
+/* to shrink the size of the top container of the summary */
+.pay-summary-container{
+  width: 90%;
+  margin: 0 auto;
+  /* border: 1px solid green; */
+}
+
+#ruler{
+  background: #303030;
+}
+
+.pay-summary{
+  display: flex;
+  justify-content: space-between;
+}
+
+.left-info{
+  width: 50%;
+}
+
+.right-info{
+  width: 39%;
+}
+
+.right-info .price{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.right-info .left-info{
+  margin: none;
+  padding: none;
+}
+
+.paymentMethodParent {
+  /* border: 1px solid yellow; */
+  height: 17em;
+  display: flex;
+  margin: auto;
+}
+
+.paymentMethodChild1 {
+  flex: 1.2;
+  font-size: 16px;
+}
+
+.linkInsidePayment {
+  padding: 15px;
+  border-radius: 5px 0px 0px 5px;
+  color: white;
+  cursor: pointer;
+  display: flex;
+}
+
+.imgSizeForPaymentOption {
+  width: 20px;
+}
+
+.paymentMethodChild2 {
+  flex: 3;
+  background: #272727;
+  border-radius: 0px 5px 5px 5px;
+  padding: 30px;
+}
+
+.accNAndIfsc {
+  display: flex;
+}
+
+.accNAndIfscChild1 {
+  flex: 3;
+}
+.accNAndIfscChild2 {
+  flex: 1;
+}
+
+.inputInsideaccNAndIfsc {
+  width: 90%;
+  background: #171717;
+  border-radius: 5px;
+  border-style: none;
+  height: 35px;
+  padding: 0px 20px;
+  color: white;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* 2nd part after click on UPI  */
+
+.labelInsideAccIfsc {
+  font-size: 14px;
+}
+
+.spaninsideAddUpiChild1 {
+  position: absolute;
+  margin-top: -25px;
+}
+
+.addUpiParent111 {
+  display: flex;
+}
+
+.addUpiChild1 {
+  flex: 1;
+  text-align: center;
+  /* background: red; */
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+.addUpiChild2 {
+  flex: 2;
+}
+
+.addUpiIconSize {
+  width: 40px;
+}
+
+.bhimIconSize {
+  width: 30px;
+  height: 40px;
+  margin-left: 2px;
+}
+.googleIconSize {
+  margin-left: 10px;
+}
+
+.phonepayIconSize {
+  margin-left: 10px;
+}
+
+.gpay {
+  margin-left: -20px;
+}
+
+.phonepay {
+  margin-left: -10px;
+}
+
+.parentofexapleatupi {
+  display: flex;
+}
+
+.exapleatupi {
+  flex: 1;
+}
+.exapleatupivarify {
+  flex: 1;
+}
+
+.backgroundPink {
+  background: #7e21db;
+  color: white;
+}
+
+.colorPink {
+  color: #7e21db;
+}
+
+.flexsmall {
+  flex: 1;
+}
+
+.flexbig {
+  flex: 5;
+}
+
+.amazonpayimage {
+  margin-left: 15%;
+}
+.freechargeimage {
+  margin-left: 15%;
+}
+
+.payzimage {
+  margin-left: 10%;
+}
+.mobiquickimage {
+  margin-left: 10%;
+}
+.sbiyonoimage {
+  margin-left: 10%;
+}
+.airtelimage {
+  margin-left: 20%;
+}
+
+.paypalBreak {
+  position: absolute;
+  margin-top: -10px;
+  margin-left: -20px;
+}
+
+.div2iconmargintop {
+  margin-top: 30px;
+  margin-left: -10px;
+}
+
+
+/* payment error */
+.payment-failed-container{
+  width: 60%;
+  height: 32em;
+  /* border: 1px solid yellow; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 3em auto;
+  text-align: center;
+}
+
+.payment-error-content{
+  /* border: 1px solid red; */
+  text-align: center;
+  margin: auto;
+  display: flex;
+  flex-direction: column; 
+  width: 60%;
+}
+
+.retry-btn{
+  width: 12%;
+  margin: auto;
+  padding: .6rem 0;
+  border-radius: 5px;
+  outline: none;
+  border: none;
+  color: white;
+  background: #7e21db;
+}

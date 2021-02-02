@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="104" height="104" viewBox="0 0 104 104">
+    <defs>
+        <style>
+            .cls-1{fill:none;stroke:#ecff73;stroke-linecap:round;stroke-linejoin:round;stroke-width:4px}
+        </style>
+    </defs>
+    <g id="streamline-icon-smiley-indifferent_140x140" transform="translate(2 2)">
+        <path id="Path_807" d="M4.375 54.375a50 50 0 1 0 50-50 50 50 0 0 0-50 50z" class="cls-1" transform="translate(-4.375 -4.375)"/>
+        <path id="Path_808" d="M47.6 50.312a1.667 1.667 0 1 1-1.667 1.667 1.667 1.667 0 0 1 1.667-1.667" class="cls-1" transform="translate(-14.271 -15.312)"/>
+        <path id="Path_809" d="M91.354 50.312a1.667 1.667 0 1 1-1.667 1.667 1.667 1.667 0 0 1 1.667-1.667" class="cls-1" transform="translate(-24.687 -15.312)"/>
+        <path id="Path_810" d="M43.75 91.875h33.333" class="cls-1" transform="translate(-10.417 -25.208)"/>
+    </g>
+</svg>

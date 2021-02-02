@@ -1,66 +1,100 @@
-import {
-    LOG_IN_USER,
-    REGISTER_USER,
-    RESET_PASS,
-    IS_LOADING
-} from "../../ActionTypes/Client/userActionTypes";
+import Types from "../../ActionTypes/Client/userActionTypes";
+import { EMAIL_VERIFICATION } from "../../ActionTypes/ModalActionTypes";
+import { SET_VERIFY } from "../../ActionTypes/HeroActionTypes";
+import ApiEndpoints from "../../ApiEndpoints";
+import Axios from "axios";
 
-export default registerUser = (userData, history) => dispatch => {
-    try {
+export const registerUser = (userData, history) => async (dispatch) => {
+  try {
+    dispatch({
+      type: Types.REGISTER_CLIENT_PROGRESS,
+    });
+    const { data } = await Axios({
+      baseURL: `${ApiEndpoints.BASE_URL}/${ApiEndpoints.CLIENT_REGISTER}`,
+      method: "POST",
+      data: userData,
+    });
+    if (data) {
+      return (
         dispatch({
-            type: IS_LOADING
+          type: Types.REGISTER_CLIENT_SUCCESS,
+          payload: data,
+        }),
+        dispatch({
+          type: SET_VERIFY,
+          payload: data.details[0].email,
+        }),
+        dispatch({
+          type: EMAIL_VERIFICATION,
+          payload: true,
         })
-        const { data } = await Axios.post(`${state.base}/Register/user`, userData)
-        if(data){
-            dispatch({
-                type : REGISTER_USER,
-                
-            })
-        }
-    } catch (error) {
-
+      );
     }
-}
+  } catch (error) {
+    dispatch({
+      type: Types.REGISTER_CLIENT_FAILURE,
+      payload: error.response?.data?.message,
+    });
+  }
+};
 
+export const loginUser = (userData, history) => async (dispatch) => {
+  try {
+    dispatch({
+      type: Types.LOGIN_CLIENT_PROGRESS,
+    });
+    const { data } = await Axios({
+      baseURL: `${ApiEndpoints.BASE_URL}/${ApiEndpoints.CLIENT_LOGIN}`,
+      method: "POST",
+      data: userData,
+    });
+    if (data) {
+      localStorage.setItem("userToken", data.token);
+      dispatch({
+        type: Types.LOGIN_CLIENT_SUCCESS,
+        payload: data,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: Types.LOGIN_CLIENT_FAILURE,
+      payload: error.response?.data,
+    });
+    // if the user hasn't verified it's email id
+    if (error.response?.data?.email) {
+      return (
+        dispatch({
+          type: EMAIL_VERIFICATION,
+          payload: true,
+        }),
+        dispatch({
+          type: SET_VERIFY,
+          payload: error.response?.data?.email,
+        })
+      );
+    }
+  }
+};
 
-// async function login() {
-//     try {
-//         setLoading(true)
-//         const { data } = await Axios.post(`${state.base}/Login/user`, { email: state.imail, password: state.ipass })
-//         setLoading(false)
-//         console.log(data)
-//     } catch (err) {
-//         setLoading(false)
-//         console.log(err.message)
-//     }
-// }
-
-// async function resetPass() {
-//     try {
-//         setLoading(true)
-//         const { data } = await Axios.post(`${state.base}/Register/resetpass/i?type=email&email=${state.imail}`)
-//         setLoading(false)
-//         console.log(data)
-//     } catch (err) {
-//         setLoading(false)
-//         console.log(err.message)
-//     }
-
-// }
-
-// async function register() {
-//     try {
-//         setLoading(true)
-//         const { data } = await Axios.post(`${state.base}/Register/user`, {
-//             email: state.imail,
-//             firstname: state.iname.split(' ')[0],
-//             lastname: state.iname.split(' ')[1] !== undefined ? state.iname.split(' ')[1] : null,
-//             password: state.ipass
-//         })
-//         setLoading(false)
-//         console.log(data)
-//     } catch (err) {
-//         setLoading(false)
-//         console.log(err.message)
-//     }
-// }
+export const resetPass = (email, history) => async (dispatch) => {
+  try {
+    dispatch({
+      type: Types.RESET_PASS_PROGRESS,
+    });
+    const { data } = await Axios({
+      baseURL: `${ApiEndpoints.BASE_URL}/${ApiEndpoints.CLIENT_RESET_PASS}=${email}`,
+      method: "POST",
+    });
+    if (data) {
+      dispatch({
+        type: Types.RESET_PASS_SUCCESS,
+        payload: data,
+      });
+    }
+  } catch (error) {
+    dispatch({
+      type: Types.RESET_PASS_FAILURE,
+      payload: error.response?.data,
+    });
+  }
+};

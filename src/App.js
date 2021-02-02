@@ -34,6 +34,12 @@ import MessagesClient from "./dashboradClient/MessagesClient/Messages";
 import NotificationClient from "./dashboradClient/NotificationClient/Notification";
 import ProfileClient from "./dashboradClient/ProfileClient/Profile";
 import OnBoard from './components/Client/OnBoard'
+import ClientPayment from "./components/Client/Payment/ClientPayment";
+import PaymentFailed from "./components/Client/Payment/PaymentFailed";
+import FeedbackRatings from "./components/Client/Feedback/FeedbackRatings";
+import Feedbacks from "./components/Client/Feedback/Feedbacks";
+import InterpreterFeedbacks from './components/interpreter/feedback/InterpreterFeedbacks'
+import EndUserFeedbacks from './components/EndUser/Feedbacks/EndUserFeedbacks'
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -86,20 +92,25 @@ const App = (props) => {
       children={() => (
         <div
           className={`col-12 p-0 ml-auto mr-auto  ${
-            props.location.pathname === "/interpretly" ||
-            props.location.pathname === "/interpretly/"
+            props.location.pathname === "/interpretly"
               ? ""
               : "row"
           }`}
         >
-          {props.location.pathname === "/interpretly" ||
+          {
+            props.location.pathname === "/interpretly" ||
             props.location.pathname === "/client/onboard" ||
-          (props.location.pathname === "/interpretly" &&
-            Token === null) ? null : ctoken !== null ? (
-            <AsidebarClient />
-          ) : (
-            <Navbar />
-          )}
+            props.location.pathname === "/client/payment" ||
+            props.location.pathname === "/client/paymentfail" ||
+            props.location.pathname === "/client/feedback" ||
+            props.location.pathname === "/interpreter/feedback" ||
+            props.location.pathname === "/enduser/feedback" ||
+          (props.location.pathname === "/interpretly" && Token === null )
+           ? null 
+           : ctoken !== null 
+            ? ( <AsidebarClient /> ) 
+            : ( <Navbar /> )
+          }
           {/* {props.location.pathname === "/client/onboard" ||
           (props.location.pathname === "/interpretly" && Token === null) 
           && ctoken !== null ? (
@@ -116,12 +127,17 @@ const App = (props) => {
               component={Home}
               layout={LayoutDefault}
             />
+            <Route exact path="/client/payment" component={ClientPayment} />
+            <Route exact path="/client/feedback" component={Feedbacks} />
+            <Route exact path="/client/paymentfail" component={PaymentFailed} />
             <Route exact path="/client/onboard" component={OnBoard} />
             <Route exact path="/interpretly/dashboard" component={Dashboard} />
             <Route exact path="/interpretly/profile" component={Profile} />
             <Route exact path="/interpretly/request" component={JobRequests} />
             <Route exact path="/interpretly/schedule" component={Schedule} />
             <Route exact path="/interpretly/completed" component={Completed} />
+            <Route exact path="/Interpreter/feedback" component={InterpreterFeedbacks} />
+            <Route exact path="/enduser/feedback" component={EndUserFeedbacks} />
 
             <Route
               exact

@@ -7,10 +7,10 @@ const FormTracker = ({ steps, setSteps }) => {
     <div className="form-tracker">
       <div className="sections">
         <button style={{ background: "none", outline: "none", border: "none" }}>
-          <div style={{ background: "#7E21DB" }} className="circle">
+          <div style={{ background: "#7e21db" }} className="circle">
             1
           </div>
-          <p style={{ color: "#7E21DB" }} className="step-name">
+          <p style={{ color: "#ab57ff" }} className="step-name">
             Details
           </p>
         </button>
@@ -21,14 +21,14 @@ const FormTracker = ({ steps, setSteps }) => {
         flexItem
         className="divider"
         style={{
-          background: steps !== 1 && "#7E21DB",
+          background: steps !== 1 && "#ab57ff",
         }}
       />
       <div className="sections">
         <button style={{ background: "none", outline: "none", border: "none" }}>
           <div
             style={{
-              background: steps !== 1 && "#7E21DB",
+              background: steps !== 1 && "#7e21db",
             }}
             className="circle"
           >
@@ -36,7 +36,7 @@ const FormTracker = ({ steps, setSteps }) => {
           </div>
           <p
             style={{
-              color: steps !== 1 && "#7E21DB",
+              color: steps !== 1 && "#ab57ff",
             }}
             className="step-name"
           >
@@ -50,14 +50,14 @@ const FormTracker = ({ steps, setSteps }) => {
         flexItem
         className="divider"
         style={{
-          background: steps == 3 && "#7E21DB",
+          background: steps == 3 && "#ab57ff",
         }}
       />
       <div className="sections">
         <button style={{ background: "none", outline: "none", border: "none" }}>
           <div
             style={{
-              background: steps == 3 && "#7E21DB",
+              background: steps == 3 && "#7e21db",
             }}
             className="circle"
           >
@@ -65,7 +65,7 @@ const FormTracker = ({ steps, setSteps }) => {
           </div>
           <p
             style={{
-              color: steps == 3 && "#7E21DB",
+              color: steps == 3 && "#ab57ff",
             }}
             className="step-name"
           >

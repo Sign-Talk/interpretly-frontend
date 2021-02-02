@@ -22,7 +22,6 @@ const SignUpverificationModal = ({ isInterpreter, formData, setFormData, ...prop
 
   const { verify } = useSelector(state => state.HeroState)
   const[loading, setLoading] = useState(false);
-  const[o, setO] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -32,6 +31,7 @@ const SignUpverificationModal = ({ isInterpreter, formData, setFormData, ...prop
       // dispatch(setmodalState(false))
     }
   }, [verify]);
+
   const handleResnendClick = async () => {
     // axios xcall
     try {
@@ -94,7 +94,7 @@ const SignUpverificationModal = ({ isInterpreter, formData, setFormData, ...prop
   };
   return (
     <Modal
-      open={emailVerificationModal}
+      open={emailVerificationModal==true}
       onClose={() => dispatch(setEmailVerifyModal(false))}     
       // open={o}
       // onClose={() => setO(false)}
@@ -122,7 +122,7 @@ const SignUpverificationModal = ({ isInterpreter, formData, setFormData, ...prop
           numInputs={6}
           separator={<span className="text-center p-2 ml-auto"></span>}
           inputStyle={{
-            border: error ? "3px solid red" : "3px solid #54ACF0",
+            border: error ? "3px solid red" : ( props.isOnBoard ? "3px solid #7e21db" : "3px solid #54ACF0"), //
             borderRadius: "7px",
             padding: "5px",
             width: "40px",
@@ -142,13 +142,22 @@ const SignUpverificationModal = ({ isInterpreter, formData, setFormData, ...prop
                           )
                       } */}
         {pass.disabled === true ? (
-          <button disabled className="continue-btn btn btn-primary">
+          <button 
+            disabled 
+            className="continue-btn btn btn-primary"
+            style={{
+              backgroundColor : props.isOnBoard ? "#7e21db" : "#54acf0"
+            }}
+            >
             Continue
           </button>
         ) : (
           <button
             onClick={handleClick}
             className="continue-btn btn btn-primary"
+            style={{
+              backgroundColor : props.isOnBoard ? "#7e21db" : "#54acf0"
+            }}
           >
             Continue
           </button>
@@ -161,7 +170,7 @@ const SignUpverificationModal = ({ isInterpreter, formData, setFormData, ...prop
                 outline: "none",
                 background: "none",
                 border: "none",
-                color: "#54acf0",
+                color: props.isOnBoard ? "#ab57ff" : "#54acf0"
               }}
               onClick={handleResnendClick}
             >

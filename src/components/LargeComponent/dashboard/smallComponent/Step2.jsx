@@ -81,10 +81,11 @@ function Step2({ state, setState, sendOtp, isOnboard, closeModal }) {
           border:
             matchedOtp !== "" &&
             matchedOtp === false &&
-            verifyClicked &&
-            !resend
+            verifyClicked && !resend
               ? "3px solid red"
-              : "3px solid #54ACF0",
+              : (
+                isOnboard ?  "3px solid #7e21db" : "3px solid #54ACF0"
+              ),
           borderRadius: "7px",
           padding: "5px",
           width: "40px",
@@ -126,7 +127,9 @@ function Step2({ state, setState, sendOtp, isOnboard, closeModal }) {
         className={`btn btn-sm text-light ${
           disabled === true ? "disabled" : null
         }`}
-        style={{ backgroundColor: "#54ACF0" }}
+        style={{ 
+          backgroundColor: isOnboard ? "#7e21db" : "#54ACF0" 
+        }}
         onClick={() => {
           verifyPhone();
           console.log(otp);
@@ -136,7 +139,10 @@ function Step2({ state, setState, sendOtp, isOnboard, closeModal }) {
       </button>
       <div
         className="col-1 rounded-pill mt-3 mb-3 ml-auto mr-auto"
-        style={{ backgroundColor: "#54ACF0", padding: "3px" }}
+        style={{ 
+          backgroundColor: isOnboard ? "#7e21db" : "#54ACF0" , 
+          padding: "3px" 
+        }}
       ></div>
       <div>
         <p className="smallFont d-inline-block">Code not recieved? &nbsp;</p>
@@ -149,7 +155,7 @@ function Step2({ state, setState, sendOtp, isOnboard, closeModal }) {
           }}
           style={{
             fontSize: "13px",
-            color: "#54ACF0",
+            color: isOnboard ? "#7e21db" : "#54ACF0" ,
             fontWeight: "bold",
             cursor: "pointer",
           }}

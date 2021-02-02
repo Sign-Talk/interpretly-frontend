@@ -141,6 +141,11 @@ const Hero = ({
                       <div className='col-12'>
                         <Link
                           to='/client/onboard'
+                          // to='/client/paymentfail'
+                          // to='interpreter/feedback'
+                          // to='enduser/feedback'
+                          // to='client/feedback'
+                          // to='/client/payment'
                         >
                           <Button
                             color="primary"
