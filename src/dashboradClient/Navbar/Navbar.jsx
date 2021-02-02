@@ -8,7 +8,7 @@ import "./Navbar.css";
 
 let icon = require("../../assets/images/message.svg");
 
-function Navbar({ Backicon, title, ShowPaymentMethod }) {
+function Navbar({ Backicon, title, SetShowPaymentMethod }) {
   const history = useHistory();
 
   const [DisplayNotification, setDisplayNotification] = useState(false);
@@ -60,6 +60,8 @@ function Navbar({ Backicon, title, ShowPaymentMethod }) {
         setDisplayNotification(false);
       }
     };
+
+    return SetShowPaymentMethod;
   }, []);
 
   return (
@@ -78,7 +80,7 @@ function Navbar({ Backicon, title, ShowPaymentMethod }) {
         {Backicon && (
           <span
             style={{ cursor: "pointer" }}
-            onClick={() => ShowPaymentMethod(false)}
+            onClick={() => SetShowPaymentMethod(false)}
           >
             <Backicon />
           </span>
