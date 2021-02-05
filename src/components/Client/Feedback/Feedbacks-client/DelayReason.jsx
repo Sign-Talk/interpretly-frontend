@@ -22,19 +22,19 @@ const DelayReason = ({ status, forwardChange }) => {
             }
             <div style={{ textAlign : "center", margin : "0 auto"}}>
                 <div className='d-flex mb-2'>
-                    <input type="checkbox" name="" id=""/>
+                    <input type="checkbox" className='checkboxes' name="" id=""/>
                     <p className="text-white check-text">Connectivity Issues</p>
                 </div>
                 <div className='d-flex mb-2'>
-                    <input type="checkbox" name="" id=""/>
+                    <input type="checkbox" className='checkboxes' name="" id=""/>
                     <p className="text-white check-text">Problems from interpreter side</p>
                 </div>
                 <div className='d-flex mb-2'>
-                    <input type="checkbox" name="" id=""/>
+                    <input type="checkbox" className='checkboxes' name="" id=""/>
                     <p className="text-white check-text">Problems from End-user</p>
                 </div>
                 <div className='d-flex'>
-                    <input type="checkbox" name="" id=""/>
+                    <input type="checkbox" className='checkboxes' name="" id=""/>
                     <p className="text-white check-text">Others</p>
                 </div>
             </div>
