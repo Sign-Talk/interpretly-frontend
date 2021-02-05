@@ -12,7 +12,7 @@ const ShortConfirmMsg = ({
     return (
         <>
         <div className='short-confirm-msg'>
-            <div className="header">
+            <div className="header mb-4">
                 <p style={{ color : 'white', textAlign: "center", fontWeight : 500, fontSize : '1.1em'}}>Confirm Job Details</p>
             </div>
             <div className="main">
@@ -24,7 +24,7 @@ const ShortConfirmMsg = ({
                 <div className="language">
                     <p className='w-40'>Language</p>
                     <p>:</p>
-                    <p className='w-40'>{formData.langugae}</p>
+                    <p className='w-40'>{`${formData.langugae} ${formData.signLang}`}</p>
                 </div>
                 <div className="region">
                     <p className='w-40'>Region</p>
@@ -44,7 +44,7 @@ const ShortConfirmMsg = ({
                 <div className="booking-time">
                     <p className='w-40'>Booking Time</p>
                     <p>:</p>
-                    <p className='w-40'>{formData.shortDue.duration}</p>
+                    <p className='w-40'>{formData.shortDue.bookingTime}</p>
                 </div>
                 <div className="interpreters">
                     <p className='w-40'>No of Interpreters</p>

@@ -22,6 +22,7 @@ const ClientJobPost = ({ closeModal, ...props }) => {
         organisationName : '',
         organisationType : '',
         publicEvent : '',
+        signLang : "",
         contractDue : {
             durationhr : '',
             durationm : '',

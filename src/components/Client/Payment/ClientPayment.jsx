@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../../LargeComponent/Navbar/Navbar";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import { Link } from 'react-router-dom'
 
 import ManagePaymentMethod from "./ManagePaymentMethod";
 
@@ -591,7 +592,11 @@ function ClientPayment({ ShowPaymentMethod }) {
             </div>
             <div style={{ textAlign : "center", width: "90%", margin : "15px auto" }}>
               <button style={{ marginRight : "20px",border : "2px solid #7e21db", color: "white", background : "none", padding : "10px 30px", borderRadius : "5px" }} >Back</button>
-              <button style={{ background : "#7e21db", color: "white", padding : "10px 20px", borderRadius : "5px", fontWeight:600  }}>Pay &#8377;2,400</button>
+              <Link to='/interpretly/dashboardclient'>
+                <button style={{ background : "#7e21db", color: "white", padding : "10px 20px", borderRadius : "5px", fontWeight:600  }}>
+                  Pay &#8377;2,400
+                </button>
+              </Link>
             </div>
           </div>
         </div>
