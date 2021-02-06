@@ -1,40 +1,84 @@
-import React from "react";
-import classes from "./Notification.module.css";
+import React, { useState, useEffect } from "react";
+import "./Notification.css";
+import Card from "./Card";
 
-import { Bell, Power } from "react-feather";
+import Navbar from "../Navbar/Navbar";
+
 let icon = require("../../../assets/images/notification.svg");
-function Notification({ history, ...props }) {
-  let arr = Array(12);
+
+function Notification() {
+  // console.log("data.length ", data.length);
+  const [data, setData] = useState([]);
+
+  // fetch db
+  const getData = () => {
+    fetch("notificationDummyData.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then(function (response) {
+        // console.log(response);
+        return response.json();
+      })
+      .then(function (myJson) {
+        setData(myJson);
+      });
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
   return (
     <>
-      <div className="col-10 ml-auto c0 p-0" style={{ minWidth: "850px" }}>
-        <div
-          className="col-12 pl-3 pt-3 p-0 pb-5"
-          style={{
-            height: "80px",
-            boxShadow: "0px 5px 15px black",
-            position: "sticky",
-            top: "0px",
-            right: "0px",
-          }}
-        >
-          <h3 className="d-inline fo1 font-weight-light">Notifications</h3>
-          <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
-            <Bell />
-          </div>
-          <div className="mr-3 rounded-circle p-2 c4 float-right text-light">
-            <Power
-              onClick={() => {
-                localStorage.removeItem("token");
-                history.push("/interpretly");
+      <div
+        className="col-10 ml-auto c0 p-0"
+        style={{
+          Width: "44.271vw",
+          position: "relative",
+        }}
+      >
+        <Navbar title={"Notifications"} />
+
+        {
+          // {{{{{{{{{{{{{{{{{{{{ if 0 data in db }}}}}}}}}}}}}}}}}}}}
+
+          data && data.length === 0 ? (
+            <div
+              className="col text-center"
+              style={{
+                dipslay: "absolute",
+                top: "10%",
+                left: "25%",
               }}
-            />
-          </div>
-        </div>
-        <div className="col m-5">
-          <img className={classes.notification} src={icon} alt="notifiaction" />
-          <p className={classes.notification}>You Do not have Notification !</p>
-        </div>
+            >
+              <img
+                className="notification"
+                style={{ margin: "2em 0" }}
+                src={icon}
+                alt="notifiaction"
+              />
+              <p className="notification" style={{ margin: 0 }}>
+                You Do not have any Notifications yet!
+              </p>
+            </div>
+          ) : (
+            data.map((data, i) => (
+              // {{{{{{{{{{{{{{{{{{{{ if any data in db }}}}}}}}}}}}}}}}}}}}
+
+              <Card
+                key={data.id}
+                id={data.id}
+                title={data.title}
+                message={data.message}
+                timestamp={data.timestamp}
+                image={data.image}
+              />
+            ))
+          )
+        }
       </div>
     </>
   );

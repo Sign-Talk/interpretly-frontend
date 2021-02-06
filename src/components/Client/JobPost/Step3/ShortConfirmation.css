@@ -1,0 +1,38 @@
+.short-confirmtion-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 80%;
+    width: 100%;
+    margin: 1.3em auto;
+}
+
+.interpreters, .amount, .description {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.client-job-modal2{
+    height: 28em;
+    width: 37em;
+    background-color: #171717;
+    border-radius: 8px;
+}
+
+.client-job-modal3{
+    height: 20em;
+    width: 28em;
+    background-color: #171717;
+    border-radius: 8px;
+}
+
+.event-y, .event-n{
+    display: flex;
+    align-self: center;
+    width: 50%;
+}
+
+.event{
+    display: flex;
+    justify-content: space-evenly;
+}

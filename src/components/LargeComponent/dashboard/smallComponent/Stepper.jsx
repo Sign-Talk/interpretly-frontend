@@ -232,7 +232,9 @@ export default function CustomizedSteppers() {
           <div>
             <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
             <div>
-              <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
+              <Button variant="contained"
+                color="primary"
+              disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                 Back
               </Button>
               <Button

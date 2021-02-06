@@ -9,6 +9,8 @@ import {
   faUniversity,
   faLaptopCode,
   faCogs,
+  faHandHoldingUsd,
+  
 } from "@fortawesome/free-solid-svg-icons";
 
 function Step3({ state, setState }) {
@@ -51,6 +53,7 @@ function Step3({ state, setState }) {
     1: <FontAwesomeIcon icon={faUniversity} className='mr-2' />,
     2: <FontAwesomeIcon icon={faLaptopCode} className='mr-2' />,
     3: <FontAwesomeIcon icon={faCogs} className='mr-2' />,
+    4: <FontAwesomeIcon icon={faHandHoldingUsd} className='mr-2'/>
   };
 
   return (

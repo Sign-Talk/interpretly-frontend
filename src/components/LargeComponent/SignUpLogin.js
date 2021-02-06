@@ -3,6 +3,10 @@ import LeftLogin from "./LeftLogin";
 import RightLogin from "./RightLogin";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { useSelector, useDispatch } from 'react-redux'
+import { setClicked } from '../../redux/Actions/HeroActions'
+import { setClientSignupModal } from '../../redux/Actions/ModalActions'
+
 // const inputStyle = {
 //   height: "24px",
 //   fontSize: "20px",
@@ -12,11 +16,11 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 //   borderRadius: "4px",
 // };
 
-function SignUpLogin({ setmodalState, modalState, clicked }) {
+function SignUpLogin({ isInterpreter, formData, setFormData, setPhoneModal, phoneModal, ...props }) {
   const [state, setState] = useState({
     base: "https://whispering-lake-75400.herokuapp.com",
     selected: "",
-    lSelected: "login",
+    lSelected: "register",
     rSelected: "login",
     imail: "",
     ipass: "",
@@ -48,17 +52,29 @@ function SignUpLogin({ setmodalState, modalState, clicked }) {
     },
   });
 
+  const dispatch = useDispatch()
+  const heroState = useSelector(state => state.HeroState)
+  const ModalState = useSelector(state => state.ModalState)
+
   useEffect(() => {
-    if (clicked !== null || clicked !== undefined)
-      setState({ ...state, selected: clicked });
-  }, [clicked]);
+    if (heroState.clicked !== null || heroState.clicked !== undefined)
+      setState({ ...state, selected: heroState.clicked });
+  }, [heroState.clicked]);
 
   return (
     <div>
       <FontAwesomeIcon
         icon={faTimes}
         className='text-danger'
-        onClick={() => setmodalState(!modalState)}
+        onClick={() => 
+          heroState.clicked == 'left' ?
+            dispatch(setClientSignupModal(!ModalState.clientSignUpModal))
+          : (
+            // dispatch(setClicked(false)),
+            // setState({...state, selected : ""})
+            props.setpopUpClicked(false)
+          )
+        }
         style={{
           position: "absolute",
           right: "0px",
@@ -66,10 +82,22 @@ function SignUpLogin({ setmodalState, modalState, clicked }) {
           cursor: "pointer",
         }}
       />
-      {state.selected === "left" ? (
-        <LeftLogin state={state} setState={setState} />
-      ) : (
-        <RightLogin state={state} setState={setState} />
+      {heroState.clicked === "left" || ModalState.clientSignUpModal || state.selected =='left' ? (
+        <LeftLogin 
+          // setVerify={setVerify} 
+          state={state} 
+          setState={setState} 
+          // setmodalState={setmodalState}
+          isInterpreter={isInterpreter}
+          formData={formData}  
+          setFormData={setFormData}
+          setPhoneModal={setPhoneModal}
+          phoneModal={phoneModal}
+          isOnBoard={props.isOnBoard}
+          setpopUpClicked={props.setpopUpClicked}
+        />
+      ) : ( heroState.clicked === "right" &&
+        <RightLogin state={state} setState={setState} setpopUpClicked={props.setpopUpClicked} />
       )}
     </div>
   );

@@ -1,18 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { SectionProps } from '../../utils/SectionProps';
-import Input from '../elements/Input';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import { SectionProps } from "../../utils/SectionProps";
 
 const propTypes = {
   ...SectionProps.types,
-  split: PropTypes.bool
-}
+  split: PropTypes.bool,
+};
 
 const defaultProps = {
   ...SectionProps.defaults,
-  split: false
-}
+  split: false,
+};
 
 const Cta = ({
   className,
@@ -25,29 +24,19 @@ const Cta = ({
   split,
   ...props
 }) => {
-
   const outerClasses = classNames(
-    'cta section center-content-mobile reveal-from-bottom',
-    topOuterDivider && 'has-top-divider',
-    bottomOuterDivider && 'has-bottom-divider',
-    hasBgColor && 'has-bg-color',
-    invertColor && 'invert-color',
+    "cta section center-content-mobile reveal-from-bottom",
+    topOuterDivider && "has-top-divider",
+    bottomOuterDivider && "has-bottom-divider",
+    hasBgColor && "has-bg-color",
+    invertColor && "invert-color",
     className
   );
 
-  const innerClasses = classNames(
-    'cta-inner section-inner',
-    topDivider && 'has-top-divider',
-    bottomDivider && 'has-bottom-divider',
-    split && 'cta-split'
-  );  
 
   return (
-    <section
-      {...props}
-      className={outerClasses}
-    >
-      <div className="container">
+    <section {...props} className={outerClasses}>
+      {/* <div className="container">
         <div
           className={innerClasses}
         >
@@ -64,10 +53,10 @@ const Cta = ({
             </Input>
           </div>
         </div>
-      </div>
+      </div> */}
     </section>
   );
-}
+};
 
 Cta.propTypes = propTypes;
 Cta.defaultProps = defaultProps;

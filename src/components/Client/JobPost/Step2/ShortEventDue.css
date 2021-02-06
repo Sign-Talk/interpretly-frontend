@@ -1,0 +1,37 @@
+.event-due-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 85%;
+    width: 90%;
+    margin: 1.3em auto;
+}
+
+.duration, .start-date, .end-date, .assistance, .address{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.assistance .checks p{
+    font-size: .8rem;
+}
+
+.short-event-checkbox{
+    align-self: center;
+    margin-right: .5em;
+    /* styles */
+    appearance: none;
+    border: 3px solid #7E21DB; 
+    outline: none;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+}
+
+.short-event-checkbox:after, .short-event-checkbox:checked:active{
+    border: 7px solid #7E21DB; 
+}
+
+.short-event-checkbox:checked{
+    border: 7px solid #7E21DB; 
+}
