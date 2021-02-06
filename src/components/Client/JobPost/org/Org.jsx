@@ -4,6 +4,14 @@ import './Org.css'
 import { useSelector, useDispatch } from 'react-redux'
 import { setOrganisationModal } from '../../../../redux/Actions/ModalActions'
 
+const orgTypes = [
+    { value : "NGO"},
+    { value : "Private Sector"},
+    { value : "Public Sector"},
+    { value : "School"},
+    { value : "Govt. Organization"}
+]
+
 const Org = ({formData, setFormData}) => {
     const dispatch = useDispatch()
     const { organisationModal } = useSelector(state => state.ModalState)
@@ -30,17 +38,16 @@ const Org = ({formData, setFormData}) => {
                     value={formData.organisationType}
                     onChange={(e) => setFormData({ ...formData, organisationType: e.target.value })}
                 >
-                    <MenuItem value="any">
+                    <MenuItem disabled value="any">
                         Any
                     </MenuItem>
-                    {/* {
-                            works.map((item, index) => (
-                                <MenuItem key={item.value} value={item.value}>
-                                    {item.icon}
-                                    {item.label}
+                        {
+                            orgTypes.map((item, index) => (
+                                <MenuItem key={index} value={item.value}>
+                                    {item.value}
                                 </MenuItem>
                             ))
-                        } */}
+                        }
                 </Select>
             </div>
             <div className='org-button'>

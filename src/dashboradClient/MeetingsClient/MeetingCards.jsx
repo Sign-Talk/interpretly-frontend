@@ -27,7 +27,7 @@ function MeetingCards({
                 {title}- {type}
               </span>{" "}
               <span className="textcolorWhite">
-                &#8226; {date} &#8226; {time}
+                &#8226; {date.replace('th', 'st')} &#8226; {time}
               </span>
             </div>
 

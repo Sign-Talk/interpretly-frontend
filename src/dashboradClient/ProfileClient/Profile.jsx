@@ -699,7 +699,7 @@ function Profile(props) {
                       >
                         Payment Methods
                       </Grid>
-                      <Grid item>PrivAcy Policy</Grid>
+                      <Grid item>Privacy Policy</Grid>
                     </Grid>
 
                     {/* 7 */}
@@ -729,7 +729,7 @@ function Profile(props) {
                           history.push("/interpretly");
                         }}
                       >
-                        LogOut <ChevronRight />
+                        Log Out <ChevronRight />
                       </Grid>
                     </Grid>
                   </Grid>
@@ -762,7 +762,7 @@ function Profile(props) {
               </>
             )}
 
-            <Grid container spacing={2} style={{ marginTop: "-3rem" }}>
+            <Grid container spacing={2} style={{ marginTop: "-3rem", marginBottom : "1em" }}>
               <Grid item xs={12} sm={4}>
                 <Button
                   onClick={handleSave}

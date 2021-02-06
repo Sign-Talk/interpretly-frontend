@@ -20,37 +20,37 @@ const Attitude = ({
                 <div className='star-icons'>
                     <button className='ratings-btn'>
                         <img src={starIcon} width={36} alt=""/>
+                    </button>
                         <p className='m-0 no'>1</p>
                         <p className='msg'>Awful</p>
-                    </button>
                 </div>
                 <div className='star-icons'>
                     <button className='ratings-btn'>
                         <img src={starIcon} width={36} alt=""/>
+                    </button>
                         <p  className='m-0 no'>2</p>
                         <p className='msg'>Bad</p>
-                    </button>
                 </div>
                 <div className='star-icons'>
                     <button className='ratings-btn'>
                         <img src={starIcon} width={36} alt=""/>
+                    </button>
                         <p className='m-0 no'>3</p>
                         <p className='msg'>Okay</p>
-                    </button>
                 </div>
                 <div className='star-icons'>
                     <button className='ratings-btn'>
                         <img src={starIcon} width={36} alt=""/>
+                    </button>
                         <p className='m-0 no'>4</p>
                         <p className='msg'>Good</p>
-                    </button>
                 </div>
                 <div className='star-icons'>
                     <button className='ratings-btn'>
                         <img src={starIcon} alt=""/>
+                    </button>
                         <p className='m-0 no'>5</p>
                         <p className='msg'>Great</p>
-                    </button>
                 </div>
             </div>
             <FeedbackFooter

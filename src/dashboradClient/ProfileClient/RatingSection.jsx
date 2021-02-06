@@ -37,7 +37,7 @@ function RatingSection() {
             </div>
             <br />
             <br />
-            <div>Hospatiality</div>
+            <div>Hospitality</div>
             <div>
               <span style={{ color: "#24e5af" }}>
                 {" "}

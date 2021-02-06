@@ -29,6 +29,13 @@ const works = [
     { value: 'Finance & Accounting', label: 'Finance & Accounting', icon : <FontAwesomeIcon icon={faHandHoldingUsd} className='mr-2'/>  },
     { value: 'others', label: 'others' },
   ]
+const signLanguages = [
+    { value: 'ISL (Indain Sign Language)' },
+    { value: 'BSL (British Sign Language)' },
+    { value: 'ASL (American Sign Language)' },
+    { value: 'FSL (French Sign Language)' },
+    { value: 'Libras (Brazilian Sign Language)' },
+]
 
 const JobSpecs = ({ 
     formData, 
@@ -100,6 +107,30 @@ const JobSpecs = ({
                             places.map((item, index) => (
                                 <MenuItem key={index} value={item.value}>
                                     {item.label}
+                                </MenuItem>
+                            ))
+                        }
+                    </Select>
+                </div>
+                <div className="region signLang mt-2">
+                    <p className='labels' style={{width : '40%'}} >Sign Language</p>
+                    <p>:</p>
+                    <Select
+                        labelId='demo-customized-select-label'
+                        id='demo-customized-select'
+                        className='bg-light rounded'
+                        style={{ width : '40%', height : 0, padding : '1rem' }}
+                        value={formData.signLang}
+                        onChange={(e) => setFormData({...formData, signLang : e.target.value})}
+                        defaultValue='value'
+                    >
+                        <MenuItem disabled value='value'>
+                            Select Sign Language
+                        </MenuItem>
+                        {
+                            signLanguages.map((item, index) => (
+                                <MenuItem key={index} value={item.value}>
+                                    {item.value}
                                 </MenuItem>
                             ))
                         }

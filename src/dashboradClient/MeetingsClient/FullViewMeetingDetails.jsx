@@ -271,7 +271,7 @@ const FullViewMeetingDetails = ({ SetShowPaymentMethod }) => {
           {/* Normal Application */}
           <div className=" ml-12 floatleft" style={{ marginTop: "50px" }}>
             <span className="colorWhite displayflex">
-              Nogotiating Applicants
+              Negotiating Applicants
             </span>
           </div>
 

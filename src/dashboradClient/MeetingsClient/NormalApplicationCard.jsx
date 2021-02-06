@@ -176,6 +176,7 @@ const NormalApplication = () => {
         <div className="infoicon displayflex"></div>
         <img
           className="infoicon displayflex"
+          style={{ width: "30px", height : "30px" }}
           src={leftarraow}
           alt="leftarrow"
         />
@@ -189,7 +190,7 @@ const NormalApplication = () => {
         <span className=" displayflex cursor">5</span>
         <img
           className=" displayflex cursor"
-          style={{ marginLeft: "-60px" }}
+          style={{ marginLeft: "-60px",  width: "30px", height : "30px"  }}
           src={rightarrow}
           alt="rightarrow"
         />

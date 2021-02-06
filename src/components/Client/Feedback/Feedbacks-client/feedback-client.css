@@ -9,6 +9,13 @@
 }
 
 .checkboxes{
+    align-self: center;
+    margin-right: .5em;
+    /* styles */
+    appearance: none;
+    border: 3px solid #7E21DB; 
+    outline: none;
+    border-radius: 50%;
     height: 29px;
     width: 29px;
 }
@@ -50,6 +57,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    text-align: center;
 }
 
 .no{
@@ -67,6 +75,7 @@
     color: none;
     border: none;
     outline: none;
+    align-self: center;
 }
 
 /* feedback-client4 */
