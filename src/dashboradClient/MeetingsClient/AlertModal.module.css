@@ -1,0 +1,27 @@
+.Title {
+  font-size: 1.66vw;
+  color: white;
+  text-align: center;
+  font-weight: 500;
+  width: 43vw;
+}
+
+.Subtitle {
+  font-size: 1.45vw;
+  width: 43vw;
+  text-align: center;
+}
+
+.Buttons {
+  margin-top: 3vw;
+}
+
+.Buttons button {
+  width: unset !important;
+}
+
+.Content {
+  display: flex;
+  grid-row-gap: 1vw;
+  flex-direction: column;
+}

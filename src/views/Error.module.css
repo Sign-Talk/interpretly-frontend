@@ -1,0 +1,47 @@
+.Title {
+  text-align: center;
+  font-size: 2.08vw;
+  letter-spacing: 0px;
+  color: #a3a3a3;
+  opacity: 1;
+}
+
+.Subtitle {
+  font-size: 1.25vw;
+  margin-top: 0.71vw;
+}
+
+.Container {
+  width: 38vw;
+  text-align: center;
+  margin-left: 35vw;
+  margin-top: 8vw;
+}
+
+.LinkContainer {
+  font-size: 0.91vw;
+}
+
+.Links {
+  display: flex;
+  grid-column-gap: 1vw;
+  color: #ab57ff;
+  justify-content: center;
+  text-decoration: underline;
+}
+
+.Links a {
+  color: #ab57ff !important;
+  text-decoration: underline;
+}
+
+.ErrImage {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vw;
+}
+
+.ErrImage img {
+  width: 26vw;
+  height: 10.3vw;
+}

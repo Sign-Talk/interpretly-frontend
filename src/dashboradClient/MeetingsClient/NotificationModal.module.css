@@ -1,0 +1,49 @@
+.Title {
+  font-size: 1.66vw;
+  color: white;
+  font-weight: 500;
+}
+
+.Subtitle {
+  margin-top: 1.5vw;
+  margin-bottom: 2vw;
+  margin-left: auto;
+  margin-right: auto;
+  width: 38vw;
+}
+
+.Card {
+  width: 50.5vw;
+  background: #272727 0% 0% no-repeat padding-box;
+  border: 2px solid #ab57ff;
+  border-radius: 0.626vw;
+  padding: 1.9vw;
+}
+
+.Duration {
+  font-size: 1.87vw;
+  text-align: left;
+  margin-left: 1vw;
+  margin-top: 0.491vw;
+}
+
+.Duration span {
+  font-weight: bold;
+}
+
+.Footer {
+  margin-left: 1vw;
+  margin-top: 2.3vw;
+  font-size: 1.45vw;
+  color: #a3a3a3;
+  display: flex;
+  justify-content: space-between;
+}
+
+.FooterButton {
+  margin-top: 2vw;
+}
+
+.FooterButton button {
+  width: unset !important;
+}

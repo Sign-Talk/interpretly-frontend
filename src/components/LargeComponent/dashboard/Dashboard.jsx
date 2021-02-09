@@ -201,7 +201,7 @@ function Dashboard({history}) {
                 <h4 className="co">Expand &gt;</h4>
               </div>
             </div>
-            <Calendar className="col-11 mr-auto mt-4 ml-auto p-3 w-100 c5 round" />
+            <Calendar className="col-11 mr-auto mt-4 ml-auto p-3 w-100 c5 round calenderForClient" />
           </div>
           <div className="col-6">
             <div className="col-12 m-auto d-flex justify-content-between p-0">

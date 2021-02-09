@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 import "react-calendar/dist/Calendar.css";
 import Divider from "@material-ui/core/Divider";
 import "./Schedule.module.css";
-import "react-calendar/dist/Calendar.css";
+
 
 function Schedule() {
   const arr = [1, 1, 1, 1, 1, 1, 1, 1];
@@ -37,7 +37,7 @@ function Schedule() {
           </div>
           <Calendar
             style={{ width: "500px" }}
-            className="col-12 mr-auto mt-4  p-3 c5 round w-100"
+            className="col-12 mr-auto mt-4  p-3 c5 round w-100 round calenderForClient"
           />
         </div>
         <div

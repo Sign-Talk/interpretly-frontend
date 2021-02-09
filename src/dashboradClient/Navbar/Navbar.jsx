@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
-import { Bell } from "react-feather";
-import DetailsRoundedIcon from "@material-ui/icons/DetailsRounded";
-import NatificationCard from "../../components/LargeComponent/Notification/Card";
+import DetailsRoundedIcon from '@material-ui/icons/DetailsRounded';
+import React, { useEffect, useState } from 'react';
+import { Bell } from 'react-feather';
+import { useHistory } from 'react-router-dom';
+import NatificationCard from '../../components/LargeComponent/Notification/Card';
+import './Navbar.css';
 
-import "./Navbar.css";
-
-let icon = require("../../assets/images/message.svg");
+let icon = require('../../assets/images/message.svg');
 
 function Navbar({ Backicon, title, SetShowPaymentMethod }) {
   const history = useHistory();
@@ -34,10 +33,10 @@ function Navbar({ Backicon, title, SetShowPaymentMethod }) {
 
   // fetch notification db
   const FetchNotificationdbJson = () => {
-    fetch("notificationDummyData.json", {
+    fetch('notificationDummyData.json', {
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     })
       .then(function (response) {
@@ -53,10 +52,10 @@ function Navbar({ Backicon, title, SetShowPaymentMethod }) {
     FetchNotificationdbJson();
 
     window.onclick = function (event) {
-      if (!event.target.matches(".sowthedic")) {
+      if (!event.target.matches('.sowthedic')) {
         setDisplayDropdown(false);
       }
-      if (!event.target.matches(".HandleShowNotification")) {
+      if (!event.target.matches('.HandleShowNotification')) {
         setDisplayNotification(false);
       }
     };
@@ -66,22 +65,19 @@ function Navbar({ Backicon, title, SetShowPaymentMethod }) {
 
   return (
     <div
-      className="col-12 pl-3 pt-3 p-0 pb-5"
+      className='col-12 pl-3 pt-3 p-0 pb-5'
       style={{
-        height: "80px",
-        boxShadow: "0px 5px 15px black",
-        position: "sticky",
-        top: "0px",
-        right: "0px",
-        zIndex: "4",
+        height: '80px',
+        boxShadow: '0px 5px 15px black',
+        position: 'sticky',
+        top: '0px',
+        right: '0px',
+        zIndex: '4',
       }}
     >
-      <h3 className="fo1 font-weight-light h3Forprofile h3Forprofileinclient">
+      <h3 className='fo1 font-weight-light h3Forprofile h3Forprofileinclient'>
         {Backicon && (
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={() => SetShowPaymentMethod(false)}
-          >
+          <span style={{ cursor: 'pointer' }} onClick={() => SetShowPaymentMethod(false)}>
             <Backicon />
           </span>
         )}
@@ -89,8 +85,8 @@ function Navbar({ Backicon, title, SetShowPaymentMethod }) {
       </h3>
 
       <div
-        className="rounded-circle p-2  bellIcon HandleShowNotification "
-        style={{ background: "#7e21db" }}
+        className='rounded-circle p-2  bellIcon HandleShowNotification '
+        style={{ background: '#7e21db' }}
         onClick={HandleShowNotification}
       >
         <Bell />
@@ -100,27 +96,24 @@ function Navbar({ Backicon, title, SetShowPaymentMethod }) {
       {DisplayNotification && (
         <div
           style={{
-            position: "absolute",
-            right: "10px",
-            width: "500px",
+            position: 'absolute',
+            right: '10px',
+            width: '500px',
           }}
         >
           <div
-            className="col-12"
+            className='col-12'
             style={{
-              maxHeight: "400px",
-              marginTop: "50px",
-              overflowY: "scroll",
-              overflowX: "hidden",
-              border: "2px solid #54acf0",
-              background: "#171717",
+              maxHeight: '400px',
+              marginTop: '50px',
+              overflowY: 'scroll',
+              overflowX: 'hidden',
+              border: '2px solid #54acf0',
+              background: '#171717',
             }}
           >
-            <div className="col-12 m-auto d-flex justify-content-between p-0">
-              <div
-                className="col text-center"
-                style={{ marginBottom: "-20px" }}
-              >
+            <div className='col-12 m-auto d-flex justify-content-between p-0'>
+              <div className='col text-center' style={{ marginBottom: '-20px' }}>
                 <h4>Notification</h4>
               </div>
             </div>
@@ -128,24 +121,19 @@ function Navbar({ Backicon, title, SetShowPaymentMethod }) {
               // {{{{{{{{{{{{{{{{{{{{ if 0 data in db }}}}}}}}}}}}}}}}}}}}
 
               data && data.length === 0 ? (
-                <div className="col text-center">
-                  <img
-                    className="notification"
-                    style={{ margin: "2em auto" }}
-                    src={icon}
-                    alt="notifiaction"
-                  />
-                  <p className="notification" style={{ margin: "auto" }}>
+                <div className='col text-center'>
+                  <img className='notification' style={{ margin: '2em auto' }} src={icon} alt='notifiaction' />
+                  <p className='notification' style={{ margin: 'auto' }}>
                     You Do not have any Notifications yet!
                   </p>
                 </div>
               ) : (
-                <div className="cardinsideeNOTI">
+                <div className='cardinsideeNOTI'>
                   {data.map((data, i) => (
                     // {{{{{{{{{{{{{{{{{{{{ if any data in db }}}}}}}}}}}}}}}}}}}}
 
                     <NatificationCard
-                      className="cardINDashBoardClient"
+                      className='cardINDashBoardClient'
                       key={data.id}
                       id={data.id}
                       title={data.title}
@@ -162,35 +150,37 @@ function Navbar({ Backicon, title, SetShowPaymentMethod }) {
       )}
       {/* // {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}} */}
 
-      <div className="NavDropDown sowthedic" onClick={HandleDisplyDropdown}>
-        <div className="NavDropDownchild sowthedic">
+      <div className='NavDropDown sowthedic' onClick={HandleDisplyDropdown}>
+        <div className='NavDropDownchild sowthedic'>
           <div
             style={{
-              position: "absolute",
-              top: "50%",
-              fontSize: "16px",
-              transform: "translate(25px, -50%)",
+              position: 'absolute',
+              top: '50%',
+              fontSize: '16px',
+              transform: 'translate(25px, -50%)',
             }}
-            className="sowthedic"
+            className='sowthedic'
           >
             Neo Ho..
           </div>
-          <div className="NavDropDownchild2 sowthedic">
-            <DetailsRoundedIcon className="DetailsRoundedIcon sowthedic" />
+          <div className='NavDropDownchild2 sowthedic'>
+            <DetailsRoundedIcon className='DetailsRoundedIcon sowthedic' />
           </div>
         </div>
       </div>
 
       {DisplayDropdown && (
-        <ul className="dropdownMenu">
-          <li className="dropdownMenuli">Open Profile</li>
-          <li className="dropdownMenuli">Account Setting</li>
-          <li className="dropdownMenuli">Privacy Policy</li>
+        <ul className='dropdownMenu'>
+          <li className='dropdownMenuli'>Open Profile</li>
+          <li className='dropdownMenuli'>Take a tour</li>
+          <li className='dropdownMenuli'>Account Settings</li>
+          <li className='dropdownMenuli'>Refund Policy</li>
+          <li className='dropdownMenuli'>Privacy Policy</li>
           <li
-            className="dropdownMenuli"
+            className='dropdownMenuli'
             onClick={() => {
-              localStorage.removeItem("token");
-              history.push("/interpretly");
+              localStorage.removeItem('token');
+              history.push('/interpretly');
             }}
           >
             Log Out
