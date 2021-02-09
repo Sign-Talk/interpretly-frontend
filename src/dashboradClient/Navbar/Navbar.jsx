@@ -67,7 +67,7 @@ function Navbar({ Backicon, title, SetShowPaymentMethod }) {
     <div
       className='col-12 pl-3 pt-3 p-0 pb-5'
       style={{
-        height: '80px',
+        height: '100px',
         boxShadow: '0px 5px 15px black',
         position: 'sticky',
         top: '0px',

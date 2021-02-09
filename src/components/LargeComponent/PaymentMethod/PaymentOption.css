@@ -9,6 +9,9 @@
   flex: 1;
   font-size: 16px;
 }
+.backgroundBlue{
+  background:#54acf0
+}
 
 .linkInsidePayment {
   padding: 15px;
@@ -27,6 +30,7 @@
   background: #272727;
   border-radius: 0px 5px 5px 5px;
   padding: 30px;
+  height: 25vw !important;
 }
 
 .accNAndIfsc {
