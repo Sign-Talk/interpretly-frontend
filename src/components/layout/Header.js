@@ -157,12 +157,13 @@ const Header = ({
                   {!hideSignin && (
                     <ul className='list-reset header-nav-right'>
                       <li>
-                        <a
-                          href='https://signtalk.in/interpretly/home/'
+                        <Link
+                          // href='#'
                           className='button button-primary button-wide-mobile button-sm'
-                          onClick={closeMenu}>
+                          // onClick={closeMenu}
+                          >
                           Log In
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   )}
