@@ -39,7 +39,9 @@
   padding: 6px 10px;
   border: none;
 }
-
+.b{
+  color: #ab57ff;
+}
 .amountSection {
   display: flex;
 }

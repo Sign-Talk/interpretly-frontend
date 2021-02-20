@@ -25,7 +25,7 @@ function ProfileInNavbarCard() {
 
   return (
     <>
-      <div className="NavDropDown sowthedica" onClick={HandleDisplyDropdown}>
+      <div className="NavDropDown sowthedica" >
         <div className="NavDropDownchild sowthedica">
           <div
             style={{
@@ -39,7 +39,7 @@ function ProfileInNavbarCard() {
             Neo Ho..
           </div>
           <div className="NavDropDownchild2 sowthedica">
-            <DetailsRoundedIcon className="DetailsRoundedIcon sowthedica" />
+            <DetailsRoundedIcon className="DetailsRoundedIcon sowthedica" onClick={HandleDisplyDropdown} />
           </div>
         </div>
       </div>

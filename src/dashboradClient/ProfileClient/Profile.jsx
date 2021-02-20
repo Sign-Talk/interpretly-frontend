@@ -379,7 +379,7 @@ function Profile(props) {
                     <Link
                       to="#"
                       className="far fa-edit"
-                      style={{ color: "#7e21db" }}
+                      style={{ color: "#ab57ff" }}
                       onClick={() => setshowName(false)}
                     >
                       Edit Name
@@ -430,7 +430,7 @@ function Profile(props) {
                             <Link
                               to="#"
                               style={{
-                                color: "#7e21db",
+                                color: "#ab57ff",
                                 marginLeft: "2rem",
                                 fontSize: "14px",
                               }}
@@ -490,7 +490,7 @@ function Profile(props) {
                             <Link
                               to="#"
                               style={{
-                                color: "#7e21db",
+                                color: "#ab57ff",
                                 marginLeft: "2rem",
                                 fontSize: "14px",
                               }}
@@ -688,7 +688,7 @@ function Profile(props) {
                       style={{
                         marginTop: "10px",
                         fontSize: "12px",
-                        color: "#7e21db",
+                        color: "#ab57ff",
                       }}
                     >
                       <Grid item>Account Settings</Grid>
@@ -711,7 +711,7 @@ function Profile(props) {
                       style={{
                         marginTop: "10px",
 
-                        color: "#7e21db",
+                        color: "#ab57ff",
                       }}
                     >
                       <Grid
@@ -749,7 +749,7 @@ function Profile(props) {
                   to="#"
                   className="far fa-edit"
                   style={{
-                    color: "#7e21db",
+                    color: "#ab57ff",
                     // left: "75%",
                     position: "absolute",
                     top: "20vh",

@@ -89,8 +89,9 @@ function Navbar({ Backicon, title, ShowPaymentMethod }) {
       <div
         className="rounded-circle p-2 c4 bellIcon HandleShowNotification "
         onClick={HandleShowNotification}
+        style={{zIndex:"9999"}}
       >
-        <Bell />
+        <Bell onClick={HandleShowNotification}/>
       </div>
 
       {/* // {{{{{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}}} */}

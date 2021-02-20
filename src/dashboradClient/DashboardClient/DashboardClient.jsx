@@ -176,7 +176,7 @@ function DashboardClient({ history, ...props }) {
         <hr className="c1 col-10 ml-auto mt-5 mb-5 mr-auto" />
 
         <div className="col-12 row m-auto">
-          <div className="col-6">
+          <div className="col-6 client">
             <div className="col-12 m-auto d-flex justify-content-between p-0">
               <div className="col text-left">
                 <h5>Schedule</h5>
