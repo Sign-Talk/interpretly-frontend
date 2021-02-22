@@ -5,6 +5,7 @@ import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 
+
 const useStyles = makeStyles({
   root: {
     "&:hover": {
@@ -49,7 +50,8 @@ const useStyles = makeStyles({
   },
 });
 
-function StyledRadio(props) {
+const StyledRadio = (props) =>  {
+
   const classes = useStyles();
 
   return (
@@ -63,11 +65,15 @@ function StyledRadio(props) {
     />
   );
 }
-function Step4({ setSteps }) {
+
+
+
+
+function Step4({ setSteps,setShowPaymentMethod }) {
   const [showOther, setshowOther] = useState(false);
 
-  return (
-    <div className="step1parent">
+
+  return <div className="step1parent">
       <p
         style={{
           color: "white",
@@ -147,12 +153,12 @@ function Step4({ setSteps }) {
 
       <button
         className="InitiatePaymentbtn continuebtn"
-        onClick={() => setSteps(5)}
+      onClick={() => { setSteps(5); setShowPaymentMethod(true)}}
       >
         Continue
       </button>
     </div>
-  );
 }
+
 
 export default Step4;

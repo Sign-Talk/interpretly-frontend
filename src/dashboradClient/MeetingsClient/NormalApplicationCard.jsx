@@ -24,21 +24,15 @@ const NormalApplication = () => {
           <span className="floatleft" style={{ marginLeft: "13px" }}>
             1
             <span style={{ marginLeft: "40px" }} className=" displayflex">
-              <span className="colorPink ">Ajay Jha</span>
-            </span>
-            <span className="displayflex">
-              <span className="floatleft" style={{ marginLeft: "-110px" }}>
-                <span className="displayflex">
-                  <img
-                    className="infoicon "
-                    // width={20}
-                    src={protectedshield}
-                    alt="protectedshield"
-                  />
-                </span>
-                <span className="displayflex" style={{ marginLeft: "-260px" }}>
-                  Certified
-                </span>
+              <span className="colorPink " style={{ float: "left" }}>
+                <span style={{ float: "left" }}>Ajay Jha</span>
+                <img
+                  className="infoicon leftarrow "
+                  src={protectedshield}
+                  alt="protectedshield"
+                  style={{ float: "left", width: "25px" }}
+                />
+                <span style={{ color: "white" }}>Certified</span>
               </span>
             </span>
           </span>
@@ -77,7 +71,7 @@ const NormalApplication = () => {
       <div className="floatleft mt-24">
         <div className="displayflex2">
           <span className="floatleft" style={{ marginLeft: "13px" }}>
-            1
+            2
             <span style={{ marginLeft: "40px" }} className=" displayflex">
               <span className="colorPink "> Abhishek</span>
             </span>
@@ -116,23 +110,17 @@ const NormalApplication = () => {
       <div className="floatleft mt-24">
         <div className="displayflex2">
           <span className="floatleft" style={{ marginLeft: "13px" }}>
-            1
+            3
             <span style={{ marginLeft: "40px" }} className=" displayflex">
-              <span className="colorPink ">Vidhyth Sharma</span>
-            </span>
-            <span className="displayflex">
-              <span className="floatleft" style={{ marginLeft: "-110px" }}>
-                <span className="displayflex">
-                  <img
-                    className="infoicon "
-                    // width={20}
-                    src={protectedshield}
-                    alt="protectedshield"
-                  />
-                </span>
-                <span className="displayflex" style={{ marginLeft: "-260px" }}>
-                  Certified
-                </span>
+              <span className="colorPink " style={{ float: "left" }}>
+                <span style={{ float: "left" }}>Vidhyth Sharma</span>
+                <img
+                  className="infoicon leftarrow "
+                  src={protectedshield}
+                  alt="protectedshield"
+                  style={{ float: "left", width: "25px" }}
+                />
+                <span style={{ color: "white" }}>Certified</span>
               </span>
             </span>
           </span>
@@ -175,8 +163,7 @@ const NormalApplication = () => {
         <div className="infoicon displayflex2"></div>
         <div className="infoicon displayflex"></div>
         <img
-          className="infoicon displayflex"
-          style={{ width: "30px", height : "30px" }}
+          className="infoicon leftarrow displayflex"
           src={leftarraow}
           alt="leftarrow"
         />
@@ -189,8 +176,8 @@ const NormalApplication = () => {
         <span className=" displayflex cursor">4</span>
         <span className=" displayflex cursor">5</span>
         <img
-          className=" displayflex cursor"
-          style={{ marginLeft: "-60px",  width: "30px", height : "30px"  }}
+          className=" displayflex leftarrow cursor"
+          style={{ marginLeft: "-60px" }}
           src={rightarrow}
           alt="rightarrow"
         />

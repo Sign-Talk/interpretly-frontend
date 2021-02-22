@@ -12,10 +12,8 @@ const NogiationApplicationCard = () => {
           # <span style={{ marginLeft: "30px" }}>Name</span>
         </span>
         <span className="colorWhite displayflex">
-          <span style={{ marginLeft: "-8px" }}>
-            Rating
-            <span></span>
-          </span>
+          <span style={{ marginLeft: "-40px" }}>Rating</span>
+          <span style={{ marginLeft: "70px" }}>Amount</span>
         </span>
       </div>
       {/* 01 */}
@@ -24,21 +22,15 @@ const NogiationApplicationCard = () => {
           <span className="floatleft" style={{ marginLeft: "13px" }}>
             1
             <span style={{ marginLeft: "40px" }} className=" displayflex">
-              <span className="colorPink ">Vidhyth Sharma </span>
-            </span>
-            <span className="displayflex">
-              <span className="floatleft" style={{ marginLeft: "-110px" }}>
-                <span className="displayflex">
-                  <img
-                    className="infoicon "
-                    // width={20}
-                    src={protectedshield}
-                    alt="protectedshield"
-                  />
-                </span>
-                <span className="displayflex" style={{ marginLeft: "-260px" }}>
-                  Certified
-                </span>
+              <span className="colorPink " style={{ float: "left" }}>
+                <span style={{ float: "left" }}>Vidhyth Sharma</span>
+                <img
+                  className="infoicon leftarrow "
+                  src={protectedshield}
+                  alt="protectedshield"
+                  style={{ float: "left", width: "25px" }}
+                />
+                <span style={{ color: "white" }}>Certified</span>
               </span>
             </span>
           </span>
@@ -46,7 +38,7 @@ const NogiationApplicationCard = () => {
         {/* 2nd part side by side */}
         <div className="displayflex">
           <span className="colorWhite displayflex">
-            <span style={{ marginLeft: "10px" }}>
+            <span style={{ marginLeft: "-25px" }}>
               <span className="colorPink">
                 <StarBorder
                   style={{ color: "#24e5af", margin: "-10px 0px 0px -12px" }}
@@ -54,6 +46,8 @@ const NogiationApplicationCard = () => {
               </span>
               4.8
             </span>
+
+            <span style={{ marginLeft: "75px" }}>&#x20b9; 3000</span>
           </span>
         </div>
         {/* 3nd part side by side */}
@@ -82,7 +76,7 @@ const NogiationApplicationCard = () => {
       <div className="floatleft mt-24">
         <div className="displayflex2">
           <span className="floatleft" style={{ marginLeft: "13px" }}>
-            1
+            2
             <span style={{ marginLeft: "40px" }} className=" displayflex">
               <span className="colorPink "> Ashwanth</span>
             </span>
@@ -91,7 +85,7 @@ const NogiationApplicationCard = () => {
         {/* 2nd part side by side */}
         <div className="displayflex">
           <span className="colorWhite displayflex">
-            <span style={{ marginLeft: "10px" }}>
+            <span style={{ marginLeft: "-25px" }}>
               <span className="colorPink">
                 <StarBorder
                   style={{ color: "#24e5af", margin: "-10px 0px 0px -12px" }}
@@ -99,6 +93,8 @@ const NogiationApplicationCard = () => {
               </span>
               4.8
             </span>
+
+            <span style={{ marginLeft: "75px" }}>&#x20b9; 4000</span>
           </span>
         </div>
         {/* 3nd part side by side */}
@@ -127,23 +123,17 @@ const NogiationApplicationCard = () => {
       <div className="floatleft mt-24">
         <div className="displayflex2">
           <span className="floatleft" style={{ marginLeft: "13px" }}>
-            1
+            3
             <span style={{ marginLeft: "40px" }} className=" displayflex">
-              <span className="colorPink ">Chandan Sharma</span>
-            </span>
-            <span className="displayflex">
-              <span className="floatleft" style={{ marginLeft: "-110px" }}>
-                <span className="displayflex">
-                  <img
-                    className="infoicon "
-                    // width={20}
-                    src={protectedshield}
-                    alt="protectedshield"
-                  />
-                </span>
-                <span className="displayflex" style={{ marginLeft: "-260px" }}>
-                  Certified
-                </span>
+              <span className="colorPink " style={{ float: "left" }}>
+                <span style={{ float: "left" }}>Chandan Sharma</span>
+                <img
+                  className="infoicon leftarrow "
+                  src={protectedshield}
+                  alt="protectedshield"
+                  style={{ float: "left", width: "25px" }}
+                />
+                <span style={{ color: "white" }}>Certified</span>
               </span>
             </span>
           </span>
@@ -151,7 +141,7 @@ const NogiationApplicationCard = () => {
         {/* 2nd part side by side */}
         <div className="displayflex">
           <span className="colorWhite displayflex">
-            <span style={{ marginLeft: "10px" }}>
+            <span style={{ marginLeft: "-25px" }}>
               <span className="colorPink">
                 <StarBorder
                   style={{ color: "#24e5af", margin: "-10px 0px 0px -12px" }}
@@ -159,6 +149,8 @@ const NogiationApplicationCard = () => {
               </span>
               4.8
             </span>
+
+            <span style={{ marginLeft: "75px" }}>&#x20b9; 3200</span>
           </span>
         </div>
         {/* 3nd part side by side */}
@@ -192,13 +184,11 @@ const NogiationApplicationCard = () => {
         <div className="infoicon displayflex2"></div>
         <div className="infoicon displayflex"></div>
         <img
-          className="infoicon displayflex"
-          style={{  width: "30px", height : "30px"  }}
+          className="infoicon leftarrow displayflex"
           src={leftarraow}
           alt="leftarrow"
         />
         <span className=" displayflex  cursor">
-          {" "}
           <p className="backblue"> 1</p>
         </span>
         <span className=" displayflex cursor">2</span>
@@ -206,8 +196,8 @@ const NogiationApplicationCard = () => {
         <span className=" displayflex cursor">4</span>
         <span className=" displayflex cursor">5</span>
         <img
-          className=" displayflex cursor"
-          style={{ marginLeft: "-60px", width: "30px", height : "30px" }}
+          className=" displayflex leftarrow cursor"
+          style={{ marginLeft: "-60px" }}
           src={rightarrow}
           alt="rightarrow"
         />

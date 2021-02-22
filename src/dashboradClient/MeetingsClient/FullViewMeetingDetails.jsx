@@ -218,40 +218,37 @@ const FullViewMeetingDetails = ({ SetShowPaymentMethod }) => {
             </span>
           </div>
           {/* short listed applicants */}
-          <div className=' ml-12 floatleft mt-24'>
-            <span className='colorWhite displayflex'>
-              <span className='floatleft'>
+         <div className=" ml-12 floatleft mt-24">
+            <span className="colorWhite displayflex">
+              <span className="floatleft">
                 1
-                <span style={{ marginLeft: '40px' }} className=' displayflex'>
-                  <span className='colorPink '>Vidhyth Sharma</span>
-                </span>
-                <span className='displayflex'>
-                  <span className='floatleft' style={{ marginLeft: '-120px' }}>
-                    <span className='displayflex'>
-                      <img
-                        className='infoicon '
-                        // width={20}
-                        src={protectedshield}
-                        alt='protectedshield'
-                      />
-                    </span>
-                    <span className='displayflex' style={{ marginLeft: '-290px' }}>
-                      Certified
-                    </span>
+                <span style={{ marginLeft: "40px" }} className=" displayflex">
+                  <span className="colorPink " style={{ float: "left" }}>
+                    <span style={{ float: "left" }}>Vidhyth Sharma</span>
+                    <img
+                      className="infoicon leftarrow "
+                      src={protectedshield}
+                      alt="protectedshield"
+                      style={{ float: "left", width: "25px" }}
+                    />
+                    <span style={{ color: "white" }}>Certified</span>
                   </span>
                 </span>
               </span>
             </span>
-            <span className='colorWhite displayflex'>
-              <span style={{ marginLeft: '40px' }}>
-                <span className='colorPink'>
-                  <StarBorder style={{ color: '#24e5af', margin: '-10px 0px 0px -12px' }} />
+            <span className="colorWhite displayflex">
+              <span style={{ marginLeft: "40px" }}>
+                <span className="colorPink">
+                  <StarBorder
+                    style={{ color: "#24e5af", margin: "-10px 0px 0px -12px" }}
+                  />
                 </span>
                 4.8
               </span>
             </span>
           </div>
 
+    
           {/* Normal Application */}
           <div className=' ml-12 floatleft mt-24'>
             <span className='colorWhite displayflex'>Normal Application</span>

@@ -46,7 +46,7 @@ function DashboardClient({ history, ...props }) {
         return response.json();
       })
       .then(function (myJson) {
-        console.log("myjson ", myJson);
+        // console.log("myjson ", myJson);
         setScheduleMeeting(myJson);
       });
   };
@@ -63,7 +63,7 @@ function DashboardClient({ history, ...props }) {
         return response.json();
       })
       .then(function (myJson) {
-        console.log("myjson ", myJson);
+        // console.log("myjson ", myJson);
         setFavIntdata(myJson);
       });
   };
@@ -197,9 +197,10 @@ function DashboardClient({ history, ...props }) {
               {!FavIntdata ? (
                 <div> No Interpreters Added</div>
               ) : (
-                FavIntdata.map((fidata) => {
+                FavIntdata.map((fidata, id) => {
                   return (
                     <FavIntCard
+                      key={id}
                       image={fidata.image}
                       name={fidata.name}
                       ifavailable={fidata.ifavailable}

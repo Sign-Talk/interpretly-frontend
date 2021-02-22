@@ -109,6 +109,7 @@
   border: none;
   outline: none;
   text-decoration: none;
+  margin-left: -30px;
 }
 
 .cursor {
@@ -152,6 +153,8 @@
 /* .cancelmeetingpar {
   justify-content: space-around;
 } */
+
+
 
 .notification-card {
   background: #272727 0% 0% no-repeat padding-box;

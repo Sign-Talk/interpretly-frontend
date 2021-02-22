@@ -274,6 +274,10 @@ export default function Profile() {
         return null;
       });
     }
+
+
+    console.log("background ",backgroundStr )
+    console.log("Backgroundforgettingval ",Backgroundforgettingval )
   };
 
   const UploadImage = (e) => {
@@ -797,7 +801,7 @@ export default function Profile() {
                         >
                           Payment Methods
                         </Grid>
-                        <Grid item>PrivAcy Policy</Grid>
+                        <Grid item>Privacy Policy</Grid>
                       </Grid>
 
                       {/* 7 */}

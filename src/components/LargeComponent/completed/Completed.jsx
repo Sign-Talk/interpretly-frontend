@@ -9,6 +9,8 @@ import Step3 from "./steps/step3";
 import Step4 from "./steps/step4";
 
 import Card from "./Completedcard";
+// import PaymentOption from "../../PaymentMethod/PaymentOption";
+import PaymentOption from "../PaymentMethod/PaymentOption";
 
 import "./completed.css";
 
@@ -16,6 +18,8 @@ const Completed = () => {
   const [initiatePayment, setinitiatePayment] = useState(false);
   const [steps, setSteps] = useState(1);
   const [jsonData, setjsonData] = useState([]);
+      const [ShowPaymentMethod, setShowPaymentMethod] = useState(false);
+
 
   // fetch upcomming job db
   const FetchJson = () => {
@@ -39,14 +43,15 @@ const Completed = () => {
     FetchJson();
   });
 
-  return (
-    <div
+  return ( <div
       className="col-10 ml-auto c0 p-0"
       style={{
         Width: "44.271vw",
         position: "relative",
       }}
-    >
+  >
+    
+    { ShowPaymentMethod ? <PaymentOption ShowPaymentMethod={setShowPaymentMethod} /> : <>
       <Navbar title={"Completed"} />
 
       <div
@@ -95,10 +100,13 @@ const Completed = () => {
           ) : steps === 3 ? (
             <Step3 setSteps={setSteps} />
           ) : (
-            <Step4 setSteps={setSteps} />
-          )}
+                  <Step4 setSteps={setSteps} setShowPaymentMethod={setShowPaymentMethod} />
+                )}
         </ReactModal>
       )}
+
+
+
       <div className="row">
         <div className="col-12">
           {jsonData.length > 0 &&
@@ -117,7 +125,10 @@ const Completed = () => {
             ))}
         </div>
       </div>
+    </>
+    }
     </div>
+
   );
 };
 

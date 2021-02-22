@@ -1,9 +1,15 @@
 import React from "react";
 
-function Card(props) {
+function NotificationCard(props) {
   return (
-    <div className="row notificationParent">
-      <div className="col-12 notificationChild ml-2">
+    <div className="row ">
+      <div
+        className="col notificationChild"
+        style={{
+          marginBottom: "-30px",
+          marginLeft: "-10px",
+        }}
+      >
         <div className="rounddiv">
           <div className="rounddivchild">{props.image}</div>
         </div>
@@ -19,4 +25,4 @@ function Card(props) {
   );
 }
 
-export default Card;
+export default NotificationCard;
